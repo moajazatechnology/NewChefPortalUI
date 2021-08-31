@@ -4,7 +4,8 @@
     <h1 class="userTitle">Viewing {{userInfo.first_name}} {{userInfo.second_name}}</h1>
     
         <button mat-button [matMenuTriggerFor]="menu">
-            <img src="/assets/images/menuicon/419-4190179_menu-vertical-icon-android-menu-icon-png.png" class="menustyle" alt="">
+            <!-- <img src="/assets/images/menuicon/419-4190179_menu-vertical-icon-android-menu-icon-png.png" class="menustyle" alt=""> -->
+            <mat-icon class="secondary-text">more_vert</mat-icon>
           </button>
           <mat-menu #menu="matMenu">
             <button mat-menu-item [routerLink]="['/admin/chefs/profile', userInfo.id]" routerLink="/chefs/profile">Profile</button>
@@ -12,7 +13,7 @@
             <button mat-menu-item [routerLink]="['/admin/chefs/productBychefId', userInfo.id]" routerLink="/chefs/productBychefId">Product</button>
             <button mat-menu-item [routerLink]="['/admin/chefs/menuByChefid', userInfo.id]" routerLink="/chefs/menuByChefid">Menu</button>
             <button mat-menu-item routerLink="/admin/chefs/OrderOfChef" [queryParams]="{ chef_id: userInfo.id }">Order</button>
-            <button mat-menu-item  [routerLink]="['/admin/schedules', userInfo.id ]" routerLink="/schedules">Schedule</button>
+            <button mat-menu-item  [routerLink]="['/admin/chefs/schedules', userInfo.id ]" routerLink="/schedules">Schedule</button>
             <button mat-menu-item routerLink="/admin/chefs/ChefPayment" [queryParams]="{ chef_id: userInfo.id }">Payments</button>
           </mat-menu>
    
