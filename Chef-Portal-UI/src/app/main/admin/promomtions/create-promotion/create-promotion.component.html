@@ -1,0 +1,163 @@
+<app-loader *ngIf = "showLoader"></app-loader>
+<div fxLayout="column" *ngIf="!showLoader">
+    <div class="header-section" fxLayout="row" fxLayoutAlign="space-between">
+        <div fxLayout="row" fxLayoutGap="15px">
+            <!-- <span class="bold">{{message}}</span> -->
+            <h2>{{message}}</h2>
+        </div> 
+        <mat-icon class="icon bold" (click)="dialogRef.close('N');">close</mat-icon>
+     </div>
+
+     <mat-divider></mat-divider>
+     <div id="login" fxLayout="column">
+
+        <div id="login-form-wrapper" fxLayout="column" fxLayoutAlign="center start" >
+    
+            <div id="login-form" >
+                <form [formGroup]="createPromoForm" fxLayot="column">
+
+                    <mat-form-field appearance="outline" >
+                        <mat-label>Promo Name</mat-label>
+                        <input matInput formControlName="name" placeholder="Promo Name" required>
+                        <mat-error>
+                            Promo Name is required
+                        </mat-error>
+                      
+                    </mat-form-field>
+
+                    <mat-form-field appearance="outline" >
+                        <mat-label>Chef selection</mat-label>
+                        <mat-select formControlName="chef_list" placeholder="Promo Name"multiple required>
+                            <mat-option *ngFor="let chef of chefsList" [value]="chef.id">{{chef.name}}</mat-option>
+                            
+                        </mat-select>
+                        
+                        <mat-error>
+                            Select chefs
+                        </mat-error>
+                      
+                    </mat-form-field>
+
+                    <mat-form-field appearance="outline" >
+                        <mat-label>Type</mat-label>
+                        <mat-select formControlName="promo_type" placeholder="Promo type" required>
+                            <mat-option *ngFor="let type of promotypesList" [value]="type.id">{{type.name}}</mat-option>
+                            
+                        </mat-select>
+                        
+                        <mat-error>
+                            Select type
+                        </mat-error>
+                      
+                    </mat-form-field>
+
+                    <mat-form-field appearance="outline" >
+                        <mat-label>Minimum order</mat-label>
+                        <input matInput formControlName="minimum_order" placeholder="Minimum order"
+                         (blur)="transformAmount($event)"required>
+                        <mat-error *ngIf="createPromoForm.get('minimum_order').hasError('required')">
+                            Minimum order is required
+                        </mat-error>
+                        <mat-error *ngIf="!createPromoForm.get('minimum_order').hasError('required') && 
+                        createPromoForm.get('minimum_order').hasError('pattern')">
+                            Only numbers allowed
+                        </mat-error>
+                      
+                    </mat-form-field>
+
+                    <div class="row">
+                        <div class="col-md-6 col-12">
+                            <p><b>Enabled:</b></p>
+                        </div>
+                        <!--/.col-->
+                        
+                        <div class="col-md-6 col-12 text-right">
+                            <mat-slide-toggle formControlName="enabled" color="primary"></mat-slide-toggle>
+                        </div>
+                        <!--/.col-->    
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6 col-12">
+                            <p><b>Percentage discount:</b></p>
+                        </div>
+                        <!--/.col-->
+                        
+                        <div class="col-md-6 col-12 text-right">
+                            <mat-slide-toggle formControlName="is_flat_discount"  color="primary" (change)="changeDiscountPercentage()"></mat-slide-toggle>
+                        </div>
+                        <!--/.col-->    
+                    </div>
+
+                    <mat-form-field appearance="outline" *ngIf="createPromoForm.get('is_flat_discount').value">
+                        <mat-label>Discount amount</mat-label>
+                        <input matInput formControlName="flat_discount" placeholder="flat discount" 
+                        (blur)="transformAmounttoPannies($event)" required>
+
+                        <mat-error *ngIf="createPromoForm.get('flat_discount').hasError('required')">
+                            Discount amount is required
+                        </mat-error>
+                        <mat-error *ngIf="!createPromoForm.get('flat_discount').hasError('required') && 
+                        createPromoForm.get('flat_discount').hasError('pattern')">
+                            Only numbers allowed
+                        </mat-error>
+                      
+                    </mat-form-field>
+
+                    <mat-form-field appearance="outline" *ngIf="!createPromoForm.get('is_flat_discount').value">
+                        <mat-label>Discount amount</mat-label>
+                        <input matInput  min="0" max="100" formControlName="percentage_discount" placeholder="percentage discount" required>
+                        <mat-error *ngIf="createPromoForm.get('percentage_discount').hasError('required')">
+                            Percentage is required
+                        </mat-error>
+                        <mat-error *ngIf="!createPromoForm.get('percentage_discount').hasError('required') && 
+                        createPromoForm.get('percentage_discount').hasError('pattern')">
+                            Only numbers are allowed between 0 to 100
+                        </mat-error>
+                      
+                    </mat-form-field>
+
+                    <mat-form-field appearance="outline">
+                        <mat-label>Expiry date</mat-label>
+                        <input matInput [matDatepicker]="startDatePicker" name="expiry_date" 
+                        [min]="startDate" formControlName="expiry_date" readonly="true">
+                        <mat-datepicker-toggle matSuffix [for]="startDatePicker" ></mat-datepicker-toggle>
+                        <mat-datepicker #startDatePicker [startAt]="startDate"></mat-datepicker>
+                        <mat-error>
+                            Expiry date is required
+                        </mat-error>
+                    </mat-form-field>
+
+                    <mat-form-field appearance="outline" >
+                        <mat-label>Max uses</mat-label>
+                        <input matInput formControlName="max_uses" placeholder="max uses" required>
+
+                        <mat-error *ngIf="createPromoForm.get('max_uses').hasError('required')">
+                            Max uses is required
+                        </mat-error>
+                        <mat-error *ngIf="!createPromoForm.get('max_uses').hasError('required') && 
+                        createPromoForm.get('max_uses').hasError('pattern')">
+                            Only numbers allowed
+                        </mat-error>
+                      
+                    </mat-form-field>
+
+                </form>
+
+            </div>
+            
+        </div>
+        <div class="button-section" fxLayout="row" fxLayoutAlign="end center" fxFlex="1 0 auto">
+
+            <div class="button-margin pl-4" fxLayoutGap="20px">
+
+                <button (click)="dialogRef.close('N');" mat-stroked-button> CANCEL</button>
+                <button class="btn btn-attempt btn-sm my-4" type="button"  (click)="onSubmit($event)" [disabled]="isSubmit">
+                    <i class="fa fa-spinner fa-spin" *ngIf="loader"></i>CREATE</button> 
+
+            </div>
+        </div>
+    
+    </div>
+    </div>
+

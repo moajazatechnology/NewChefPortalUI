@@ -1,0 +1,28 @@
+<div class="userTitleMainDiv">
+  <h1 class="userTitle">Viewing {{userInfo.first_name}} {{userInfo.second_name}}</h1>
+  
+      <button mat-button [matMenuTriggerFor]="menu">
+          <img src="/assets/images/menuicon/419-4190179_menu-vertical-icon-android-menu-icon-png.png" class="menustyle" alt="">
+        </button>
+        <mat-menu #menu="matMenu">
+          <button mat-menu-item [routerLink]="['/admin/chefs/profile', userInfo.id]" routerLink="/chefs/profile">Profile</button>
+          <button mat-menu-item routerLink="/admin/home" [queryParams]="{ chef_id: userInfo.id}">Home</button>
+          <button mat-menu-item [routerLink]="['admin/chefs/productBychefId', userInfo.id]" routerLink="/chefs/productBychefId">Product</button>
+          <button mat-menu-item [routerLink]="['/admin/chefs/menuByChefid', userInfo.id]" routerLink="/chefs/menuByChefid">Menu</button>
+          <button mat-menu-item routerLink="/admin/chefs/OrderOfChef" [queryParams]="{ chef_id: userInfo.id }">Order</button>
+          <button mat-menu-item  [routerLink]="['/admin/schedules', userInfo.id ]" routerLink="/schedules">Schedule</button>
+          <button mat-menu-item routerLink="/admin/chefs/ChefPayment" [queryParams]="{ chef_id: userInfo.id }">Payments</button>
+        </mat-menu>
+ 
+</div>
+<div class="column">
+  <div fxLayout="row" fxLayoutAlign="start start" class="p-5">
+      <h3 class="w-20">Payment</h3>
+      <div *ngIf="payment_status.payouts_enabled"><mat-icon [ngStyle]="{'background-color':'green'}">check</mat-icon></div>
+      <div *ngIf="!payment_status.payouts_enabled"><mat-icon [ngStyle]="{'background-color':'red'}">close</mat-icon></div>
+  </div>
+  <div fxLayout="row" fxLayoutAlign="start start" class="p-5">
+      <button mat-raised-button type="submit" color="primary" (click)="paymentSignup()">
+          <i class="fa fa-spinner fa-spin" *ngIf="loader"></i>Payment Signup</button>
+  </div>
+</div>

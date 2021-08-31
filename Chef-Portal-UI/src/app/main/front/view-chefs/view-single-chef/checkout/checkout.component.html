@@ -1,0 +1,380 @@
+<!-- <app-loader></app-loader> -->
+<app-view-chef-navbar></app-view-chef-navbar>
+<div class="container-fluid p-0">
+    <!-- CONTENT -->
+    <div  fxLayout="column">
+       <!-- CENTER -->
+       <div class="center p-24">
+
+           <!-- CONTENT -->
+            <div class="content p-24 " fxLayout="column" [ngClass]="showHideBasketBtn ? 'w-75' : 'w-100'">
+
+                <div class="p-24 mb-20" fxLayout.gt-sm="row" fxLayoutAlign.gt-sm="end start" *ngIf="showHideMobileBasket">
+
+                    <div class="container-fluid p-0">
+                        <div class="responsive-box">
+                
+                            <div class="ml-4" fxLayout="column">
+                                <!-- <div fxLayout="column"> -->
+                                    <div fxLayout="row" fxLayoutAlign="end end">
+                                        <button class="btn btn-attempt border-white btn-sm" type="button" (click)="showHideBasket()"> <i class="fa fa-angle-left mr-2"></i> HIDE BASKET</button>
+        
+                                    </div>
+                                    <div *ngIf="basketProductList.length > 0" fxLayout="column" >
+                                        <h3 class="bold">Your order with {{ singleChefInfo?.name}}</h3>
+                                        <h3 class="bold">Order for {{singleChefInfo?.selectedDate | date:'EEE, MMM d'}}</h3>
+                                        <div class="basket-box mr-4">
+                                            <div class="mb-3 hr-line" *ngFor="let product of basketProductList;let productArrindex=index">
+                                                <div fxLayout="row" class="mb-3" fxFlex="1 0 auto">
+                                                    <div fxLayout="column" fxLayoutAlign="space-around start"  fxFlex="16">
+                                                        <div fxLayout="row" class="mb-3">  
+                                                            <mat-icon (click)="increaseDecreaseCount('decrease',productArrindex)">remove_circle_outline</mat-icon>
+                                                                <div>{{product.count}}</div>
+                                                            <mat-icon (click)="increaseDecreaseCount('increase',productArrindex)" matTooltip="You cannot increase quantity" [matTooltipDisabled]="!isTooltipshow">add_circle_outline</mat-icon>
+                                                        </div>
+                                                        <div fxLayout="row" class="mb-3">
+                                                           <span class="bold"> {{ (product.totalPrice/100) | currency:'GBP'}} </span>
+                                                        </div>
+                                                        <div fxLayout="row" class="mb-3">
+                                                            <mat-icon color="warn" (click)="deleteSelectedproduct(productArrindex)">delete</mat-icon>
+                                                        </div>
+                                                        
+                                                    </div>
+                                                    <div fxLayout="column" fxLayoutAlign="space-around start"  fxFlex="84">
+                                                        <span class="mb-3"><b>Product Name :</b> {{ product.name }}</span>
+                                                        <div class="mb-3" *ngFor="let variant of product.checkedProductVariantOptions">
+                                                            <span class="mb-3"><b>Variant Name :</b> {{ variant.variant_name }}</span>
+                                                            <div  *ngFor="let option of variant.checkedOptions">
+                                                                <span>{{option.product_variant_name}}</span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+        
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div fxLayout="row" fxLayoutAlign="start center">
+                                            <span class="bold"><h2>Subtotal = {{ (totalPrice/100) | currency:'GBP'}} </h2></span>
+                                        </div>
+                                        <div fxLayout="row" *ngIf="isSlotSelected && (active===1)" fxLayoutAlign="start center">
+                                            <div fxLayout="column" fxLayoutAlign="space-around start">
+                                                <span class="bold"><h2>Delivery = {{ deliveryCharges | currency:'GBP'}} </h2></span>
+                                                <span class="bold" *ngIf="!showPromoCode"><h2>Total = {{ ((totalPrice/100) + deliveryCharges) | currency:'GBP'}} </h2></span>
+                                            </div>
+                                            
+                                        </div>
+                                        <div fxLayout="row" *ngIf="isSlotSelected && showPromoCode" fxLayoutAlign="start center">
+                                            <div fxLayout="column" fxLayoutAlign="space-around start">
+                                                <span class="bold" *ngIf="promocode && !promocode.is_flat_discount"><h2>Discount = {{ discount | currency:'GBP'}}  <mat-icon color="warn" (click)="removeDiscount()">delete</mat-icon></h2></span>
+                                                <span class="bold" *ngIf="promocode && promocode.is_flat_discount"><h2>Discount = {{ discount | currency:'GBP'}}  <mat-icon color="warn" (click)="removeDiscount()">delete</mat-icon></h2></span>
+                                                <span class="bold"><h2>Total = {{ (productTotalPriceWithDeliveryCharges) | currency:'GBP'}} </h2></span>
+                                            </div>
+                                            
+                                        </div>
+                                        <div fxLayout="row" fxLayoutAlign="end center">
+                                            <button mat-raised-button type="submit" color="primary" (click)="proceedToPayment()">
+                                                <i class="fa fa-spinner fa-spin" *ngIf="loader"></i>
+                                                PROCEED TO PAYMENT
+                                            </button>
+                                        </div>
+                                        
+                                    </div>
+                                    <div fxLayout="row" fxLayoutAlign="center center" *ngIf="basketProductList.length === 0">
+                                        <h2>No product added in your Basket.</h2>
+                                    </div>
+                                   
+                                <!-- </div> -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- PROFILE HEADER -->
+                <div class="p-24 mb-20" fxLayout.gt-sm="row" fxLayoutAlign.gt-sm="end start">
+
+                   <div class="container-fluid p-0 basket">
+                    <div class="row m-0 rowheight">
+                        <div class="col-xl-12 col-lg-12 col-12  mb-3 pl-lg-0 pr-lg-0 pt-3">
+                            <div class="row ml-md-3">
+                                <div class="col-md-6 col-sm-6 text-left">
+                                    <h3 class="bold">Order for {{singleChefInfo.selectedDate | date:'EEE, MMM d'}}</h3>
+                                </div>
+                                <!--/.col-->
+                                <div class="col-md-6 col-sm-6 text-right">
+                                    <button class="btn btn-attempt btn-sm" type="button" (click)="showHideBasket()"  *ngIf="!showHideBasketBtn && !showHideMobileBasket"> <i class="fa fa-angle-left mr-2"></i> SHOW BASKET</button>
+                                   
+                                </div>
+
+                            </div>
+                            <!--/.row-->
+                            
+                            <hr>
+                    
+                            <div class="col-12 px-lg-5">
+                                <ul ngbNav #nav="ngbNav" [(activeId)]="active" class="nav-tabs">
+                                    <li [ngbNavItem]="1">
+                                      <a ngbNavLink (click)="changeTab()">Delivery</a>
+                                      <ng-template ngbNavContent>
+                                        <div [formGroup]="deliveryFormGroup">
+                                            <div class="border mb-3">
+                                                <p class="mb-0"><b>Delivery Address:</b></p>
+                                                
+                                                <button  class="btn btn-attempt btn-sm my-4" type="button" (click)="addNewAddress()">Add New Address</button> 
+                                                
+                                                <div class="col-12 pl-0 mb-2" *ngFor="let address of allAddressList.eligible">
+                                                    <mat-radio-group aria-label="Select an option" formControlName="customer_address_id" color="primary" (change)="onChangeAddress($event.value)">
+                                                        <mat-radio-button [value]="address.id"><span class="text-wrap">{{address.address_1}}, {{address.address_2}}, {{address.address_3}}, {{address.city}}, {{address.country}},{{address.postcode}} <mat-icon (click)="editAddress(address)">edit</mat-icon> <mat-icon color="warn" (click)="deleteSelectedAddress(address.id)">delete</mat-icon></span></mat-radio-button>
+                                                    </mat-radio-group>
+                                                    <mat-error *ngIf="deliveryFormGroup.get('customer_address_id').hasError('required')"> 
+                                                            Select address
+                                                    </mat-error>
+                                                </div>
+                                                <!--/.col-->    
+                                                <hr>
+
+                                                <div class="col-12 pl-0 mb-2" *ngFor="let address of allAddressList.not_eligible">
+                                                    <mat-radio-group aria-label="Select an option" color="primary" (change)="onChangeAddress($event.value)">
+                                                        <mat-radio-button [value]="address.id"><span class="text-wrap">{{address.address_1}}, {{address.address_2}}, {{address.address_3}}, {{address.city}}, {{address.country}},{{address.postcode}} <mat-icon (click)="editAddress(address)">edit</mat-icon> <mat-icon color="warn" (click)="deleteSelectedAddress(address.id)">delete</mat-icon></span></mat-radio-button>
+                                                    </mat-radio-group>
+                                                </div>
+                        
+                                            </div>
+                                        
+                                            <div class="border pb-5 mb-3">
+                                                <p><b>Delivery Slot:</b></p>
+                        
+                                                <div class="col-md-12 col-12 pl-0 pb-5">
+                                                    <div class="box">
+                                                        <div class="inputBox">
+                                                            <mat-form-field appearance="outline" fxFlex="100">
+                                                                <mat-select placeholder=" Select Slot" formControlName="chef_store_slot_id" (selectionChange)="onSlotChange($event.value)">
+                                                                    <mat-option *ngFor="let slot of allSlotsList.delivery_slots" [value]="slot.id" >
+                                                                        {{ ((slot?.start_hour)%12) }} pm - {{ ((slot?.end_hour)%12) }} pm
+                                                                    </mat-option>
+                                                                </mat-select>
+                                                                <mat-error *ngIf="deliveryFormGroup.get('chef_store_slot_id').hasError('required')"> 
+                                                                    Select slot
+                                                                </mat-error>
+                                                            
+                                                            </mat-form-field>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <!--/. col -->    
+                                            </div>
+
+                                            <div class="border pb-5 mb-3">
+                                                <div class="col-md-12 col-12 pl-0 pb-5">
+                                                    
+                                                    <mat-form-field appearance="outline"  fxFlex="100">
+                                                        <mat-label>Promo code</mat-label>
+                                                        <input matInput formControlName="promocode"  [(ngModel)]="promocodeDelivery" placeholder="Enter promo code"/>
+                                                    </mat-form-field>
+                                                </div>
+                                                    
+                                                <button  class="btn btn-attempt btn-sm my-4" [disabled]="!promocodeDelivery" type="button" (click)="checkPromoCode('delivery')">
+                                                    <i class="fa fa-spinner fa-spin" *ngIf="promocodeLoader"></i>CHECK PROMO CODE</button> 
+                                                <!--/. col -->    
+                                            </div>
+
+                                            <div class="border pb-5 mb-3">
+                                                <div class="col-md-12 col-12 pl-0 pb-5">
+                                                    
+                                                    <mat-form-field appearance="outline"  fxFlex="100">
+                                                        <mat-label>Notes</mat-label>
+                                                        <textarea matInput formControlName="notes" placeholder="Enter optional notes..."></textarea>
+                                                    </mat-form-field>
+                                                </div>
+                                                    
+                                            </div>
+                    
+                                        </div>
+                                      </ng-template>
+                                    </li>
+                                    <li [ngbNavItem]="2">
+                                      <a ngbNavLink (click)="changeTab()">Collection</a>
+                                      <ng-template ngbNavContent>
+                                        <div [formGroup]="collectionFormGroup">
+                                            <div class="border mb-3">
+                                                <p class="mb-0"><b>Collection Address:</b></p>
+                                                
+                                                <div class="row pt-3">
+                                                    <div class="col-md-6 col-12 mb-3">
+                                                            <div class="inputBox">
+                                                                <mat-form-field appearance="outline" fxFlex="100">
+                                                                    <mat-label>Name</mat-label>
+                                                                    <input matInput formControlName="name" placeholder="Enter name...">
+                                                                    <mat-icon matSuffix class="secondary-text">person</mat-icon>
+                                                                                                    
+                                                                </mat-form-field>
+                                                            </div>                                
+                                                    </div>
+                                                    <!--/.col-->
+                                                    <div class="col-md-6 col-12 mb-3">
+                                                            <div class="inputBox">
+                                                                <mat-form-field appearance="outline"  fxFlex="100">
+                                                                    <mat-label>Email</mat-label>
+                                                                    <input matInput formControlName="email"  placeholder="Enter email...">
+                                                                    <mat-icon matSuffix class="secondary-text">email</mat-icon>
+                                                                                                    
+                                                                </mat-form-field>
+                                                            </div>                                
+                                                    </div>
+                                                    <!--/.col-->
+                                                    <div class="col-md-6 col-12 mb-3">
+                                                            <div class="inputBox">
+                                                                <mat-form-field appearance="outline" fxFlex="100">
+                                                                    <mat-label>Phone Number</mat-label>
+                                                                    <input matInput formControlName="phone_number" placeholder="Enter phone number...">
+                                                                    <mat-icon matSuffix class="secondary-text">phone</mat-icon>
+                                                                                                    
+                                                                </mat-form-field>
+                                                            </div>                                
+                                                    </div>
+                                                    <!--/.col-->
+                                                </div>
+                                                <!--/. row -->
+                                                
+                                            </div>
+                        
+                                            <div class="border pb-5 mb-3">
+                                                <p><b>Collection Slot:</b></p>
+                        
+                                                <div class="col-md-12 col-12 pl-0 pb-5">
+                                                    <mat-form-field appearance="outline" fxFlex="100">
+                                                        <mat-select placeholder=" Select Slot"  formControlName="chef_store_slot_id_1" (selectionChange)="onSlotChange($event.value)">
+                                                            <mat-option *ngFor="let slot of allSlotsList.collection_slots" [value]="slot.id" >
+                                                                {{ ((slot?.start_hour)%12) }} pm - {{ ((slot?.end_hour)%12) }} pm
+                                                            </mat-option>
+                                                        </mat-select>
+                                                    
+                                                    </mat-form-field>
+                                                </div>
+                                                <!--/. col -->    
+                                            </div>
+                                            <div class="border pb-5 mb-3">
+                                                <div class="col-md-12 col-12 pl-0 pb-5">
+                                                    
+                                                    <mat-form-field appearance="outline" fxFlex="100">
+                                                        <mat-label>Promo code</mat-label>
+                                                        <input matInput formControlName="promocode" [(ngModel)]="promocodeCollection" placeholder="Enter promo code"/>
+                                                    </mat-form-field>
+                                                </div>
+                                                    
+                                                <button  class="btn btn-attempt btn-sm my-4" type="button" [disabled]="!promocodeCollection" (click)="checkPromoCode('collection')">
+                                                    <i class="fa fa-spinner fa-spin" *ngIf="promocodeLoader"></i>CHECK PROMO CODE</button> 
+                                                <!--/. col -->    
+                                            </div>
+                                            <div class="border pb-5 mb-3">
+                                                <div class="col-md-12 col-12 pl-0 pb-5">
+                                                    
+                                                    <mat-form-field appearance="outline" fxFlex="100">
+                                                        <mat-label>Notes</mat-label>
+                                                        <textarea matInput formControlName="notes"  placeholder="Enter optional notes..."></textarea>
+                                                    </mat-form-field>
+                                                </div>
+                                                    
+                                            </div>
+                                        </div>
+                                      </ng-template>
+                                    </li>
+                                  </ul>
+                                  <div [ngbNavOutlet]="nav" class="mt-2"></div>   
+                            </div>
+                            <!--/. col -->
+                        </div>
+                        <!--/.col-->
+                    </div>
+                    <!--/.row-->
+                    </div>
+                    <!--/. container-fluid-->
+                </div>
+
+            </div>
+            <div class="content basket-content" fxLayout="column" fxFlex="25" *ngIf="showHideBasketBtn" >
+
+                <div class="main-box">
+                
+                    <div class="ml-4" fxLayout="column" fxLayoutAlign="start center">
+                        <div fxLayout="column">
+                            <div fxLayoutAlign="end center">
+                                <button class="btn btn-attempt border-white btn-sm" type="button" (click)="showHideBasket()"> <i class="fa fa-angle-left mr-2"></i> HIDE BASKET</button>
+
+                            </div>
+                            <div *ngIf="basketProductList.length > 0" fxLayout="column" >
+                                <h3 class="bold">Your order with {{ singleChefInfo?.name}}</h3>
+                                <h3 class="bold">Order for {{singleChefInfo?.selectedDate | date:'EEE, MMM d'}}</h3>
+                                <div class="basket-box">
+                                    <div class="mb-3 hr-line" *ngFor="let product of basketProductList;let productArrindex=index">
+                                        <div fxLayout="row" class="mb-3" fxFlex="1 0 auto">
+                                            <div fxLayout="column" fxLayoutAlign="space-around start"  fxFlex="16">
+                                                <div fxLayout="row" class="mb-3">  
+                                                    <mat-icon (click)="increaseDecreaseCount('decrease',productArrindex)">remove_circle_outline</mat-icon>
+                                                        <div>{{product.count}}</div>
+                                                    <mat-icon (click)="increaseDecreaseCount('increase',productArrindex)" matTooltip="You cannot increase quantity" [matTooltipDisabled]="!isTooltipshow">add_circle_outline</mat-icon>
+                                                </div>
+                                                <div fxLayout="row" class="mb-3">
+                                                   <span class="bold"> {{ (product.totalPrice/100) | currency:'GBP'}} </span>
+                                                </div>
+                                                <div fxLayout="row" class="mb-3">
+                                                    <mat-icon color="warn" (click)="deleteSelectedproduct(productArrindex)">delete</mat-icon>
+                                                </div>
+                                                
+                                            </div>
+                                            <div fxLayout="column" fxLayoutAlign="space-around start"  fxFlex="84">
+                                                <span class="mb-3"><b>Product Name :</b> {{ product.name }}</span>
+                                                <div class="mb-3" *ngFor="let variant of product.checkedProductVariantOptions">
+                                                    <span class="mb-3"><b>Variant Name :</b> {{ variant.variant_name }}</span>
+                                                    <div  *ngFor="let option of variant.checkedOptions">
+                                                        <span>{{option.product_variant_name}}</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <div fxLayout="row" fxLayoutAlign="start center">
+                                    <span class="bold"><h2>Subtotal = {{ (totalPrice/100) | currency:'GBP'}} </h2></span>
+                                </div>
+                                <div fxLayout="row" *ngIf="isSlotSelected && (active===1)" fxLayoutAlign="start center">
+                                    <div fxLayout="column" fxLayoutAlign="space-around start">
+                                        <span class="bold"><h2>Delivery = {{ deliveryCharges | currency:'GBP'}} </h2></span>
+                                        <span class="bold" *ngIf="!showPromoCode"><h2>Total = {{ ((totalPrice/100) + deliveryCharges) | currency:'GBP'}} </h2></span>
+                                    </div>
+                                    
+                                </div>
+                                <div fxLayout="row" *ngIf="isSlotSelected && showPromoCode" fxLayoutAlign="start center">
+                                    <div fxLayout="column" fxLayoutAlign="space-around start">
+                                        <span class="bold" *ngIf="promocode && !promocode.is_flat_discount"><h2>Discount = {{ discount | currency:'GBP'}}  <mat-icon color="warn" (click)="removeDiscount()">delete</mat-icon></h2></span>
+                                        <span class="bold" *ngIf="promocode && promocode.is_flat_discount"><h2>Discount = {{ discount | currency:'GBP'}}  <mat-icon color="warn" (click)="removeDiscount()">delete</mat-icon></h2></span>
+                                        <span class="bold"><h2>Total = {{ (productTotalPriceWithDeliveryCharges) | currency:'GBP'}} </h2></span>
+                                    </div>
+                                    
+                                </div>
+                                <div fxLayout="row" fxLayoutAlign="end center">
+                                    <button mat-raised-button type="submit" color="primary" (click)="proceedToPayment()">
+                                        <i class="fa fa-spinner fa-spin" *ngIf="loader"></i>
+                                        PROCEED TO PAYMENT
+                                    </button>
+                                </div>
+                                
+                            </div>
+                            <div fxLayout="row" fxLayoutAlign="center center" *ngIf="basketProductList.length === 0">
+                                <h2>No product added in your Basket.</h2>
+                            </div>
+                           
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+      
+       </div>
+       <!-- / CENTER -->
+   </div>
+   <!-- / CONTENT -->
+
+</div>
+
+<app-footer1></app-footer1>

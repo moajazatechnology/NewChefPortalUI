@@ -1,0 +1,76 @@
+<app-loader *ngIf="showLoader"></app-loader>
+<div fxLayout="column" class="p-4" *ngIf="!showLoader">
+  <div fxLayout="column" fxLayoutAlign="start start" fxFlex="50">
+    <h1>Welcome to your marketplace</h1>
+    <div class="hr"></div>
+    <p>To get your marketplace up and running,there are few essentials steps that you need to take,as listed below.
+        Once Finished your marketplace will be ready to receive it's first visitor!
+    </p>
+  </div>
+  <div fxLayout="column" fxFlex="50" class="p-4">
+      <div *ngIf="!profile_data.profile_complete">     
+        <table class="w-50">
+            <tr>
+                <td><div><b>Chef Profile Picture</b></div></td>
+                <td>
+                    <mat-icon *ngIf="profile_data.profile_image_set" class="check">check</mat-icon>
+                    <mat-icon *ngIf="!profile_data.profile_image_set" class="ncheck">close</mat-icon>
+                </td>
+            </tr>
+            <div class="hr"></div>
+            <tr>
+                <td><div><b>Chef Banner</b></div></td>
+                <td>
+                    <mat-icon *ngIf="profile_data.banner_image_set" class="check">check</mat-icon>
+                    <mat-icon *ngIf="!profile_data.banner_image_set" class="ncheck">close</mat-icon>
+                </td>
+            </tr>
+            <div class="hr"></div>
+            <tr>
+                <td><div><b>Store Address</b></div></td>
+                <td>
+                    <mat-icon *ngIf="profile_data.chef_store_address_set" class="check">check</mat-icon>
+                    <mat-icon *ngIf="!profile_data.chef_store_address_set" class="ncheck">close</mat-icon>
+                </td>
+            </tr>
+            <div class="hr"></div>
+            <tr>
+                <td><div><b>First Product created</b></div></td>
+                <td>
+                    <mat-icon *ngIf="profile_data.product_created" class="check">check</mat-icon>
+                    <mat-icon *ngIf="!profile_data.product_created" class="ncheck">close</mat-icon>
+                </td>
+            </tr>
+            <div class="hr"></div>
+            <tr>
+                <td><div><b>First menu created</b></div></td>
+                <td>
+                    <mat-icon *ngIf="profile_data.menu_created" class="check">check</mat-icon>
+                    <mat-icon *ngIf="!profile_data.menu_created" class="ncheck">close</mat-icon>
+                </td>
+            </tr>
+            <div class="hr"></div>
+            <tr>
+                <td><div><b>Payments configured</b></div></td>
+                <td>
+                    <mat-icon *ngIf="profile_data.payment_status" class="check">check</mat-icon>
+                    <mat-icon *ngIf="!profile_data.payment_status" class="ncheck">close</mat-icon>
+                </td>
+            </tr>
+            <div class="hr"></div>
+            <tr>
+                <td><div><b>Enabled</b></div></td>
+                <td>
+                    <mat-icon *ngIf="profile_data.enabled" class="check">check</mat-icon>
+                    <mat-icon *ngIf="!profile_data.enabled" class="ncheck">close</mat-icon>
+                </td>
+            </tr>
+            <div class="hr"></div>
+            
+        </table>
+    </div>
+    <div *ngIf="profile_data.profile_complete">   
+        <h1>Your Profile is complete</h1> 
+    </div>
+  </div>
+</div>

@@ -1,0 +1,83 @@
+<!-- <mat-toolbar color="primary">  
+    <mat-toolbar-row>
+            <div class="ptop-2"  fxLayoutGap="20px">
+                    <span><img routerLink="/" src="./assets/lmc_logo_white.png" class="image" style="width: 20%;"></span>
+
+                    <input id="autocomplete1" class="form-control" placeholder="Enter Your Address" class="input-class" type="text" />
+                    <button mat-stroked-button  class="btn-border" (click)="onAddressSearch()">Search </button>
+            </div>
+    <span class="example-spacer"></span>
+    <div fxShow="true" fxHide.lt-md="true" fxLayoutGap="20px" *ngIf="!customerToken">
+     
+      <button mat-stroked-button  class="btn-border" [matMenuTriggerFor]="menuCustomer">Customers <i class="fa fa-caret-down "></i>
+      </button>
+      <mat-menu #menuCustomer="matMenu">
+        <button mat-menu-item routerLink="/customer-login">Login</button>
+        <button mat-menu-item routerLink="/customer-signup">Sign up</button>
+      </mat-menu>
+    
+    </div>
+    <div fxShow="true" fxHide.lt-md="true" fxLayoutGap="20px" *ngIf="customerToken">
+     
+      <button mat-stroked-button  class="btn-border" [matMenuTriggerFor]="menuCustomer">All <i class="fa fa-caret-down "></i>
+      </button>
+      <mat-menu #menuCustomer="matMenu">
+        <button mat-menu-item routerLink="chef-login">Profile</button>
+        <button mat-menu-item routerLink="become-chefs">My Orders</button>
+        <button mat-menu-item (click)="logout()">Logout</button>
+      </mat-menu>
+    
+    </div>
+    
+      </mat-toolbar-row>   
+
+   
+</mat-toolbar> -->
+<nav class="navbar navbar-expand-lg bg-dark navbar-dark">
+  <a class="navbar-brand">
+      <img src="assets/lmc_logo_white.png" [routerLink]="'/'" class = "img-fluid pb-2" style = "width : 206px;height:50px;">
+  </a>
+    
+  <button class="navbar-toggler hidden-sm-up" type="button" (click)="isNavbarCollapsed = !isNavbarCollapsed" data-target="#navbarsDefault" aria-controls="navbarsDefault" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  
+  <div class="row" [ngbCollapse]="isNavbarCollapsed" class="collapse navbar-collapse" id="navbarsDefault">
+      <ul class="navbar-nav">
+          <form class="form-inline">
+              <input id="autocomplete1" class="form-control form-control-lg ml-lg-5 mb-lg-0 mb-3  bg-transparent" placeholder="Enter Your Address" class="input-class" type="text" />
+              <button mat-stroked-button  class="btn-border text-white" (click)="onAddressSearch()">Search </button>
+          </form>
+      </ul>
+      <ul class="navbar-nav ml-auto">
+ 
+          <!-- Dropdown -->
+          <li class="nav-item">
+
+             <div *ngIf="!customerToken">
+     
+              <button mat-stroked-button  class="btn-border text-white" [matMenuTriggerFor]="menuCustomer">Customers <i class="fa fa-caret-down "></i>
+              </button>
+              <mat-menu #menuCustomer="matMenu">
+                <button mat-menu-item routerLink="/customer-login">Login</button>
+                <button mat-menu-item routerLink="/customer-signup">Sign up</button>
+              </mat-menu>
+            
+            </div>
+            <div *ngIf="customerToken">
+     
+              <button mat-stroked-button  class="btn-border text-white" [matMenuTriggerFor]="menuCustomer">{{customerInfo.first_name}} {{customerInfo.second_name}}<i class="fa fa-caret-down pl-8"></i>
+              </button>
+              <mat-menu #menuCustomer="matMenu">
+                <button mat-menu-item routerLink="/customer/profile">Profile</button>
+                <button mat-menu-item routerLink="/customer/orders">My Orders</button>
+                <button mat-menu-item (click)="logout()">Logout</button>
+              </mat-menu>
+            
+            </div>
+  
+          </li>    
+      </ul>
+  </div>
+</nav>    
+<!--/. navbar -->

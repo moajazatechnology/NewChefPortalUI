@@ -1,0 +1,78 @@
+<div class="container-fluid p-0">
+    <div class="row m-0 rowheight">
+        <div class="col-xl-12 col-lg-12 col-12  mb-3 pl-lg-0 pr-lg-0 pt-3">
+            <div class="row ml-md-3">
+                <div class="col-md-6 col-12">
+                    <!-- <h2><b>Add new address</b></h2> -->
+                </div>
+                <!--/.col-->
+                
+                <div class="col-md-6 col-12 text-right">
+                    <mat-icon (click)="dialogRef.close('N');">close</mat-icon>
+                </div>
+                <!--/.col-->    
+            </div>
+            <!--/.row-->
+            
+            <div class="col-12 px-lg-3">
+                <div class="content">
+                    <div class="medias" fxLayout="row wrap" fxLayoutAlign="start">
+    
+                        <div class="media" fxFlex="100">
+                            <!-- IMAGES  -->
+    
+                            <div class="media-content" fxLayout="column" fxFlex="1 1 auto">
+                                <div fxLayout="row" fxLayoutAlign="start" class="footer pl-3 pt-3">
+                                   <h2> Order ID: {{ order.id }}</h2>
+                                </div>
+    
+                                <div fxLayout="row" fxLayoutAlign="start end" class=" footer text-color pt-3">
+                                    <div fxLayout="column" fxLayoutAlign="start stretch">
+                                        <span><b>Chef name : </b>{{ order._chef?.first_name}} {{ order._chef?.second_name}}</span>
+                                        <span><b>Order status : </b>{{ order.status}}</span>
+                                        <span><b>Order total : </b>{{ (order.order_total /100) | currency:'GBP'}}</span>
+                                        <span><b>Order time : </b>{{ order.order_date | date:'MMM d, y, h:mm a'}}</span>
+                                        <span><b>Order type : </b><span *ngIf="order.collection">Collection</span><span *ngIf="!order.collection">Delivery</span></span>
+                                        <span><b>Order slot : </b>{{ ((order?.start_slot)%12) }} pm - {{ ((order?.end_slot)%12) }} pm</span>
+                                    </div>
+                                   
+                                </div>
+                                <div fxLayout="row" fxLayoutAlign="start" class="footer pl-3 pt-3">
+                                    <h2> Order Details</h2>
+                                </div>
+                                <div class="content border text-color">
+                                    <div *ngFor="let data of order.order_details">
+                                        <div fxLayout="column" fxLayoutAlign="start stretch">
+                                            <span><b>PRODUCT NAME : </b><span class="text-align-right">{{ data.name}} </span></span>
+                                            <span><b>QUANTITY : </b>{{ data.quantity}}</span>
+                                            <span><b>COST : </b>{{ (data.price/100)  | currency:'GBP'}}</span>
+                                        </div>
+                                        <hr>
+                                    </div>
+                                </div>
+                                <div fxLayout="row" fxLayoutAlign="start" class="pl-3 pt-3">
+                                    <div fxLayout="column" fxLayoutAlign="start stretch">
+                                        <span> <b>Sub-total : </b>{{ (order.sub_total /100)  | currency:'GBP'}}</span>
+                                        <span><b> Delivery Cost : </b>{{ (order.delivery_fee /100)  | currency:'GBP' }}</span>
+                                        <span><b> PROMO APPLIED : </b>{{ order.promo_code }}</span>
+                                        <span><b> Total Cost : </b>{{ (order.order_total/100)  | currency:'GBP' }}</span>
+                                    </div>
+                                 </div>
+                
+                            </div>
+                            <!-- /IMAGES -->
+    
+                        </div>
+                        
+                    </div>
+                       
+                </div>
+            </div>
+            <!--/. col -->
+        </div>
+        <!--/.col-->
+    </div>
+    <!--/.row-->
+    </div>
+    <!--/. container-fluid-->
+    

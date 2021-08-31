@@ -1,0 +1,169 @@
+<app-view-chef-navbar></app-view-chef-navbar>
+
+<div class="container-fluid p-0">
+<div class="row m-0 rowheight">
+    <div class="col-xl-10 col-lg-9 col-12 mb-3 pl-lg-0 pr-lg-0 pt-3">
+        <div class="row ml-md-4">
+            <div class="col-md-6 col-12 pl-md-4">
+                <p>Sorry... Something went wrong.</p>
+            </div>
+            <!--/.col-->
+            
+            <div class="col-md-6 col-12 text-right">
+                <button class="btn btn-attempt btn-sm" type="button" (click)="showbasket()"> <i class="fa fa-angle-left mr-2"></i> Show Basket</button>
+            </div>
+            <!--/.col-->    
+        </div>
+        <!--/.row-->
+
+        <hr class="hr">
+    
+        <div class="col-12 px-md-5">
+            <p>Would you like to try again?</p>
+    
+            <button class="btn btn-attempt btn-sm mt-3" type="button">Attempt To order again</button>
+        </div>
+    </div>
+    <!--/.col-->
+    <div class="col-xl-2 col-lg-3 col-12 pr-lg-0 basket mb-3" *ngIf="showHideBasket">
+        <div class="col-12 pr-lg-0">
+            <div class="col-12 pr-lg-0 text-right">
+                <button class="btn btn-attempt border-white btn-sm" type="button" (click)="hideBasket()"> <i class="fa fa-angle-left mr-2"></i> Hide Basket</button>
+            </div>
+            <!--/. col -->
+
+            <div class="col-12 pt-2 px-2">
+                <p class="mb-1">Your Order with</p>
+                <p>Order for</p>
+            </div>
+            <!--/. col -->
+            <div class="col-12 pt-2  divborder">
+                <div class="border-bottom">
+                    <div class="row">
+                        <div class="col pr-lg-0">
+                            <div class="input-group">
+                                <span class="input-group-btn">
+                                    <button type="button" class="btn btn-default  btn-number shadow">
+                                        <i class="fa fa-minus"></i>
+                                    </button>
+                                </span>
+                                <input type="text" name="quant[1]" class="form-control input-number" value="1" min="1" max="10">
+                                <span class="input-group-btn">
+                                    <button type="button" class="btn btn-default btn-number shadow" data-type="plus" data-field="quant[1]">
+                                        <i class="fa fa-plus"></i>
+                                    </button>
+                                </span>
+                            </div>
+                        </div>
+                        <!--/.col-->
+                        <div class="col my-auto pl-lg-0">
+                            <p class="mb-0">Product Name:</p>
+                        </div>
+                        <!--col-->
+                    </div>
+                    <!--/.row -->
+    
+                    <div class="row">
+                        <div class="col">
+                            <i class="fa fa-euro"></i> 13.34
+                        </div>
+                        <!--/.col-->
+                        <div class="col my-auto">
+                            <ul class="pl-0 mb-2">
+                                <li>Variant Category</li>
+                            </ul>
+                            <ul class="pl-3">
+                                <li>Option</li>
+                            </ul>
+                        </div>
+                        <!--col-->
+                    </div>
+                    <!--/.row -->
+                </div>
+
+                <div class="border-bottom">
+                    <div class="row">
+                        <div class="col pr-lg-0">
+                            <div class="input-group">
+                                <span class="input-group-btn">
+                                    <button type="button" class="btn btn-default  btn-number shadow">
+                                        <i class="fa fa-minus"></i>
+                                    </button>
+                                </span>
+                                <input type="text" name="quant[1]" class="form-control input-number" value="1" min="1" max="10">
+                                <span class="input-group-btn">
+                                    <button type="button" class="btn btn-default btn-number shadow" data-type="plus" data-field="quant[1]">
+                                        <i class="fa fa-plus"></i>
+                                    </button>
+                                </span>
+                            </div>
+                        </div>
+                        <!--/.col-->
+                        <div class="col my-auto pl-lg-0">
+                            <p class="mb-0">Product Name:</p>
+                        </div>
+                        <!--col-->
+                    </div>
+                    <!--/.row -->
+    
+                    <div class="row">
+                        <div class="col">
+                            <i class="fa fa-euro"></i> 15.00
+                        </div>
+                        <!--/.col-->
+                        <div class="col my-auto">
+                            <ul class="pl-0 mb-2">
+                                <li>Variant Category</li>
+                            </ul>
+                            <ul class="pl-3">
+                                <li>Option</li>
+                            </ul>
+                        </div>
+                        <!--col-->
+                    </div>
+                    <!--/.row -->
+                </div>
+            </div>
+            <!--/. col -->
+
+            <p class="mt-3">Total : <i class="fa fa-euro"></i> 28.34</p>
+
+            <button class="btn btn-attempt btn-sm mt-3" type="button">Proceed To Payment</button>   
+        </div>
+        <!--/.col-->
+    </div>
+</div>
+<!--/.row-->
+</div>
+<!--/. container-fluid-->
+
+<footer>
+<div class = "container-fluid footer-dark">
+<div class = "row py-3">
+    <div class = "col-lg-3 col-md-6 col-12">
+        <img src = "assets/img/lmc_logo_white.png" class = "img-fluid" style = "width : 200px;">
+    </div>
+    <!--/. col -->
+    <div class = "col-lg-3 col-md-6 col-12">
+        <h5 class = "pt-3 text-white"><b>Contact</b></h5>
+        <p class = "mb-2"><a href = "#" class = "text-white">About Us</a></p>
+        <p class = "mb-2"><a href = "tel:+447988188825" class = "text-white">Phone:+447988188825</a></p>
+        <p class = "mb-2"><a href = "mailto:ali@localmasterchefs.com" class = "text-white">Email:ali@localmasterchefs.com</a></p>
+    </div>
+    <!--/. col -->
+    <div class = "col-lg-3 col-md-6 col-12">
+        <h5 class = "pt-3 text-white"><b>Customers</b></h5>
+        <p class = "mb-2"><a href = "#" class = "text-white">Login</a></p>
+        <p class = "mb-2"><a href = "#" class = "text-white">Signup</a></p>
+    </div>
+    <!--/. col -->
+    <div class = "col-lg-3 col-md-6 col-12">
+        <h5 class = "pt-3 text-white"><b>Chefs</b></h5>
+        <p class = "mb-2"><a href = "#" class = "text-white">Login</a></p>
+        <p class = "mb-2"><a href = "#" class = "text-white">Become a chef</a></p>
+    </div>
+    <!--/. col -->
+</div>
+<!--/. row -->
+</div>
+</footer>

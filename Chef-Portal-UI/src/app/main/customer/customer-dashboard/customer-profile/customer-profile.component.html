@@ -1,0 +1,48 @@
+<app-loader *ngIf="showLoader"></app-loader>
+<div class="container-fluid height-100">
+    <div class="row mb-3">
+        <div class="col-12 pt-10">
+           <h2>Your Profile</h2> 
+        </div>
+    </div>
+    <hr>
+    <div class="container-fluid mb-3"  *ngIf="!showLoader">
+        <div class="col-12">
+            <table>
+
+                <tr fxLayoutAlign="start start"><th><h2><b>Details:</b></h2></th></tr>
+    
+                <tr class="mb-3">
+                    <td>
+                        <p><b>Name:</b> {{ customerDetails.first_name}} {{ customerDetails.second_name}}</p>
+                    </td>
+                    <td><mat-icon (click)="editprofileData('name')">edit</mat-icon></td>
+                </tr>
+                <tr class="mb-3">
+                    <td>
+                        <p><b>Email:</b> {{ customerDetails.email}}</p>
+                    </td>
+                    <td><mat-icon (click)="editprofileData('email')">edit</mat-icon></td>
+
+                </tr>
+                <tr class="mb-3">
+                    <td>
+                        <p><b>Phone Number:</b> {{ customerDetails.phone_number}}</p>
+                    </td>
+                    <td><mat-icon (click)="editprofileData('phone')">edit</mat-icon></td>
+
+                </tr>
+                <tr class="mb-3">
+                    <td>
+                        <button mat-stroked-button color="primary" type="button" (click)="editprofileData('password')">Edit Password</button>
+                    </td>
+
+                </tr>
+    
+    
+            </table>
+            
+        </div>
+    </div>
+</div>
+<app-footer1></app-footer1>

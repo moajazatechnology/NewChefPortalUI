@@ -1,0 +1,90 @@
+
+<app-loader *ngIf="showLoader"></app-loader>
+<div class="userTitleMainDiv">
+    <h1 class="userTitle">Viewing {{userInfo.first_name}} {{userInfo.second_name}}</h1>
+    
+        <button mat-button [matMenuTriggerFor]="menu">
+            <img src="/assets/images/menuicon/419-4190179_menu-vertical-icon-android-menu-icon-png.png" class="menustyle" alt="">
+          </button>
+          <mat-menu #menu="matMenu">
+            <button mat-menu-item [routerLink]="['/admin/chefs/profile', userInfo.id]" routerLink="/chefs/profile">Profile</button>
+            <button mat-menu-item routerLink="/admin/home" [queryParams]="{ chef_id: userInfo.id}">Home</button>
+            <button mat-menu-item [routerLink]="['/admin/chefs/productBychefId', userInfo.id]" routerLink="/chefs/productBychefId">Product</button>
+            <button mat-menu-item [routerLink]="['/admin/chefs/menuByChefid', userInfo.id]" routerLink="/chefs/menuByChefid">Menu</button>
+            <button mat-menu-item routerLink="/admin/chefs/OrderOfChef" [queryParams]="{ chef_id: userInfo.id }">Order</button>
+            <button mat-menu-item  [routerLink]="['/admin/schedules', userInfo.id ]" routerLink="/schedules">Schedule</button>
+            <button mat-menu-item routerLink="/admin/chefs/ChefPayment" [queryParams]="{ chef_id: userInfo.id }">Payments</button>
+          </mat-menu>
+   
+</div>
+<div fxLayout="column" *ngIf="!showLoader">
+    
+    <div fxLayout="row" fxLayoutAlign="start start" class="p-5">
+        <button mat-raised-button type="submit" color="primary" (click)="openCreateProductDialog()">Create Product </button>
+    </div>
+    
+    <!-- <div>
+            <mat-label>Chef</mat-label>
+            <mat-select [(value)]="chefid" (change)="getProducts()">
+                <mat-option>None</mat-option>
+                <mat-option *ngFor="let topping of chefList" [value]="topping.id" >{{topping.first_name}}</mat-option>
+            </mat-select>
+            <mat-error>
+                Chef Name is required
+            </mat-error>
+    </div> -->
+    <!-- CONTENT -->
+    <div class="content">
+       
+        <!-- CENTER -->
+        <div class="center p-24 pb-56" >
+            <!-- CONTENT -->
+            <div class="content">
+                <div class="medias" fxLayout="row wrap" fxLayoutAlign="start">
+
+                    <div class="media" *ngFor="let product of productList" fxFlex="100" fxFlex.gt-xs="25"
+                            fxFlex.gt-sm="25">
+                        <!-- IMAGES  -->
+
+                        <div class="media-content" fxLayout="column" fxFlex="1 1 auto">
+
+                            <div class="footer" fxLayout="row" fxLayoutAlign="end start">
+                                <mat-icon (click)="openEditDialog(product)">edit</mat-icon>
+                                <mat-icon (click)="deleteSelectedProduct(product.id)" color="warn">delete</mat-icon>
+
+                            </div>
+    
+                            <div  class="content" fxLayout="column" fxFlex="1 1 auto">
+                                <img [src]="product._product_details?._product_media_of_product_details?.media_url?.url" [alt]="product._product_details.name">
+                                    <div class="h1 p-5"><b>{{product._product_details.name}}</b></div>
+                            </div>
+    
+                            <div class="footer pt-4" fxLayout="row" fxLayoutAlign="center center">
+                                
+                                <div><p><b>Price:</b>{{product._product_details.price  | currency:'EUR'}}</p></div>
+                            </div>
+                            <div class="footer pt-4" fxLayout="row" fxLayoutAlign="center center">
+                                
+                                <div><p>{{product._product_details.description}}</p></div>
+                            </div>
+    
+                        </div>
+                        <!-- /IMAGES -->
+
+                    </div>
+                    
+                </div>
+               
+           </div>
+            <!-- / CONTENT -->
+
+        </div>
+        <!-- / CENTER -->
+            <!-- IF NO PRODUCT IS FOUND -->
+    <div fxLayout="row" fxLayoutAlign="center center" class="p-10"
+    *ngIf="productList.length===0">No Product found.</div>
+
+    </div>
+    <!-- / CONTENT -->
+
+</div>
