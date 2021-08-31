@@ -138,7 +138,7 @@ export class ChefsComponent implements OnInit {
 
   changeRouteToSchedule(id){
     // alert(id);
-    this._router.navigate(['/admin/schedules',id]);
+    this._router.navigate(['/admin/chefs/schedules',id]);
     sessionStorage.setItem("chef_Id",id);
   }
 }

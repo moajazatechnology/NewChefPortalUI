@@ -99,8 +99,8 @@
                                             <p class="card-text">{{chef.distance_from_user | number : '1.1'}} Miles away</p>
                                         </div>
                                         <!--/.col-->
-                                        <div class="col-md-6 col-12 mb-md-0 mb-3 text-md-center">
-                                            <img [src]="chef.profile_image?.media_url?.url" [alt]="chef.name" class="img-user" alt="">
+                                        <div class="col-md-6 col-12 mb-md-0 mb-3 text-center">
+                                            <img [src]="chef.profile_image?.media_url?.url" [alt]="chef.name"  class="img-responsive img-user" alt="">
                                             <p class = "pl-md-0 pl-3">{{ chef.first_name }} {{ chef.second_name }}</p>    
                                         </div>
                                         <!--/.col-->

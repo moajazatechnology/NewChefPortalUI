@@ -29,3 +29,36 @@ img{
     color: white;
     background-color: #6e41c8;
 }
+
+@media(min-width : 768px){
+    .home-padding{
+        padding-left : 60px;
+        padding-right : 60px;
+    }
+}
+.btn-search{
+    background : #6e41c8!important;
+    border : 1px solid #fff;
+    font-weight: 700;
+}
+
+.search-input{
+    background : transparent;
+}
+.search-input::placeholder{
+    color : #fff!important; 
+}
+.form-control:focus{
+    color : #fff;
+    box-shadow: none;
+    border-color : 1px solid #fff
+}
+.form-control{
+    color : #fff;
+    font-size: 14px;
+}
+@media(min-width:998px){
+    .form-control{
+        width : 280px;
+    }
+}

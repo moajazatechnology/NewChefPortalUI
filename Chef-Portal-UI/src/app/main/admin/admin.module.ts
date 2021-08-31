@@ -70,7 +70,7 @@ const routes = [
           component : OrderOfChefComponent
         },
         {
-          path : 'schedules/:id',
+          path : 'chefs/schedules/:id',
           component: SchedulesComponent,
           resolve  : {
             events: CalendarService,
