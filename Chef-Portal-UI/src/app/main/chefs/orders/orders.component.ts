@@ -82,7 +82,7 @@ export class OrdersComponent implements OnInit {
           //   sortable:true
           // },
           {
-            columnDef: 'adress',
+            columnDef: 'address',
             header:'Address',
             sortable:true
           },
@@ -149,7 +149,7 @@ export class OrdersComponent implements OnInit {
         obj['scheduleTime'] = element.start_slot + ':00 - ' + element.end_slot + ':00';
         // obj['paymentMethod'] = element;
         obj['address'] = element._chef?._chef_store?.name;
-        obj['account'] = this.currencyPipe.transform(element.order_total, 'EUR');
+        obj['account'] = this.currencyPipe.transform(element.order_total, 'GBP');
         // obj['rating'] = element;
         
         tempArr.push(obj);

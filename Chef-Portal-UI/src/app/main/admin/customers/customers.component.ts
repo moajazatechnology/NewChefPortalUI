@@ -1,6 +1,7 @@
 import {  DatePipe } from '@angular/common';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { DataService } from 'src/app/_services/dataservice';
@@ -32,6 +33,7 @@ export class CustomersComponent implements OnInit {
 
   constructor(
       private _dataService: DataService,
+      private _matSnackBar: MatSnackBar,
       public datepipe: DatePipe) {
         this.columns = [
           {
@@ -52,6 +54,11 @@ export class CustomersComponent implements OnInit {
           {
             columnDef: 'phone_no',
             header: 'Phone Number',
+            sortable: true
+          },
+          {
+            columnDef: 'enabled',
+            header: 'Enabled',
             sortable: true
           }
       ];
@@ -108,5 +115,29 @@ export class CustomersComponent implements OnInit {
     this.page = event.pageIndex + 1;
     this.pageSize = event.pageSize;
     this.getList();
+  }
+
+  changeToggle(element) {
+
+    this.showLoader = true;
+
+    let data ={
+      'customer_id':element.id,
+      'enabled':element.enabled
+    }
+
+    this._dataService.post({url: 'admin/enable_customer',data: data,isLoader:true})
+    .subscribe(data =>{
+
+      this.showLoader = false;
+      this.getList();
+    },error =>{
+      this._matSnackBar.open(error.error.message, 'CLOSE', {
+        verticalPosition: 'bottom',
+        horizontalPosition:'center',
+        duration        : 2000
+      });
+      this.showLoader = false;
+    });
   }
 }

@@ -7,17 +7,18 @@
             <th mat-header-cell *matHeaderCellDef>{{column.header}}</th>
             
                 <td mat-cell *matCellDef="let element">
-                    <span *ngIf="column.columnDef!=='name'">
+                    <span *ngIf="column.columnDef!=='name' && column.columnDef!=='enabled'">
                         {{element[column.columnDef]}}
                     </span>
                     <span *ngIf="column.columnDef==='name'">
-                        <!-- <button routerLink="'chefs/profile'">{{element[column.columnDef]}}</button> -->
                       <a [routerLink]="['/admin/chefs/profile', element.id]" routerLink="/profile">{{element[column.columnDef]}}</a>
+                    </span>
+
+                    <span *ngIf="column.columnDef==='enabled'">
+                      <mat-slide-toggle [(ngModel)]="element[column.columnDef]"  color="primary" (change)="changeToggle(element)"></mat-slide-toggle>
                     </span>
                     
                     <span *ngIf="column.columnDef==='action'">
-                      <!-- <button [routerLink]="['/productBychefId', element.id]" routerLink="/productBychefId" type="button" mat-raised-button color="primary">Product</button>&nbsp;
-                      <button [routerLink]="['/menuByChefid', element.id]" routerLink="/menuByChefid" type="button" mat-raised-button color="primary">Menu</button> -->
                    
                       <button mat-button [matMenuTriggerFor]="menu">
                         <mat-icon class="secondary-text">more_vert</mat-icon>
@@ -28,13 +29,11 @@
                         <button mat-menu-item [routerLink]="['/admin/chefs/productBychefId', element.id]" routerLink="productBychefId">Product</button>
                         <button mat-menu-item [routerLink]="['/admin/chefs/menuByChefid', element.id]" routerLink="menuByChefid">Menu</button>
                         <button mat-menu-item routerLink="/admin/chefs/OrderOfChef" [queryParams]="{ chef_id: element.id}">Order</button>
-                        <!-- <button mat-menu-item  [routerLink]="['/schedules', element.id]" routerLink="/schedules">Schedule</button> -->
                         <button mat-menu-item  (click)="changeRouteToSchedule(element.id)">Schedule</button>
                         <button mat-menu-item routerLink="/admin/chefs/ChefPayment" [queryParams]="{ chef_id: element.id}">Payments</button>
                       </mat-menu>
                     </span>
                 </td>
-               <!-- [routerLink]="['/menuByChefid', element.id]" routerLink="/menuByChefid"  ChefPayment-->
         </ng-container>
        
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>

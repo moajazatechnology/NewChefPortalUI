@@ -89,7 +89,7 @@
                         <!--/.col-->    
                     </div>
 
-                    <mat-form-field appearance="outline" *ngIf="createPromoForm.get('is_flat_discount').value">
+                    <mat-form-field appearance="outline" *ngIf="!createPromoForm.get('is_flat_discount').value">
                         <mat-label>Discount amount</mat-label>
                         <input matInput formControlName="flat_discount" placeholder="flat discount" 
                         (blur)="transformAmounttoPannies($event)" required>
@@ -104,9 +104,10 @@
                       
                     </mat-form-field>
 
-                    <mat-form-field appearance="outline" *ngIf="!createPromoForm.get('is_flat_discount').value">
-                        <mat-label>Discount amount</mat-label>
-                        <input matInput  min="0" max="100" formControlName="percentage_discount" placeholder="percentage discount" required>
+                    <mat-form-field appearance="outline" *ngIf="createPromoForm.get('is_flat_discount').value">
+                        <mat-label>Percentage amount</mat-label>
+                        <input matInput  min="0" max="100" formControlName="percentage_discount" placeholder="percentage discount"
+                        (blur)="transformAmounttoPercentage($event)" required>
                         <mat-error *ngIf="createPromoForm.get('percentage_discount').hasError('required')">
                             Percentage is required
                         </mat-error>

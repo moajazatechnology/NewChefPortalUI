@@ -21,6 +21,7 @@ export class AddToBasketComponent implements OnInit {
   ngOnInit(): void {
     this.product = this.data;
     this.productTotalPrice = this.product.price;
+    this.checkedProductVariantOptions = [];
 
     this.addCheckedOptions();
   }
@@ -40,7 +41,7 @@ export class AddToBasketComponent implements OnInit {
     console.log(this.checkedProductVariantOptions);
   }
   
-  changeCheckboxSelection(varient,variantIdx, idx, event) {
+  changeCheckboxSelection(varient,variantIdx, optionId, idx, event) {
     console.log(varient);
     console.log(idx);
     console.log(event);
@@ -50,12 +51,27 @@ export class AddToBasketComponent implements OnInit {
     if(event.checked) {
 
       if(varient.single_selection) {
-        varient.options.forEach(element => {
-          if(element.default){
-            element.default = false;
-            this.productTotalPrice = this.productTotalPrice - varient.options[idx].price;
+        varient.options.forEach((element,index) => {
+          
+          if(optionId !==element.id){
+            if(element.default){
+              element.default = false;
+              this.productTotalPrice = this.productTotalPrice - varient.options[idx].price;
+            
+            }else {
+
+              this.checkedProductVariantOptions.forEach((variant,indx) => {
+                variant?.checkedOptions.forEach((element,index) => {
+                  
+                  if(!element.default) {
+                    this.productTotalPrice = this.productTotalPrice - varient.options[idx].price;
+                    this.checkedProductVariantOptions[indx]['checkedOptions'].splice(index,1);
+                  }
+                });
+              });
+
+            }
           }
-         
         });
         varient.options[idx].default = true;
         this.productTotalPrice = this.productTotalPrice + varient.options[idx].price;
@@ -73,16 +89,30 @@ export class AddToBasketComponent implements OnInit {
         if(varient.max_selection >= limit) {
           this.productTotalPrice = this.productTotalPrice + varient.options[idx].price;
         }else {
-          varient.options.forEach(element => {
-            if(element.default){
-              element.default = false;
-              this.productTotalPrice = this.productTotalPrice - varient.options[idx].price;
+          varient.options.forEach((element,index) => {
+            if(optionId !==element.id){
+              if(element.default){
+                element.default = false;
+                this.productTotalPrice = this.productTotalPrice - varient.options[idx].price;
+            
+              }else {
+
+                this.checkedProductVariantOptions.forEach((variant,indx) => {
+                  variant?.checkedOptions.forEach((element,index) => {
+                    
+                    if(!element.default) {
+
+                      this.productTotalPrice = this.productTotalPrice - varient.options[idx].price;
+                      this.checkedProductVariantOptions[indx]['checkedOptions'].splice(index,1);
+                    }
+                  });
+                });
+                
+              }
             }
-           
           });
           varient.options[idx].default = true;
-          this.productTotalPrice = this.productTotalPrice + varient.options[idx].price;
-
+          this.productTotalPrice = this.product.price + varient.options[idx].price;
         }
       }
       let duplicateVariant = this.checkedProductVariantOptions.find(v => v.id === varient.id);
@@ -107,8 +137,6 @@ export class AddToBasketComponent implements OnInit {
         this.checkedProductVariantOptions[index]['checkedOptions'] = [(varient.options[idx])];
       }
 
-    }else {
-      this.productTotalPrice = this.productTotalPrice - varient.options[idx].price;
     }
 
   }
