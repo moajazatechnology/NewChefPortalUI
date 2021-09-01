@@ -7,8 +7,11 @@
             <th mat-header-cell *matHeaderCellDef>{{column.header}}</th>
             
                 <td mat-cell *matCellDef="let element">
-                    <span>
+                    <span *ngIf="column.columnDef!=='enabled'">
                         {{element[column.columnDef]}}
+                    </span>
+                    <span *ngIf="column.columnDef==='enabled'">
+                        <mat-slide-toggle [(ngModel)]="element[column.columnDef]"  color="primary" (change)="changeToggle(element)"></mat-slide-toggle>
                     </span>
                 </td>
 

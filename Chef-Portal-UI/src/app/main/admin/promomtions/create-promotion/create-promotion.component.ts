@@ -94,7 +94,7 @@ export class CreatePromotionComponent implements OnInit {
   }
 
   transformAmount(element){
-    let formattedAmount = this.currencyPipe.transform(this.createPromoForm.get('minimum_order').value, 'EUR');
+    let formattedAmount = this.currencyPipe.transform(this.createPromoForm.get('minimum_order').value, 'GBP');
 
     console.log(formattedAmount);
     console.log(element.target.value);
@@ -104,7 +104,14 @@ export class CreatePromotionComponent implements OnInit {
 
   transformAmounttoPannies(element) {
 
-    let formattedAmount = this.currencyPipe.transform(this.createPromoForm.get('flat_discount').value, 'EUR');
+    let formattedAmount = this.currencyPipe.transform(this.createPromoForm.get('flat_discount').value, 'GBP');
+
+    element.target.value = formattedAmount;
+  }
+
+
+  transformAmounttoPercentage(element) {
+    let formattedAmount = this.createPromoForm.get('percentage_discount').value + '%';
 
     element.target.value = formattedAmount;
   }

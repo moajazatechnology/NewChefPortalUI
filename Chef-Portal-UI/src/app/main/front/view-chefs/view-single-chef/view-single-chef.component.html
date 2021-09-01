@@ -89,7 +89,7 @@
                 <!-- PROFILE HEADER -->
                 <div class="header p-24 mb-20" fxLayout.gt-sm="row"  [ngStyle]="{'background-image': 'url('+singleChefInfo.banner_image?.media_url?.url+')' }"
                     fxLayoutAlign.gt-sm="end start">
-                    <button class="btn btn-attempt btn-sm" type="button" (click)="showHideBasket()"  *ngIf="!showHideBasketBtn && !showHideMobileBasket"> <i class="fa fa-angle-left mr-2"></i> SHOW BASKET</button>
+                    <button class="btn btn-attempt btn-sm btn-m-4" type="button" (click)="showHideBasket()"  *ngIf="!showHideBasketBtn && !showHideMobileBasket"> <i class="fa fa-angle-left mr-2"></i> SHOW BASKET</button>
                 </div>
 
                 <div class="row pt-3 padding-2">
@@ -108,9 +108,9 @@
 
                 <div class="main-box">
                 
-                    <div *ngIf="showHideBasketBtn" fxLayout="column" fxLayoutAlign="start center">
-                        <div fxLayout="column">
-                            <div fxLayoutAlign="end center">
+                    <div *ngIf="showHideBasketBtn" fxLayout="column" fxLayoutAlign="start">
+                        <!-- <div> -->
+                            <div  fxLayout="row"  fxLayoutAlign="end start">
                                 <button class="btn btn-attempt border-white btn-sm" type="button" (click)="showHideBasket()"> <i class="fa fa-angle-left mr-2"></i> HIDE BASKET</button>
 
                             </div>
@@ -119,8 +119,8 @@
                                 <h3 class="bold">Order for {{selectedDate | date:'EEE, MMM d'}}</h3>
                                 <div class="box">
                                     <div class="mb-3 hr-line" *ngFor="let product of basketProductList;let productArrindex=index">
-                                        <div fxLayout="row" class="mb-3" fxFlex="1 0 auto">
-                                            <div fxLayout="column" fxLayoutAlign="space-around start"  fxFlex="16">
+                                        <div fxLayout="row" class="mb-3" fxFlex="1 0 auto" fxLayoutGap="20px">
+                                            <div fxLayout="column" fxLayoutAlign="space-around start"  fxFlex="22">
                                                 <div fxLayout="row" class="mb-3">  
                                                     <mat-icon (click)="increaseDecreaseCount('decrease',productArrindex)">remove_circle_outline</mat-icon>
                                                         <div>{{product.count}}</div>
@@ -134,7 +134,7 @@
                                                 </div>
                                                 
                                             </div>
-                                            <div fxLayout="column" fxLayoutAlign="space-around start"  fxFlex="84">
+                                            <div fxLayout="column" fxLayoutAlign="space-between start"  fxFlex="78">
                                                 <span class="mb-3"><b>Product Name :</b> {{ product.name }}</span>
                                                 <div class="mb-3" *ngFor="let variant of product.checkedProductVariantOptions">
                                                     <span class="mb-3"><b>Variant Name :</b> {{ variant.variant_name }}</span>
@@ -162,7 +162,7 @@
                                 <h2>No product added in your Basket.</h2>
                             </div>
                            
-                        </div>
+                        <!-- </div> -->
                     </div>
                 </div>
 

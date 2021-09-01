@@ -1,6 +1,7 @@
 import { DatePipe } from '@angular/common';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
@@ -36,6 +37,7 @@ export class ChefsComponent implements OnInit {
   constructor(
       private _dataService: DataService,
       private _router:Router,
+      private _matSnackBar: MatSnackBar,
       public datepipe: DatePipe) {
         this.columns = [
           {
@@ -140,5 +142,29 @@ export class ChefsComponent implements OnInit {
     // alert(id);
     this._router.navigate(['/admin/chefs/schedules',id]);
     sessionStorage.setItem("chef_Id",id);
+  }
+
+  changeToggle(element) {
+
+    this.showLoader = true;
+
+    let data ={
+      'chef_id':element.id,
+      'enabled':element.enabled
+    }
+
+    this._dataService.post({url: 'admin/enable_chef',data: data,isLoader:true})
+    .subscribe(data =>{
+
+      this.showLoader = false;
+      this.getList();
+    },error =>{
+      this._matSnackBar.open(error.error.message, 'CLOSE', {
+        verticalPosition: 'bottom',
+        horizontalPosition:'center',
+        duration        : 2000
+      });
+      this.showLoader = false;
+    });
   }
 }
