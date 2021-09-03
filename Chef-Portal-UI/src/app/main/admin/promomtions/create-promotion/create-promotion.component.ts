@@ -54,9 +54,11 @@ export class CreatePromotionComponent implements OnInit {
         is_flat_discount: this._fb.control(false),
         expiry_date: this._fb.control(this.startDate,[Validators.required]),
         max_uses: this._fb.control(0,[Validators.required,Validators.pattern("^[0-9]*$")]),
-        flat_discount: this._fb.control(0,[Validators.required,Validators.pattern("^[0-9]*$")]),
-        percentage_discount: this._fb.control(0,[Validators.required,Validators.pattern("^[0-9]$|^[1-9][0-9]$|^(100)$")])
+        flat_discount: this._fb.control(0,[Validators.required,Validators.pattern("^([0-9]{1,2}){1}(\.[0-9]{1,2})?$")]),
+        percentage_discount: this._fb.control(0,[Validators.required,Validators.pattern("^([0-9]{1,2}){1}(\.[0-9]{1,2})?$")])
+        // percentage_discount: this._fb.control(0,[Validators.required,Validators.pattern("^[0-9]$|^[1-9][0-9]$|^(100)$")])
     });
+    
   }
 
   getChefsList() {
