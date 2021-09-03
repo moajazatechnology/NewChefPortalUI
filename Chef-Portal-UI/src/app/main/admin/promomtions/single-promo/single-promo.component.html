@@ -4,10 +4,10 @@
     <mat-divider></mat-divider>
     <h3><b>Name: {{singlePromoInfo.name}}</b></h3>
     <h3><b>Expiry Date: {{singlePromoInfo.expiry_date | date:'EEE, MMM d, y, h:mm:ss'}}</b></h3>
-    <h3><b>Discount type: <span *ngIf="is_flat_discount">Flat Discount</span> <span *ngIf="!is_flat_discount">Percentage</span></b></h3>
-    <h3><b>Discount amount: <span *ngIf="is_flat_discount">{{singlePromoInfo.flat_discount}}</span> <span *ngIf="!is_flat_discount">{{singlePromoInfo.percentage_discount}}%</span></b></h3>
+    <h3><b>Discount type: <span *ngIf="singlePromoInfo.is_flat_discount">Flat Discount</span> <span *ngIf="!singlePromoInfo.is_flat_discount">Percentage</span></b></h3>
+    <h3><b>Discount amount: <span *ngIf="singlePromoInfo.is_flat_discount">{{(singlePromoInfo.flat_discount /100) }}</span> <span *ngIf="!singlePromoInfo.is_flat_discount">{{singlePromoInfo.percentage_discount}}%</span></b></h3>
     <h3><b>Discount type: {{singlePromoInfo.discount_type?.name}}</b></h3>
-    <h3><b>Minimum order: {{singlePromoInfo.minimum_order | currency:'GBP'}}</b></h3>
+    <h3><b>Minimum order: {{(singlePromoInfo.minimum_order / 100) | currency:'GBP'}}</b></h3>
     <h3><b>Total uses: {{singlePromoInfo.total_uses}}</b></h3>
     <div class="row">
         <!-- <div class="col-12"> -->

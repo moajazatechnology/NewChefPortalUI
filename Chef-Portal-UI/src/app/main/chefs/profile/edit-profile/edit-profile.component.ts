@@ -238,6 +238,7 @@ export class EditProfileComponent implements OnInit {
 
   fileChangeEvent(event: any): void {
     const file = event && event.target.files[0] || null;
+    this.file = event.target.files[0];
     this.getBase64(event.target.files[0]);
   }
 
@@ -256,7 +257,7 @@ export class EditProfileComponent implements OnInit {
     reader.readAsDataURL(file); // read file as data url
 
     reader.onload = (event: any) => { // called once readAsDataURL is completed
-      this.file = event.target.result;
+      // this.file = event.target.result;
       this.tmp_avatar_img = event.target.result;
       let mediaInfo = new FormData();
       mediaInfo.append('chef_profile_id',this.data.profile_data.chef_profile_id);
