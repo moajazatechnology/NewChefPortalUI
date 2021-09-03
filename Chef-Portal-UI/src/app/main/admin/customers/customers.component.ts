@@ -98,7 +98,7 @@ export class CustomersComponent implements OnInit {
         obj['name'] = element.first_name + ' '+ element.second_name;
         obj['email'] = element.email;
         obj['phone_no'] = element.phone_number;
-
+        obj['enabled'] = element.enabled;
         tempArr.push(obj);
     });
   	return tempArr;

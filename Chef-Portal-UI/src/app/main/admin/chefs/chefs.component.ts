@@ -113,16 +113,9 @@ export class ChefsComponent implements OnInit {
         obj['email'] = element.email;
         obj['address'] = (element._chef_store_address.address_1 && element._chef_store_address.address_1) + (element._chef_store_address.address_2!=='' ? ','+ element._chef_store_address.address_2 :'')+ (element._chef_store_address.address_3!=='' ? ','+element._chef_store_address.address_3:'' )+(element._chef_store_address.city!=='' ? ','+element._chef_store_address.city: '')+(element._chef_store_address.country!=='' ? ','+element._chef_store_address.country:'')+(element._chef_store_address.postcode!=='' ? ','+element._chef_store_address.postcode:'');
         obj['phone_no'] = element.phone_number;
-        // obj['enabled'] = element.enabled;
-        if(element.enabled == true){
-          obj['enabled'] = 'Yes';
-        }
-        else{
-          obj['enabled'] = 'No';
-        }
+        obj['enabled'] = element.enabled;
+
         tempArr.push(obj);
-       
-        
     });
   	return tempArr;
   }
