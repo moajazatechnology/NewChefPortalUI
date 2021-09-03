@@ -30,9 +30,9 @@ export class ViewChefNavbarComponent implements OnInit {
     const autocomplete = new google.maps.places.Autocomplete(
       document.getElementById('autocomplete1') as HTMLInputElement,
       {
-        types: ['address'],
+        //types: ['address'],
         componentRestrictions: {'country': ['UK']},
-        fields: ['place_id','geometry','name']
+        fields: ['geometry','name']
       }
     );
 
