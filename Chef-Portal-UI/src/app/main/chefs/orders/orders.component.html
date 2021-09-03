@@ -12,7 +12,7 @@
                     </span>
                     <span *ngIf="column.columnDef==='status'">
                         <mat-form-field appearance="outline">
-                            <mat-select [disabled]="element.statusName === 'COMPLETE'" [(ngModel)]="element.status" (selectionChange)="statusChange($event,element.id)">
+                            <mat-select [disabled]="element.statusName === 'COMPLETE' || element.statusName === 'CANCELLED'" [(ngModel)]="element.status" (selectionChange)="statusChange($event,element.id)">
                                 <mat-option *ngFor="let status of statusList" [value]="status.id" >
                                     {{status.status}}
                                 </mat-option>

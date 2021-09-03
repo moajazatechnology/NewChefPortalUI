@@ -16,6 +16,7 @@ export class CreatePromotionComponent implements OnInit {
   public isSubmit: boolean = false;
   public loader = false;
   public showLoader: boolean = true;
+  isFlatDiscount: boolean = false;
   message: string = '';
 
   startDate = new Date();
@@ -24,6 +25,8 @@ export class CreatePromotionComponent implements OnInit {
 
   chefsList: any  = [];
   promotypesList: any  = [];
+  flat_discount;
+  minimum_order;
 
   constructor(
     public dialogRef: MatDialogRef<CreatePromotionComponent>,
@@ -51,7 +54,7 @@ export class CreatePromotionComponent implements OnInit {
         promo_type: this._fb.control('',[Validators.required]),
         minimum_order: this._fb.control('',[Validators.required,Validators.pattern("^[0-9]*$")]),
         enabled: this._fb.control(false),
-        is_flat_discount: this._fb.control(false),
+        is_flat_discount: this._fb.control(true),
         expiry_date: this._fb.control(this.startDate,[Validators.required]),
         max_uses: this._fb.control(0,[Validators.required,Validators.pattern("^[0-9]*$")]),
         flat_discount: this._fb.control(0,[Validators.required,Validators.pattern("^([0-9]{1,2}){1}(\.[0-9]{1,2})?$")]),
@@ -59,6 +62,11 @@ export class CreatePromotionComponent implements OnInit {
         // percentage_discount: this._fb.control(0,[Validators.required,Validators.pattern("^[0-9]$|^[1-9][0-9]$|^(100)$")])
     });
     
+  }
+
+  checkmaxFlatDiscount(){
+
+    return 0
   }
 
   getChefsList() {
@@ -125,15 +133,18 @@ export class CreatePromotionComponent implements OnInit {
   onSubmit(event) {
     
     if(this.createPromoForm.valid) {
-
+      console.log(this.createPromoForm.value);
       this.loader = true;
-      let formValue = this.createPromoForm.value;
-      formValue.flat_discount = formValue.flat_discount * 100;
-      formValue.minimum_order = formValue.minimum_order * 100;
+      let formValue: any = {};
+      formValue = this.createPromoForm.value;
+      let data = formValue;
+
+      data.flat_discount = this.flat_discount * 100;
+      data.minimum_order = this.minimum_order * 100;
 
       this.isSubmit = true;
 
-        this.dataService.post({url: 'promo/create', data: formValue, isLoader:true})
+        this.dataService.post({url: 'promo/create', data: data, isLoader:true})
       .subscribe(data =>{
 
         this._matSnackBar.open('Promo code created successfully', 'CLOSE', {

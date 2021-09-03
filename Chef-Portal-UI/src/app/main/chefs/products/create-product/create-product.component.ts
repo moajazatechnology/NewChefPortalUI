@@ -244,7 +244,7 @@ export class CreateProductComponent implements OnInit {
   
   fileChangeEvent(event: any): void {
     const file = event && event.target.files[0] || null;
-    // this.file = event.target.files[0];
+    this.file = event.target.files[0];
     this.getBase64(event.target.files[0]);
   }
 
@@ -253,7 +253,7 @@ export class CreateProductComponent implements OnInit {
     reader.readAsDataURL(file); // read file as data url
 
     reader.onload = (event: any) => { // called once readAsDataURL is completed
-      this.file = event.target.result;
+      // this.file = event.target.result;
       this.tmp_avatar_img = event.target.result;
     }
   }
