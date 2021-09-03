@@ -159,7 +159,7 @@ export class ViewChefsComponent implements OnInit {
 
   getAllergen() {
 
-    this.dataService.getAllergensDietaries({url:'product/allergen_info',isLoader:true})
+    this.dataService.getAllAllergensDietaries({url:'product/allergen_info',isLoader:true})
     .subscribe(response =>{
       this.allergenList = response;
       this.filteredAllergyMulti.next(this.allergenList.slice());
@@ -170,7 +170,7 @@ export class ViewChefsComponent implements OnInit {
 
   getDietaries() {
 
-    this.dataService.getAllergensDietaries({url:'product/dietary_info',isLoader:true})
+    this.dataService.getAllAllergensDietaries({url:'product/dietary_info',isLoader:true})
     .subscribe(response =>{
       this.dietaryList = response;
       this.filteredDietaryMulti.next(this.dietaryList.slice());

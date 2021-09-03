@@ -23,8 +23,8 @@
                                         <h3 class="bold">Order for {{selectedDate | date:'EEE, MMM d'}}</h3>
                                         <div class="basket-box">
                                             <div class="mb-3 hr-line" *ngFor="let product of basketProductList;let productArrindex=index">
-                                                <div fxLayout="row" class="mb-3" fxFlex="1 0 auto">
-                                                    <div fxLayout="column" fxLayoutAlign="space-around start"  fxFlex="16">
+                                                <div fxLayout="row" class="mb-3" fxFlex="1 0 auto" fxLayoutGap="20px">
+                                                    <div fxLayout="column" fxLayoutAlign="space-around start"  fxFlex="22">
                                                         <div fxLayout="row" class="mb-3">  
                                                             <mat-icon (click)="increaseDecreaseCount('decrease',productArrindex)">remove_circle_outline</mat-icon>
                                                                 <div>{{product.count}}</div>
@@ -38,7 +38,7 @@
                                                         </div>
                                                         
                                                     </div>
-                                                    <div fxLayout="column" fxLayoutAlign="space-around start"  fxFlex="84">
+                                                    <div fxLayout="column" fxLayoutAlign="space-around start"  fxFlex="78">
                                                         <span class="mb-3"><b>Product Name :</b> {{ product.name }}</span>
                                                         <div class="mb-3" *ngFor="let variant of product.checkedProductVariantOptions">
                                                             <span class="mb-3"><b>Variant Name :</b> {{ variant.variant_name }}</span>

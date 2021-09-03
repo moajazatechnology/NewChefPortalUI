@@ -83,7 +83,7 @@ export class OrderComponent implements OnInit {
           //   sortable:true
           // },
           {
-            columnDef: 'adress',
+            columnDef: 'address',
             header:'Address',
             sortable:true
           },

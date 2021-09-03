@@ -400,6 +400,27 @@ getAllergensDietaries(info: { url: string; isLoader?: boolean; }): Observable<Re
   );
 }
 
+getAllAllergensDietaries(info: { url: string; isLoader?: boolean; }): Observable<Response> {
+  this.startLoader(info);
+  // let t = localStorage.getItem('token').replace('"','');
+  //  let token = t.replace('"','')
+  // //UPLOAD FILE DATA OPTION HEADERS
+  // const HttpUploadOptions = {
+  //     headers: new HttpHeaders({  'Accept':'application/json','Authorization': 'Bearer ' + token })
+  // }
+
+  return this.http.get(ServerURL.SERVER_URL_ALLERGENSDIETARY + info.url).pipe(
+    map((res) => {
+      return this.extractData(res, info);
+    }),
+    catchError((err: Response) => {
+      // console.error(err);
+      return this.handleErrorPromise(err, info);
+    })
+  );
+}
+
+
   extractData(res: any, info: { url: string; data?: any; isLoader?: boolean; }) {
     // Complete the loader as valid response is recieved
     this.stopLoader(info);

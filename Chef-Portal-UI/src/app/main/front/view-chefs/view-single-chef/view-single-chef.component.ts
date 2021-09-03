@@ -145,7 +145,12 @@ export class ViewSingleChefComponent implements OnInit {
   }
 
   addToBasket(product,menu_id) {
+
+    console.log(product);
+
     let productData = product;
+
+
     productData['menu_id'] = menu_id;
     let dialogRef = this.dialog.open(AddToBasketComponent, {
       data:productData,

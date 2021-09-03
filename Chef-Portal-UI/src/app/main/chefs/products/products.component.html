@@ -28,7 +28,7 @@
     
                             <div  class="content" fxLayout="column" fxFlex="1 1 auto">
                                 <img [src]="product._product_details?._product_media_of_product_details?.media_url?.url" [alt]="product._product_details.name">
-                                    <div class="h1 p-5"><b>{{product._product_details.name}}</b></div>
+                                    <div class="h1 pl-3 text-center pt-3"><b>{{product._product_details.name}}</b></div>
                             </div>
     
                             <div class="footer pt-4" fxLayout="row" fxLayoutAlign="center center">
@@ -37,7 +37,7 @@
                             </div>
                             <div class="footer pt-4" fxLayout="row" fxLayoutAlign="center center">
                                 
-                                <div><p>{{product._product_details.description}}</p></div>
+                                <div class="text pl-3"><p>{{product._product_details.description}}...</p></div>
                             </div>
     
                         </div>

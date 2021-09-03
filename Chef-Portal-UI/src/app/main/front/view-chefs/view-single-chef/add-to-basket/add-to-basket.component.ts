@@ -29,12 +29,34 @@ export class AddToBasketComponent implements OnInit {
   addCheckedOptions() {
 
     this.product.variants?.forEach((variant,indx) => {
-      variant?.options.forEach((element,index) => {
+      variant?.options.forEach((element,optionIndex) => {
         
         if(element.default) {
-          this.checkedProductVariantOptions.push(variant);
-          this.checkedProductVariantOptions[indx]['checkedOptions']=[(variant.options[index])];
-          this.productTotalPrice = this.productTotalPrice + variant.options[index].price;
+
+          let duplicateVariant = this.checkedProductVariantOptions.find(v => v.id === variant.id);
+
+          if(duplicateVariant) {
+            let index = 0;
+            this.checkedProductVariantOptions.forEach((element,indx) => {
+              if(element.id=== variant.id){
+                index = indx;
+              }
+            });
+            this.checkedProductVariantOptions[index]['checkedOptions'].push(variant.options[optionIndex]);
+          }else{
+            this.checkedProductVariantOptions.push(variant);
+            let index = 0;
+            this.checkedProductVariantOptions.forEach((element,indx) => {
+              if(element.id=== variant.id){
+                index = indx;
+              }
+            });
+            console.log(this.checkedProductVariantOptions);
+            this.checkedProductVariantOptions[index]['checkedOptions'] = [(variant.options[optionIndex])];
+          }
+          // this.checkedProductVariantOptions.push(variant);
+          // this.checkedProductVariantOptions[indx]['checkedOptions']=[(variant.options[optionIndex])];
+          this.productTotalPrice = this.productTotalPrice + variant.options[optionIndex].price;
         }
       });
     });
