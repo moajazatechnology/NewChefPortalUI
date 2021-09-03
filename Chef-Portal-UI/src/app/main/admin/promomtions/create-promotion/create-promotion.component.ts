@@ -25,8 +25,8 @@ export class CreatePromotionComponent implements OnInit {
 
   chefsList: any  = [];
   promotypesList: any  = [];
-  flat_discount;
-  minimum_order;
+  flat_discount: number = 0;
+  minimum_order: number = 0;
 
   constructor(
     public dialogRef: MatDialogRef<CreatePromotionComponent>,
@@ -139,6 +139,7 @@ export class CreatePromotionComponent implements OnInit {
       formValue = this.createPromoForm.value;
       let data = formValue;
 
+      data.is_flat_discount = this.flat_discount !== 0 ? true : false;
       data.flat_discount = this.flat_discount * 100;
       data.minimum_order = this.minimum_order * 100;
 
