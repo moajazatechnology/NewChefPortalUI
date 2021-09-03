@@ -74,7 +74,7 @@ export class CreateProductComponent implements OnInit {
 
       this.createProductForm = this._fb.group({
         name: this._fb.control(product_details.name,[Validators.required]),
-        price: this._fb.control((product_details.price /100),[Validators.required,Validators.pattern("^[0-9]*$")]),
+        price: this._fb.control((product_details.price /100),[Validators.required,Validators.pattern("^([0-9]{1,2}){1}(\.[0-9]{1,2})?$")]),
         description: this._fb.control(product_details.description,[Validators.required]),
         allergense: this._fb.control(product_details.allergens),
         dietaries: this._fb.control(product_details.dietary),
@@ -125,7 +125,7 @@ export class CreateProductComponent implements OnInit {
 
       this.createProductForm = this._fb.group({
         name: this._fb.control('',[Validators.required]),
-        price: this._fb.control('',[Validators.required,Validators.pattern("^[0-9]*$")]),
+        price: this._fb.control('',[Validators.required,Validators.pattern("^([0-9]{1,2}){1}(\.[0-9]{1,2})?$")]),
         description: this._fb.control('',[Validators.required]),
         allergense: this._fb.control([]),
         dietaries: this._fb.control([]),
@@ -244,6 +244,7 @@ export class CreateProductComponent implements OnInit {
   
   fileChangeEvent(event: any): void {
     const file = event && event.target.files[0] || null;
+    // this.file = event.target.files[0];
     this.getBase64(event.target.files[0]);
   }
 
@@ -321,8 +322,8 @@ export class CreateProductComponent implements OnInit {
       }else{
         mediaInfo.append('chef_id',formValue.chef_id);
       }
-      mediaInfo.append('dietary_selection',JSON.stringify(formValue.dietaries));
-      mediaInfo.append('allergen_selection',JSON.stringify(formValue.allergense));
+      // mediaInfo.append('dietary_selection',JSON.stringify(formValue.dietaries));
+      // mediaInfo.append('allergen_selection',JSON.stringify(formValue.allergense));
 
       //Allergens is optional parameter if select send
       if(formValue.allergense.length > 0){
@@ -368,7 +369,7 @@ export class CreateProductComponent implements OnInit {
         // Show the error message
           this.loader = false;
           this.isSubmit = false;
-          this._matSnackBar.open(error.message, 'RETRY', {
+          this._matSnackBar.open(error.error.message, 'RETRY', {
             verticalPosition: 'bottom',
             horizontalPosition:'center',
             duration        : 2000
