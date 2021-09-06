@@ -23,6 +23,7 @@ import { CreateMenuComponent } from './menus/create-menu/create-menu.component';
 import { CalendarEventFormDialogComponent } from './schedules/event-form/event-form.component';
 import { AddProductVarientsComponent } from './products/create-product/add-product-varients/add-product-varients.component';
 import { ViewSingleOrderComponent } from './orders/view-single-order/view-single-order.component';
+import { ViewOrderComponent } from './orders/view-order/view-order.component';
 
 const routes = [
   {
@@ -91,6 +92,7 @@ const routes = [
     CalendarEventFormDialogComponent,
     AddProductVarientsComponent,
     ViewSingleOrderComponent,
+    ViewOrderComponent,
   ],
   imports: [
     CommonModule,

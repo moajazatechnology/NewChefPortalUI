@@ -34,7 +34,7 @@
 
             <tr>
                 <td><b>Minimum order:</b>
-                    <div>{{(userInfo._chef_store?.minimum_order) / 100}}</div>
+                    <div>{{(userInfo._chef_store?.minimum_order) / 100 | currency:'GBP'}}</div>
                 </td>
                 <td><mat-icon (click)="editChefMinimunOrder('minimumorder')">edit</mat-icon></td>
             </tr>

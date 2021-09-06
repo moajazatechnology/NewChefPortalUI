@@ -17,7 +17,7 @@
 
                         <mat-form-field  appearance="outline">
                             <mat-label>Minimum Order</mat-label>
-                            <input matInput formControlName="minimum_order">
+                            <input matInput formControlName="minimum_order" (blur)="transformAmount($event)">
                             <mat-error *ngIf="editMinimumOrderForm.get('minimum_order').hasError('required')">
                                 Minimum Order is required
                             </mat-error>

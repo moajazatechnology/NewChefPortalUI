@@ -1,3 +1,4 @@
+import { CurrencyPipe } from '@angular/common';
 import { Component, Inject, OnInit, ViewChild } from '@angular/core';
 import { AbstractControl, FormArray, FormBuilder, FormControl, FormGroup, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
@@ -67,6 +68,7 @@ export class EditProfileComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data: any,
     private _fb: FormBuilder,
     private _matSnackBar:MatSnackBar,
+    private currencyPipe: CurrencyPipe,
     private _dataService :DataService,
      ) {
 
@@ -593,6 +595,15 @@ export class EditProfileComponent implements OnInit {
       CommonUtils.validateAllFormFields(this.editCollectionForm);
     }
     
+    
+  }
+
+  transformAmount(element){
+    let formattedAmount = this.currencyPipe.transform(this.editMinimumOrderForm.get('minimum_order').value, 'GBP');
+
+    console.log(formattedAmount);
+    console.log(element.target.value);
+    element.target.value = formattedAmount;
     
   }
 

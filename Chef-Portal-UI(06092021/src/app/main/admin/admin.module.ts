@@ -27,6 +27,7 @@ import { PromomtionsComponent } from './promomtions/promomtions.component';
 import { CreatePromotionComponent } from './promomtions/create-promotion/create-promotion.component';
 import { SinglePromoComponent } from './promomtions/single-promo/single-promo.component';
 import { EditPromocodeComponent } from './promomtions/edit-promocode/edit-promocode.component';
+import { AdminHomeComponent } from './admin-home/admin-home.component';
 
 const routes = [
   {
@@ -35,7 +36,7 @@ const routes = [
       children : [
         {
           path     : 'home',
-          component: HomeComponent,
+          component: AdminHomeComponent,
         },
         {
           path     : 'chefs',
@@ -121,7 +122,8 @@ const routes = [
     PromomtionsComponent,
     CreatePromotionComponent,
     SinglePromoComponent,
-    EditPromocodeComponent
+    EditPromocodeComponent,
+    AdminHomeComponent
   ],
   imports: [
     CommonModule,

@@ -91,4 +91,16 @@
         <h1>Your Profile is complete</h1> 
     </div>
   </div>
+  <div fxLayout="column" class="mb-3" fxLayoutAlign="space-around start" fxFlex="50">
+    <h3><b>Sales made today: {{profile_data.sales_stats?.total_daily_sales}}</b></h3>
+    <h3><b>All time sales: {{profile_data.sales_stats?.total_sales}}</b></h3>
+    </div>
+
+    <div fxLayout="column" class="mb-3" fxLayoutAlign="space-around start" fxFlex="50">
+        <h3>Overview of Orders</h3>
+    <h3><b>Cancelled: {{profile_data.order_stats?.cancelled_orders}}</b></h3>
+    <h3><b>Pending: {{profile_data.order_stats?.pending_orders}}</b></h3>
+    <h3><b>Dispatched: {{profile_data.order_stats?.dispatched_orders}}</b></h3>
+    <h3><b>Completed: {{profile_data.order_stats?.complete_orders}}</b></h3>
+    </div>
 </div>

@@ -1,0 +1,23 @@
+<app-loader *ngIf="showLoader"></app-loader>
+<div class="container-fluid" *ngIf="!showLoader">
+    <div class="row p-3">
+        <div class="mb-3">
+            <h3><b>Sales made today: {{profile_data.sales_stats?.total_daily_sales}}</b></h3>
+            <h3><b>All-time sales: {{profile_data.sales_stats?.total_sales}}</b></h3>
+        </div>
+
+        <div class="mb-3">
+            <h3><b>New customer today: {{profile_data.general_stats?.new_customers_today}}</b></h3>
+            <h3><b>Total chefs on platform: {{profile_data.general_stats?.total_chefs}}</b></h3>
+            <h3><b>Total customers on platform: {{profile_data.general_stats?.total_customers}}</b></h3>
+        </div>
+        
+        <div class="mb-3">
+            <h3>Overview of Orders</h3>
+            <h3><b>Cancelled: {{profile_data.order_stats?.cancelled_orders}}</b></h3>
+            <h3><b>Pending: {{profile_data.order_stats?.pending_orders}}</b></h3>
+            <h3><b>Dispatched: {{profile_data.order_stats?.dispatched_orders}}</b></h3>
+            <h3><b>Completed: {{profile_data.order_stats?.complete_orders}}</b></h3>
+        </div>
+    </div>
+</div>
