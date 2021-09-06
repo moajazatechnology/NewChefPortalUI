@@ -97,6 +97,10 @@ export class ProfileComponent implements OnInit {
   editDeliverySlots(type) {
     this.openDialog(type);
   }
+
+  editChefMinimunOrder(type) {
+    this.openDialog(type);
+  }
   
   openDialog(type) {
     let data = {type:type,profile_data:this.userInfo,cuisineNames: []};

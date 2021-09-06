@@ -7,7 +7,10 @@
             <th mat-header-cell *matHeaderCellDef>{{column.header}}</th>
             
                 <td mat-cell *matCellDef="let element">
-                    <span *ngIf="column.columnDef!=='status'">
+                    <span *ngIf="column.columnDef!=='status' && column.columnDef!=='id'">
+                        {{element[column.columnDef]}}
+                    </span>
+                    <span *ngIf="column.columnDef==='id'" class="order" (click)="viewSingleorder(element.id)">
                         {{element[column.columnDef]}}
                     </span>
                     <span *ngIf="column.columnDef==='status'">

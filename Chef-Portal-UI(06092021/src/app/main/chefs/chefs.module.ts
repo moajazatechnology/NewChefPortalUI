@@ -22,6 +22,7 @@ import { EditProfileComponent } from './profile/edit-profile/edit-profile.compon
 import { CreateMenuComponent } from './menus/create-menu/create-menu.component';
 import { CalendarEventFormDialogComponent } from './schedules/event-form/event-form.component';
 import { AddProductVarientsComponent } from './products/create-product/add-product-varients/add-product-varients.component';
+import { ViewSingleOrderComponent } from './orders/view-single-order/view-single-order.component';
 
 const routes = [
   {
@@ -46,6 +47,10 @@ const routes = [
         {
           path     : 'orders',
           component: OrdersComponent
+        },
+        {
+          path     : 'order/single/:id',
+          component: ViewSingleOrderComponent
         },
         {
           path     : 'products',
@@ -85,6 +90,7 @@ const routes = [
     CreateMenuComponent,
     CalendarEventFormDialogComponent,
     AddProductVarientsComponent,
+    ViewSingleOrderComponent,
   ],
   imports: [
     CommonModule,

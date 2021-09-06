@@ -32,6 +32,7 @@ export class EditProfileComponent implements OnInit {
   editCuisineForm: FormGroup
   editCollectionDeliveryForm: FormGroup;
   editCollectionForm: FormGroup;
+  editMinimumOrderForm: FormGroup;
   public slots : FormArray; 
   pwdhide: boolean = true;
   cpwdhide: boolean = true;
@@ -95,6 +96,9 @@ export class EditProfileComponent implements OnInit {
       this.EditBiographyFormGroup();
     }else if(this.data.type === 'profile'){
       this.message = 'New Profile Picture';
+    }else if(this.data.type === 'minimumorder') {
+      this.message = 'Edit Minimum Order';
+      this.EditMinimumOrderFormGroup();
     }else if(this.data.type === 'banner'){
       this.message = 'New Banner Picture';
     }else if(this.data.type === 'cuisine'){
@@ -280,6 +284,13 @@ export class EditProfileComponent implements OnInit {
     });
   }
 
+  EditMinimumOrderFormGroup() {
+    this.editMinimumOrderForm = this._fb.group({
+      chef_id: this._fb.control(0),
+      minimum_order: this._fb.control(this.data.profile_data?._chef_store?.minimum_order,[Validators.required,Validators.pattern("^[0-9]*$")])
+    });
+  }
+
   EditPasswordFormGroup() {
     this.editPasswordForm = this._fb.group({
       password: this._fb.control('', [Validators.required,Validators.minLength(8)]),
@@ -376,6 +387,30 @@ export class EditProfileComponent implements OnInit {
       this.postAPIResponse('chef/details/email'+this.url,this.editEmailForm.value,message);
     }else{
       CommonUtils.validateAllFormFields(this.editEmailForm);
+    }
+  }
+
+  mimimumOrderSubmit(event) {
+
+    let userType = localStorage.getItem('userType');
+    let checkUserType = userType === 'true' ? true : false;
+    if (checkUserType) {
+        this.url = "?chef_id="+this.data.profile_data.id;
+    }else{
+        this.url ="";
+    }
+
+    event.preventDefault();
+    event.stopPropagation();
+    if(this.editMinimumOrderForm.valid) {
+      this.loader = true;
+      this.isSubmit = true
+      let message = 'Minimum order Edited Successfully';
+      let data = this.editMinimumOrderForm.value;
+      data.minimum_order = data.minimum_order * 100;
+      this.postAPIResponse('chef/chef_store/minimum_order'+this.url, data, message);
+    }else{
+      CommonUtils.validateAllFormFields(this.editMinimumOrderForm);
     }
   }
 

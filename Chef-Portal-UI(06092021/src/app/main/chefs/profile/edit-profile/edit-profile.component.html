@@ -11,6 +11,31 @@
         <div id="login-form-wrapper" fxLayout="column" fxLayoutAlign="center start">
     
             <div id="login-form">
+
+                <div *ngIf="data.type==='minimumorder'">
+                    <form fxLayot="column" [formGroup]="editMinimumOrderForm">
+
+                        <mat-form-field  appearance="outline">
+                            <mat-label>Minimum Order</mat-label>
+                            <input matInput formControlName="minimum_order">
+                            <mat-error *ngIf="editMinimumOrderForm.get('minimum_order').hasError('required')">
+                                Minimum Order is required
+                            </mat-error>
+                            <mat-error *ngIf="!editMinimumOrderForm.get('minimum_order').hasError('required') && 
+                            editMinimumOrderForm.get('minimum_order').hasError('pattern')">
+                                Only numbers allowed
+                            </mat-error>
+                        
+                        </mat-form-field>
+        
+                        <button mat-raised-button color="primary" class="submit-button" aria-label="LOG IN"
+                        (click)="mimimumOrderSubmit($event)" [disabled]="isSubmit">
+                        <i class="fa fa-spinner fa-spin" *ngIf="loader"></i>
+                        SUBMIT
+                        </button>
+
+                    </form>
+                </div>
                 <div *ngIf="data.type==='email'">
                     <form fxLayot="column" [formGroup]="editEmailForm">
 

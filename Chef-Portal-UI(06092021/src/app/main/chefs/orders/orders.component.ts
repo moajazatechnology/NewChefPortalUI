@@ -1,9 +1,11 @@
 import { CurrencyPipe, DatePipe } from '@angular/common';
 import { Component, OnInit, ViewChild } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
+import { Router } from '@angular/router';
 import { first } from 'rxjs/internal/operators/first';
 import { DataService } from 'src/app/_services/dataservice';
 
@@ -38,6 +40,7 @@ export class OrdersComponent implements OnInit {
   constructor(
       private _dataService: DataService,
       public datepipe: DatePipe,
+      private router: Router,
       private _matSnackBar: MatSnackBar,
       private currencyPipe : CurrencyPipe) {
         this.columns = [
@@ -168,6 +171,11 @@ export class OrdersComponent implements OnInit {
     this.page = event.pageIndex + 1;
     this.pageSize = event.pageSize;
     this.getList();
+  }
+
+  viewSingleorder(id) {
+
+    this.router.navigate(['chef/order/single/',id])
   }
 
   statusChange(event,order_id) {

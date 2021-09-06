@@ -24,6 +24,7 @@ export class ViewSingleChefComponent implements OnInit {
   public isTooltipshow: boolean = false;
   public basketProductList: any = [];
   public showFilteredProductList: any = [];
+  public chefsAvailableDate: any = [];
   public totalPrice: number = 0;
   public chef_id: number = 0;
   public customerToken: any;
@@ -87,9 +88,23 @@ export class ViewSingleChefComponent implements OnInit {
     .subscribe(response =>{
       this.singleChefInfo = response;
       this.getFilterProducts(this.singleChefInfo.chef_availability[0]);
+      this.getAvailableDates();
       this.getalreadySavedProduct();
       console.log(response);
     });
+  }
+
+  getAvailableDates() {
+
+    this.singleChefInfo.chef_availability?.forEach(element => {
+
+      let duplicateVariant = this.chefsAvailableDate.find(date => (this.dataService.getDateFormat(new Date(element)) === this.dataService.getDateFormat(new Date(date)))); 
+      if(!duplicateVariant) { 
+        this.chefsAvailableDate.push(element);
+      }
+    });
+
+    console.log(this.chefsAvailableDate);
   }
 
   getalreadySavedProduct() {

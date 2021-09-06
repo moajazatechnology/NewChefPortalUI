@@ -187,7 +187,7 @@
       
             </button>
             <mat-menu #menuDate="matMenu">
-                <div *ngFor="let date of singleChefInfo.chef_availability">
+                <div *ngFor="let date of chefsAvailableDate">
                 <button mat-menu-item (click)="onSelectDate(date)">{{date | date:'EEE, MMM d'}}</button>
                 </div>
             </mat-menu>

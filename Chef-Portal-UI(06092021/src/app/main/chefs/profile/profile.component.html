@@ -33,6 +33,13 @@
             <tr fxLayoutAlign="start start"><th><h2><b>Store configuration:</b></h2></th></tr>
 
             <tr>
+                <td><b>Minimum order:</b>
+                    <div>{{(userInfo._chef_store?.minimum_order) / 100}}</div>
+                </td>
+                <td><mat-icon (click)="editChefMinimunOrder('minimumorder')">edit</mat-icon></td>
+            </tr>
+
+            <tr>
                 <td><b>Offered cusines:</b>
                     <div *ngFor="let cuisine of cuisineNames;let i=index">{{i+1}}. {{cuisine?._cuisine?.name}}</div>
                 </td>
