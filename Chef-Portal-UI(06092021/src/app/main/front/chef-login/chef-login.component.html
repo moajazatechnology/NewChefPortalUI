@@ -1,0 +1,52 @@
+<!-- <app-loader></app-loader> -->
+<div class="container-fluid height-100"  id="login">
+
+    <div id="login-form-wrapper" fxLayout="column" fxLayoutAlign="center center">
+
+        <div id="login-form" >
+
+            <div class="title">LOGIN TO YOUR ACCOUNT</div>
+
+            <form [formGroup]="loginForm">
+
+                <mat-form-field appearance="outline">
+                    <mat-label>Email</mat-label>
+                    <input matInput formControlName="email">
+                    <mat-icon matSuffix class="secondary-text">mail</mat-icon>
+                    <mat-error>
+                        Email is required
+                    </mat-error>
+                  
+                </mat-form-field>
+
+                <mat-form-field appearance="outline">
+                    <mat-label>Password</mat-label>
+                    <input matInput type="password" formControlName="password" placeholder="password" [type]="pwdhide ? 'password' : 'text'">
+                    <button type="button" mat-icon-button matSuffix (click)="pwdhide = !pwdhide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="pwdhide">
+                    <mat-icon  matSuffix class="secondary-text">{{pwdhide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                    </button>
+                    <mat-error>
+                        Password is required
+                    </mat-error>
+                    
+                </mat-form-field>
+
+                <button mat-raised-button color="primary" class="submit-button" aria-label="LOG IN"
+                (click)="onLogin($event)" [disabled]="isSubmit">
+                <i class="fa fa-spinner fa-spin" *ngIf="loading"></i>
+                    LOGIN
+                </button>
+
+            </form>
+
+            <div class="register mb-3" fxLayout="column" fxLayoutAlign="center center">
+                <span class="text">Don't have an account?</span>
+                <a class="link" routerLink="/become-chefs">Become a Chefs</a>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+<app-footer1></app-footer1>

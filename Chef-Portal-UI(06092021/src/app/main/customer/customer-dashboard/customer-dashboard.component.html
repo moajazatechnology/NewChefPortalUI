@@ -1,0 +1,95 @@
+<!-- <div style="height: 100vh;">
+    <mat-toolbar color="primary">
+        <div fxShow="true" fxHide.lt-md="true">
+            <a mat-button  routerLink="/" style="text-align: start;">
+                <span><img src="./assets/lmc_logo_white.png" class="image" style="width: 20%;"></span>
+            </a>
+        </div>
+        <div fxShow="true" fxHide.gt-sm="true">
+            <a mat-button  routerLink="/" style="text-align: start;">
+                <span><img src="./assets/lmc_logo_white.png" class="image" style="width: 50%;"></span>
+            </a>
+        </div>
+  
+      <span class="example-spacer"></span>
+  
+      <div fxShow="true" fxHide.lt-md="true" fxLayoutGap="20px">
+
+        <button mat-button [matMenuTriggerFor]="menu">All <i class="fa fa-caret-down pl-18"></i></button>
+        <mat-menu #menu="matMenu">
+            <button mat-menu-item routerLink="profile">Profile</button>
+            <button mat-menu-item routerLink="orders">My Orders</button>
+            <button mat-menu-item (click)="logout()">Logout</button>
+        </mat-menu>
+        
+      </div>
+  
+      <div fxShow="true" fxHide.gt-sm="true">
+        <button mat-icon-button (click)="sidenav.toggle()">
+          <mat-icon>menu</mat-icon>
+        </button>
+      </div>
+    </mat-toolbar>
+  
+    <mat-sidenav-container fxFlexFill class="example-container">
+      <mat-sidenav #sidenav fxLayout="column">
+        <div fxShow="true" fxHide.gt-sm="true">
+          <div fxLayout="column">
+            <a (click)="sidenav.toggle()" href="#" mat-button>
+              <button  mat-icon-button>
+                <mat-icon>close</mat-icon>
+              </button>
+            </a>
+            <button mat-button [matMenuTriggerFor]="menu">All <i class="fa fa-caret-down pl-18"></i></button>
+        <mat-menu #menu="matMenu">
+            <button mat-menu-item routerLink="profile">Profile</button>
+            <button mat-menu-item routerLink="orders">My Orders</button>
+            <button mat-menu-item (click)="logout()">Logout</button>
+        </mat-menu>
+           
+          </div>
+        </div>
+      </mat-sidenav>
+      <mat-sidenav-content fxFlexFill>
+
+        
+        <router-outlet></router-outlet>
+      </mat-sidenav-content>
+          
+    </mat-sidenav-container>
+
+  </div>
+   -->
+  <nav class="navbar navbar-expand-lg bg-dark navbar-dark">
+    <a class="navbar-brand">
+        <img src="assets/lmc_logo_white.png" [routerLink]="'/'" class = "img-fluid pb-2" style = "width : 206px;height:50px;">
+    </a>
+      
+    <button class="navbar-toggler hidden-sm-up" type="button" (click)="isNavbarCollapsed = !isNavbarCollapsed" data-target="#navbarsDefault" aria-controls="navbarsDefault" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    
+    <div class="row" [ngbCollapse]="isNavbarCollapsed" class="collapse navbar-collapse" id="navbarsDefault">
+       
+        <ul class="navbar-nav ml-auto">
+   
+            <!-- Dropdown -->
+            <li class="nav-item">
+              <div>
+       
+                <button mat-stroked-button  class="btn-border text-white" [matMenuTriggerFor]="menuCustomer">{{customerInfo.first_name}} {{customerInfo.second_name}} <i class="fa fa-caret-down "></i>
+                </button>
+                <mat-menu #menuCustomer="matMenu">
+                  <button mat-menu-item routerLink="profile">Profile</button>
+                  <button mat-menu-item routerLink="orders">My Orders</button>
+                  <button mat-menu-item (click)="logout()">Logout</button>
+                </mat-menu>
+              
+              </div>
+    
+            </li>    
+        </ul>
+    </div>
+  </nav>    
+  <!--/. navbar -->
+  <router-outlet></router-outlet>

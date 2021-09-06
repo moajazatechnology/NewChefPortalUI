@@ -1,0 +1,24 @@
+mat-sidenav {
+    width: 200px;
+    padding:15px;
+    background-color: red;
+}
+// .mat-drawer { 
+//     background-color: #023075;
+//     color:#fff
+// }
+
+.logout-btn {
+    margin-top: 1em;
+    margin-bottom: 1em;
+    color: white;
+    background-color: #6E41C8;
+    border-radius: 30px;
+}
+
+.main-content {
+    padding:20px;
+}
+.toolbar-spacer {
+    flex: 1 1 auto;
+}

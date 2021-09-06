@@ -1,0 +1,94 @@
+<app-loader *ngIf="showLoader"></app-loader>
+<div class="userTitleMainDiv" *ngIf="id">
+    <h1 class="userTitle">Viewing {{userInfo.first_name}} {{userInfo.second_name}}</h1>
+    
+        <button mat-button [matMenuTriggerFor]="menu">
+            <!-- <img src="/assets/images/menuicon/419-4190179_menu-vertical-icon-android-menu-icon-png.png" class="menustyle" alt=""> -->
+            <mat-icon class="secondary-text">more_vert</mat-icon>
+          </button>
+          <mat-menu #menu="matMenu">
+            <button mat-menu-item [routerLink]="['/admin/chefs/profile', userInfo.id]" routerLink="/chefs/profile">Profile</button>
+            <button mat-menu-item routerLink="/admin/home" [queryParams]="{ chef_id: userInfo.id}">Home</button>
+            <button mat-menu-item [routerLink]="['/admin/chefs/productBychefId', userInfo.id]" routerLink="/chefs/productBychefId">Product</button>
+            <button mat-menu-item [routerLink]="['/admin/chefs/menuByChefid', userInfo.id]" routerLink="/chefs/menuByChefid">Menu</button>
+            <button mat-menu-item routerLink="/admin/chefs/OrderOfChef" [queryParams]="{ chef_id: userInfo.id }">Order</button>
+            <button mat-menu-item  [routerLink]="['/admin/chefs/schedules', userInfo.id ]" routerLink="/schedules">Schedule</button>
+            <button mat-menu-item routerLink="/admin/chefs/ChefPayment" [queryParams]="{ chef_id: userInfo.id }">Payments</button>
+          </mat-menu>
+   
+</div>
+<div fxLayout="column" class="p-4" *ngIf="!showLoader">
+  <div fxLayout="column" fxLayoutAlign="start start" fxFlex="50">
+    <h1>Welcome to LocalMasterchefs!</h1>
+    <div class="hr"></div>
+    <p>To get your store up and running,there are few essentials steps that you need to take,as listed below.
+        Once Finished, please get in contact with the team to make your store live!
+    </p>
+  </div>
+  <div fxLayout="column" fxFlex="50" class="p-4">
+      <div *ngIf="!profile_data.profile_complete">     
+        <table class="w-50">
+            <tr>
+                <td><div><b>Set Profile Picture</b></div></td>
+                <td>
+                    <mat-icon *ngIf="profile_data.profile_image_set" class="check">check</mat-icon>
+                    <mat-icon *ngIf="!profile_data.profile_image_set" class="ncheck">close</mat-icon>
+                </td>
+            </tr>
+            <div class="hr"></div>
+            <tr>
+                <td><div><b>Set Banner</b></div></td>
+                <td>
+                    <mat-icon *ngIf="profile_data.banner_image_set" class="check">check</mat-icon>
+                    <mat-icon *ngIf="!profile_data.banner_image_set" class="ncheck">close</mat-icon>
+                </td>
+            </tr>
+            <div class="hr"></div>
+            <tr>
+                <td><div><b>Configured Store Address</b></div></td>
+                <td>
+                    <mat-icon *ngIf="profile_data.chef_store_address_set" class="check">check</mat-icon>
+                    <mat-icon *ngIf="!profile_data.chef_store_address_set" class="ncheck">close</mat-icon>
+                </td>
+            </tr>
+            <div class="hr"></div>
+            <tr>
+                <td><div><b>First Product created</b></div></td>
+                <td>
+                    <mat-icon *ngIf="profile_data.product_created" class="check">check</mat-icon>
+                    <mat-icon *ngIf="!profile_data.product_created" class="ncheck">close</mat-icon>
+                </td>
+            </tr>
+            <div class="hr"></div>
+            <tr>
+                <td><div><b>First menu created</b></div></td>
+                <td>
+                    <mat-icon *ngIf="profile_data.menu_created" class="check">check</mat-icon>
+                    <mat-icon *ngIf="!profile_data.menu_created" class="ncheck">close</mat-icon>
+                </td>
+            </tr>
+            <div class="hr"></div>
+            <tr>
+                <td><div><b>Payments configured</b></div></td>
+                <td>
+                    <mat-icon *ngIf="profile_data.payment_status" class="check">check</mat-icon>
+                    <mat-icon *ngIf="!profile_data.payment_status" class="ncheck">close</mat-icon>
+                </td>
+            </tr>
+            <div class="hr"></div>
+            <tr>
+                <td><div><b>Live on platform</b></div></td>
+                <td>
+                    <mat-icon *ngIf="profile_data.enabled" class="check">check</mat-icon>
+                    <mat-icon *ngIf="!profile_data.enabled" class="ncheck">close</mat-icon>
+                </td>
+            </tr>
+            <div class="hr"></div>
+            
+        </table>
+    </div>
+    <div *ngIf="profile_data.profile_complete">   
+        <h1>Your Profile is complete</h1> 
+    </div>
+  </div>
+</div>

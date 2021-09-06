@@ -1,0 +1,111 @@
+.botton{
+    margin-left: 50px;
+}
+
+.icon {
+    float: right;
+    font-size :110%;
+    cursor: pointer;
+    color: black;
+    border-radius: 50%;
+}
+.bold {
+   font-weight: bold; 
+   font-size: medium;
+}
+
+
+#login {
+    width: 100%;
+
+    #login-form-wrapper {
+        flex: 1 0 auto;
+        // padding: 32px;
+
+    
+        #login-form {
+            width: 384px;
+            max-width: 384px;
+            padding: 32px;
+            text-align: center;
+
+            .title {
+                font-size: 20px;
+                margin: 16px 0 32px 0;
+            }
+
+            form {
+                width: 100%;
+                text-align: left;
+
+                mat-form-field {
+                    width: 100%;
+                }
+                .logo-preview{
+                    float: left;
+                    max-width: 100%;
+                }
+                img {
+                    width: 50%;
+                    height: 50%;
+                }
+
+                .submit-button {
+                    // width: 220px;
+                    margin: 16px auto;
+                    display: block;
+
+                }
+                .pr-10 {
+                    padding-right: 10%;
+                }
+                .pt-10 {
+                    padding-top: 10%;
+                }
+                .p{
+                    padding: 2%;
+                }
+
+                .w-100{
+                    width: 100%;
+                    border: 1px solid gainsboro;
+                    margin-top: 5%;
+                    border-radius: 2%;
+                }
+                .w-10{
+                    width: 10%;
+                }
+                td {
+                    padding: 2%;
+                }
+                tr {
+                    padding: 2%;
+                    border: 1px solid gainsboro;
+                }
+                .hr {
+                    border: 1px solid black;
+                }
+                .hr1 {
+                    border: 2px solid black;
+                }
+
+                tr.border-bottom {
+                    border-bottom: 1px solid #ff000d;
+                  }
+                  .icon,mat-icon {
+                      cursor: pointer;
+                  }
+                .scroll-div {
+                    height: 200px;
+                    overflow-x: auto;
+                }
+            }
+        }
+    }
+}
+
+.btn-cancel{
+    text-transform: uppercase;
+    color:black!important;
+    background-color:white;
+ }

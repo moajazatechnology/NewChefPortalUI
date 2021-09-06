@@ -1,0 +1,173 @@
+<app-loader *ngIf = "showLoader"></app-loader>
+<div fxLayout="column" *ngIf="!showLoader">
+    <div class="header-section" fxLayout="row" fxLayoutAlign="space-between">
+        <div fxLayout="row" fxLayoutGap="15px">
+            <span class="bold">{{message}}</span>
+        </div> 
+        <mat-icon class="icon bold" (click)="dialogRef.close('N');">close</mat-icon>
+     </div>
+     <div id="login" fxLayout="column">
+
+        <div id="login-form-wrapper" fxLayout="column" fxLayoutAlign="center start" >
+    
+            <div id="login-form" >
+                <form [formGroup]="createProductForm" fxLayot="column">
+
+                    <!-- <mat-form-field appearance="outline" *ngIf="userType">
+                        <mat-label>Chef</mat-label>
+                        <mat-select [(value)]="selected">
+                            <mat-option>None</mat-option>
+                            <mat-option *ngFor="let topping of chefList" [value]="topping.id" >{{topping.first_name}}</mat-option>
+                        </mat-select>
+                        <mat-error>
+                            Chef Name is required
+                        </mat-error>
+                      
+                    </mat-form-field> -->
+
+                    <mat-form-field appearance="outline" >
+                        <mat-label>Product Name</mat-label>
+                        <input matInput formControlName="name" placeholder="Product Name">
+                        <mat-error>
+                            Product Name is required
+                        </mat-error>
+                      
+                    </mat-form-field>
+    
+                    <mat-form-field appearance="outline">
+                        <mat-label>Price</mat-label>
+                        <input matInput formControlName="price" placeholder="Price" (blur)="transformAmount($event)">
+                        <mat-error *ngIf="createProductForm.get('price').hasError('required')">
+                            Price is required
+                        </mat-error>
+                        <mat-error *ngIf="!createProductForm.get('price').hasError('required') && 
+                        createProductForm.get('price').hasError('pattern')">
+                            Only numbers allowed
+                        </mat-error>
+                      
+                    </mat-form-field>
+    
+                    <mat-form-field appearance="outline">
+                        <mat-label>Description</mat-label>
+                        <textarea matInput formControlName="description" placeholder=""></textarea>
+                        <mat-error>
+                            Description is required
+                        </mat-error>
+                    </mat-form-field>
+                    <mat-form-field appearance="outline">
+                        <mat-label>Allergens info</mat-label>
+                        <mat-select formControlName="allergense" placeholder="Allergense" [multiple]="true" #multiSelect>
+                            <mat-option>
+                                <ngx-mat-select-search placeholderLabel="Search" noEntriesFoundLabel="No allergy Found" 
+                                [formControl]="AllergyMultiFilterCtrl"></ngx-mat-select-search>
+                            </mat-option>
+                            <mat-option *ngFor="let allergen of filteredAllergyMulti | async " [value]="allergen.id" >
+                                {{allergen?.allergen_name}}
+                            </mat-option>
+                        </mat-select>
+                       
+                      </mat-form-field>
+
+                      <mat-form-field appearance="outline">
+                        <mat-label>Dietary info</mat-label>
+                        <mat-select formControlName="dietaries" placeholder="Dietary-info" [multiple]="true" #multiSelect>
+                            <mat-option>
+                                <ngx-mat-select-search placeholderLabel="Search" noEntriesFoundLabel="No allergy Found" 
+                                [formControl]="DietaryMultiFilterCtrl"></ngx-mat-select-search>
+                            </mat-option>
+                            <mat-option *ngFor="let diet of filteredDietaryMulti | async " [value]="diet.id" >
+                                {{diet?.dietary_name}}
+                            </mat-option>
+                        </mat-select>
+                       
+                      </mat-form-field>
+             
+                    <div class="w-100">
+                        <div class="p" fxLayout="row" fxLayoutAlign="space-between center">
+                            <div>Product Variants</div>
+                            <div><mat-icon (click)="addEditVarientCategory(null,'add',0)">add_circle_outline</mat-icon></div>
+                        </div>
+                        <div  [ngClass]="(varient_category.length > 0) ? 'scroll-div' : ''">
+                            <div *ngFor="let content of createProductForm.get('varient_category')?.controls;let index = index;">  
+                            
+                                <div class="hr1"></div>
+                                <div class="p" fxLayout="row" fxLayoutAlign="space-between center">
+                                    <div><mat-label>{{content.get('name').value}}</mat-label></div>
+                                    <div>
+                                        <mat-icon (click)="addEditVarient(null,'add',index)">add_circle_outline</mat-icon>
+                                        <mat-icon (click)="addEditVarientCategory(content.value,'edit',index)">edit</mat-icon>
+                                        <mat-icon color="warn" (click)="onRemoveRow(index)">delete</mat-icon>
+                                    </div>
+                                </div>
+                                <div class="hr"></div>
+
+                                <div class="p" fxLayout="row" fxLayoutAlign="space-between center">
+                                    <div>Variant</div>
+                                    <div>Default</div>
+                                    <div>Price</div>
+                                    <div>Action</div>
+                                </div>
+                                <div class="p" fxLayout="row" fxLayoutAlign="space-between center" *ngFor="let product of content.get('productVarientList')?.value;let i=index;">
+                                    <div><mat-label>{{product?.value?.option_name || product?.option_name}}</mat-label></div>
+                                    <div><mat-slide-toggle color="primary" [disabled]="true" [checked]="product?.value?.default || product?.default" (change)="toggleChangeValue($event,i, index)" name="enableWifi"></mat-slide-toggle></div>
+                                    <div>{{product?.value?.price || product?.price | currency:'GBP'}}</div>
+                                    <div>
+                                        <mat-icon (click)="addEditVarient(product?.value || product,'edit',index)">edit</mat-icon>
+                                        <mat-icon color="warn" (click)="deleteVarient(i, index)">delete</mat-icon>
+                                    </div>
+                                </div>
+                                <mat-divider></mat-divider>
+                                <div class="p" fxLayout="row" fxLayoutAlign="space-between center">
+                                    <div>Single selection</div>
+                                    <div><mat-slide-toggle color="primary" [formControl]="content.get('single_selection')" (change)="changeSingleSelection($event,index)"
+                                         name="enableWifi" [disabled]="true"></mat-slide-toggle></div>
+                                    <div>Max selection</div>
+                                    <div *ngIf="!content.get('single_selection').value" class="w-10">
+                                        <mat-form-field appearance="outline">
+                                            <input matInput [formControl]="content.get('max_selection')" [readonly]="true">
+                                        </mat-form-field>
+                                    </div>
+                                </div>
+
+                                <mat-divider></mat-divider>
+                            </div>
+                        </div>
+                    </div>
+    
+                    <h3 class="pt-10">Product Image:</h3>
+                    <input  hidden 
+                            #inputfile
+                            [formControl]="createProductForm.get('product_image')"
+                            type="file"
+                            (change)="fileChangeEvent($event)"
+                            [accept]="inputAccpets"
+                            />
+                    <div class="btn mb-4">
+                        <button type="button" mat-stroked-button color="primary" 
+                         class="mr-12" (click)="inputfile.click();" >Choose</button>
+                        <button type="button" mat-stroked-button color="warn" *ngIf="tmp_avatar_img !== '' && tmp_avatar_img"
+                         (click)="RemovePicture()">Remove</button>
+                    </div>
+                    <div class="logo-preview pb-12 pt-12" *ngIf="tmp_avatar_img !== '' && tmp_avatar_img">
+                        <img [src]="tmp_avatar_img" *ngIf="tmp_avatar_img !== '' && tmp_avatar_img" />
+                    </div>
+    
+                </form>
+
+            </div>
+            
+        </div>
+        <div class="button-section" fxLayout="row" fxLayoutAlign="end center" fxFlex="1 0 auto">
+
+            <div class="button-margin pl-4" fxLayout="row" fxLayoutGap="20px">
+    
+                <button mat-raised-button  type="submit" (click)="onSubmit($event)" [disabled]="isSubmit" 
+                color="primary" fxFlex="80px" > 
+                <i class="fa fa-spinner fa-spin" *ngIf="loader"></i>Save</button>
+                <button (click)="dialogRef.close('N');" mat-raised-button fxFlex="80px"> Cancel</button>
+            </div>
+        </div>
+    
+    </div>
+    </div>
+

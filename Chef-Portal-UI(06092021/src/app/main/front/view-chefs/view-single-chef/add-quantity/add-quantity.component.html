@@ -1,0 +1,22 @@
+<div class="content">
+    <div fxLayout="row" fxLayoutAlign="end center">
+        <mat-icon class="icon bold" (click)="dialogRef.close('N');">close</mat-icon>
+     </div>
+    
+    <div fxLayout="row" class="pt-3 mb-20" fxLayoutAlign="space-between center">
+        <div class="bold"><h2>Quantity </h2> </div>
+        <div  fxLayout="row" fxLayoutAlign="space-around stretch" >
+            <mat-icon (click)="increaseDecreaseCount('decrease')">remove_circle_outline</mat-icon>
+                <div>{{count}}</div>
+            <mat-icon (click)="increaseDecreaseCount('increase')" matTooltip="You cannot increase quantity" [matTooltipDisabled]="!isTooltipshow">add_circle_outline</mat-icon>
+        </div>
+    </div>
+    <hr>
+    <div fxLayout="row" class="pt-3" fxLayoutAlign="space-between center">
+        <div class="bold">Total = {{ (productTotalPrice /100) | currency:'GBP' }}</div>
+        <button mat-raised-button color="primary" (click)="addQuantity()">
+            ADD
+        </button>
+    </div>
+   </div>
+ <!-- / CONTENT -->

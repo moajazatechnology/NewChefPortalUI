@@ -1,0 +1,74 @@
+
+.icon {
+    float: right;
+    font-size :110%;
+    cursor: pointer;
+    color: black;
+    border-radius: 50%;
+}
+.bold {
+   font-weight: bold; 
+   font-size: medium;
+}
+
+
+#login {
+    width: 100%;
+
+    #login-form-wrapper {
+        flex: 1 0 auto;
+        // padding: 32px;
+
+    
+        #login-form {
+            width: 384px;
+            max-width: 384px;
+            padding: 25px;
+            text-align: center;
+
+            .title {
+                font-size: 20px;
+                margin: 16px 0 32px 0;
+            }
+
+            form {
+                width: 100%;
+                text-align: left;
+
+                mat-form-field {
+                    width: 100%;
+                }
+                .logo-preview{
+                    float: left;
+                    max-width: 100%;
+                }
+                img {
+                    width: 50%;
+                    height: 50%;
+                }
+
+                .submit-button {
+                    width: 220px;
+                    margin: 16px auto;
+                    display: block;
+
+                }
+                .pr-10 {
+                    padding-right: 10%;
+                }
+                .pt-10 {
+                    padding-top: 10%;
+                }
+                .p-4 {
+                    padding: 4%;
+                }
+                i{
+                    cursor: pointer;
+                }
+                .red {
+                    color: red;
+                }
+            }
+        }
+    }
+}

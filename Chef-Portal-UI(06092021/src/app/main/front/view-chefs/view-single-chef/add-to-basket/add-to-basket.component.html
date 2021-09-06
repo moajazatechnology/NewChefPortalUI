@@ -1,0 +1,74 @@
+<div class="content">
+    <div fxLayout="row" fxLayoutAlign="end center">
+        <mat-icon class="icon bold" (click)="dialogRef.close('N');">close</mat-icon>
+     </div>
+    
+    <div class="medias" fxLayout="row wrap" fxLayoutAlign="start">
+        
+        <div class="media" fxFlex="100" fxFlex.gt-xs="100" fxFlex.gt-sm="100">
+            <!-- PRODUCTS -->
+
+            <div class="media-content" fxLayout="column" fxFlex="1 1 auto">
+
+                <div  class="content" fxLayout="column" fxFlex="1 1 auto">
+                    <img [src]="product.media_url?.url" [alt]="product.name">
+                    <div class="p-4" fxLayout="column" fxLayoutAlign="space-between start">
+                        <div class="h1">{{ product.name }}</div>
+                        <span class="fw-100">{{ (product.price /100) | currency:'GBP' }}</span>
+                        <span class="fw-100">{{ product.description}}</span>
+                    </div>
+                    
+                </div>
+
+                <mat-divider></mat-divider>
+
+                <div class="content" fxLayout="column" fxFlex="1 1 auto">
+                    <div class="pt-3 pl-3"><b>Allergens: </b></div>
+                    <div class="pt-3 pl-3" *ngFor="let allergen of product.allergens">
+                        {{ allergen.allergen_name }} 
+                    </div>
+                    <mat-divider></mat-divider>
+                    <div class="pt-3 pl-3"><b>Diatery Info:</b></div>
+                    <div class="pt-3 pl-3" *ngFor="let diatery of product.dietary">
+                        {{ diatery.dietary_name }} 
+                    </div>
+                </div>
+
+                <mat-divider></mat-divider>
+
+                <div  class="content1" fxLayout="column"  fxLayoutAlign="space-between start" fxFlex="1 1 auto">
+
+                    <div *ngFor="let varient of product.variants; let variantIdx=index" fxLayout="column" fxLayoutAlign="space-between stretch">
+                        <table>
+                            <tr><th>{{varient.variant_name}}</th></tr>
+                            <tr *ngFor="let option of varient.options;let idx = index"> 
+                                <td>{{option.product_variant_name}}</td>
+                                <td>{{(option.price / 100) | currency:'GBP' }}</td>
+                                <td><mat-checkbox 
+                                        color="primary"
+                                        [checked]="option.default"
+                                        (change)="changeCheckboxSelection(varient,variantIdx, option.id, idx,$event)">
+                                    </mat-checkbox>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                   
+                </div>
+
+                <div class="footer" fxLayout="row" fxLayoutAlign="space-between center">
+                   
+                    <div class="bold">Total = {{ (productTotalPrice /100) | currency:'GBP' }}</div>
+                    <button mat-raised-button color="primary" (click)="addToBasket(product)">
+                        ADD
+                    </button>
+                </div>
+
+            </div>
+            <!-- /PRODUCTS -->
+        </div>
+    </div>
+    <!-- IF NO PRODUCTS IS FOUND -->
+    <!-- <div class="no-record" *ngIf="singleChefInfo.menus.length<=0">No Menus found.</div> -->
+   </div>
+ <!-- / CONTENT -->

@@ -1,0 +1,11 @@
+<div class="column">
+    <div fxLayout="row" fxLayoutAlign="start start" class="p-5">
+        <h3 class="w-20">Payments configured</h3>
+        <div *ngIf="payment_status.payouts_enabled"><mat-icon [ngStyle]="{'background-color':'green'}">check</mat-icon></div>
+        <div *ngIf="!payment_status.payouts_enabled"><mat-icon [ngStyle]="{'background-color':'red'}">close</mat-icon></div>
+    </div>
+    <div fxLayout="row" fxLayoutAlign="start start" class="p-5">
+        <button mat-raised-button type="submit" color="primary" (click)="paymentSignup()">
+            <i class="fa fa-spinner fa-spin" *ngIf="loader"></i>Setup payments</button>
+    </div>
+</div>  

@@ -1,0 +1,94 @@
+<app-loader *ngIf="showLoader"></app-loader>
+<div fxLayout="column" *ngIf="!showLoader">
+    <div fxLayout="column" fxLayoutAlign="start center">
+        <h1 class="p-4"><b>Welcome, {{userInfo.first_name}} {{userInfo.second_name}}.</b></h1>
+    </div>
+
+    <div fxLayout="column" fxLayoutAlign="start start" class="p-2">
+
+        <table>
+            <tr fxLayoutAlign="start start"><th><h2><b>Personal Profile</b></h2></th></tr>
+            <tr>
+                <td><b>Biography:</b> {{userInfo._chef_profile?.biography}}</td>
+                <td><mat-icon (click)="editChefBiography('biography')">edit</mat-icon></td>
+            </tr>
+            <tr>
+                <td><b>Profile picture: </b>
+                    <div class="logo-preview pb-12 pt-12" *ngIf="userInfo._chef_profile?._chef_profile_image?.media_url !== '' && userInfo._chef_profile?._chef_profile_image?.media_url">
+                        <img [src]="userInfo._chef_profile?._chef_profile_image?.media_url?.url" style="width: 40%;"
+                         *ngIf="userInfo._chef_profile?._chef_profile_image?.media_url?.url !== '' && userInfo._chef_profile?._chef_profile_image?.media_url?.url" />
+                    </div>
+                </td>
+                <td><mat-icon (click)="editChefProfile('profile')">edit</mat-icon></td>
+            </tr>
+            <tr>
+                <td><b>Store banner: </b>
+                    <div class="logo-preview pb-12 pt-12" *ngIf="userInfo._chef_profile?._chef_banner_image?.media_url !== '' && userInfo._chef_profile?._chef_banner_image?.media_url">
+                        <img [src]="userInfo._chef_profile?._chef_banner_image?.media_url?.url"  style="width: 40%;"
+                            *ngIf="userInfo._chef_profile?._chef_banner_image?.media_url?.url !== '' && userInfo._chef_profile?._chef_banner_image?.media_url?.url" />
+                    </div>
+                </td>
+                <td><mat-icon (click)="editChefBiography('banner')">edit</mat-icon></td>
+            </tr>
+            <tr fxLayoutAlign="start start"><th><h2><b>Store configuration:</b></h2></th></tr>
+
+            <tr>
+                <td><b>Offered cusines:</b>
+                    <div *ngFor="let cuisine of cuisineNames;let i=index">{{i+1}}. {{cuisine?._cuisine?.name}}</div>
+                </td>
+                <td><mat-icon (click)="editChefCuisine('cuisine')">edit</mat-icon></td>
+            </tr>
+
+            <tr>
+                <td>
+                    <p><b>Address 1:</b> {{userInfo._chef_store?._chef_store_address.address_1}}</p>
+                    <p><b>Address 2:</b>{{userInfo._chef_store?._chef_store_address.address_2}}</p>
+                    <p><b>Address 3:</b> {{userInfo._chef_store?._chef_store_address.address_3}}</p>
+                    <p><b>City:</b> {{userInfo._chef_store?._chef_store_address.city}}</p>
+                    <p><b>Country:</b> {{userInfo._chef_store?._chef_store_address.country}}</p>
+                    <p><b>Postcode:</b> {{userInfo._chef_store?._chef_store_address.postcode}}</p>
+            
+                </td>
+                <td><mat-icon (click)="editChefStoreAddress('address')">edit</mat-icon></td>
+            </tr>
+
+            <tr>
+                <td>
+                    <div>
+                       <b> Collection </b> <mat-icon *ngIf="userInfo._chef_store?.collection" class="check">check</mat-icon> <mat-icon *ngIf="!userInfo._chef_store?.collection" class="ncheck">close</mat-icon><br>
+                       <b> Delivery </b><mat-icon *ngIf="userInfo._chef_store?.delivery" class="check">check</mat-icon> <mat-icon *ngIf="!userInfo._chef_store?.delivery" class="ncheck">close</mat-icon>
+                    </div>
+                </td>
+                <td><mat-icon (click)="editCollectionDelivery('collectionDelivery')">edit</mat-icon></td>
+            </tr>
+
+            <tr>
+                <td><b>Collection Slots</b></td>
+                <td><mat-icon (click)="editCollectionSlots('collection')">edit</mat-icon></td>
+            </tr>
+
+            <tr>
+                <td><b>Delivery Slots</b></td>
+                <td><mat-icon (click)="editDeliverySlots('delivery')">edit</mat-icon></td>
+            </tr>
+            
+            <tr fxLayoutAlign="start start"><th><h2><b>Personal Information:</b></h2></th></tr>
+            <tr>
+                <td><b>Password :</b> ***********</td>
+                <td><mat-icon (click)="editChefPassword('password')">edit</mat-icon></td>
+            </tr>
+            <tr>
+                <td><p><b>Phone Number:</b> {{userInfo.phone_number}}</p></td>
+                <td><mat-icon (click)="editChefPhoneNo('phoneNo')">edit</mat-icon></td>
+            </tr>
+            <tr>
+                <td><p><b>Email:</b> {{userInfo.email}}</p></td>
+                <td><mat-icon (click)="editChefEmail('email')">edit</mat-icon></td>
+            </tr>
+
+        </table>
+        
+    </div>
+</div>
+
+

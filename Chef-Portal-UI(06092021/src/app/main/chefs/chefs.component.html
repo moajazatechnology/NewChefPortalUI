@@ -1,0 +1,46 @@
+
+  <mat-sidenav-container fullscreen>
+    <mat-sidenav mode="side" #sidenav opened position="start">
+    <img src="./assets/lmc_logo_white.png" routerLink="home" class="image" style="width: 100%; margin-bottom: 1em;">
+    <div fxLayout="column">
+        
+        <button mat-button  routerLink="home" routerLinkActive="selected no-border txt-bold" fxLayoutAlign="start" class="py-2 pr-5">
+        Home</button>
+        <mat-divider></mat-divider>
+        <button mat-button  routerLink="profile" routerLinkActive="selected no-border txt-bold" fxLayoutAlign="start" class="py-2 pr-5">
+        Profile</button>
+        <mat-divider></mat-divider>
+        <button mat-button routerLink="orders" routerLinkActive="selected no-border txt-bold" fxLayoutAlign="start" class="py-2 pr-5">
+        Orders</button>
+    <mat-divider></mat-divider>
+    <button mat-button  routerLink="products" routerLinkActive="selected no-border txt-bold" fxLayoutAlign="start" class="py-2 pr-5">
+        Products</button>
+    <mat-divider></mat-divider>
+    <button mat-button  routerLink="menus" routerLinkActive="selected no-border txt-bold" fxLayoutAlign="start" class="py-2 pr-5">
+        Menus</button>
+    <mat-divider></mat-divider>
+    <button mat-button  routerLink="schedules" routerLinkActive="selected no-border txt-bold" fxLayoutAlign="start" class="py-2 pr-5">
+        Schedules</button>
+    <mat-divider></mat-divider>
+    <button mat-button  routerLink="payment" routerLinkActive="selected no-border txt-bold" fxLayoutAlign="start" class="py-2 pr-5">
+        Payments</button>
+    <mat-divider></mat-divider>
+    </div>
+      
+    </mat-sidenav>
+    <mat-sidenav-content>
+      <mat-toolbar>
+        <button mat-icon-button (click)="sidenav.toggle()">
+          <mat-icon>menu</mat-icon>
+        </button>
+            <!-- Chef Portals -->
+        <span class="toolbar-spacer"></span>
+        <button mat-button (click)="logout()" routerLinkActive="selected no-border txt-bold" fxLayoutAlign="start" class="py-2 pr-5 logout-btn">
+            Log out
+        </button>
+      </mat-toolbar>
+    
+      <router-outlet></router-outlet>
+     
+    </mat-sidenav-content>
+  </mat-sidenav-container>

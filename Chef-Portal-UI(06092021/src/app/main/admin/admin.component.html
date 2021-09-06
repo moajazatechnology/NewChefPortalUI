@@ -1,0 +1,44 @@
+
+  <mat-sidenav-container fullscreen>
+    <mat-sidenav mode="side" #sidenav opened position="start">
+        <img src="./assets/lmc_logo_white.png" routerLink="home" class="image" style="width: 100%; margin-bottom: 1em;">
+        <div fxLayout="column">
+          
+          <button mat-button [routerLink]="['/admin/home']" routerLink="home" routerLinkActive="selected no-border txt-bold" fxLayoutAlign="start" class="py-2 pr-5">
+            Home</button>
+          <mat-divider></mat-divider>
+          <button mat-button [routerLink]="['/admin/orders']" routerLinkActive="selected no-border txt-bold" fxLayoutAlign="start" class="py-2 pr-5">
+            Orders</button>
+            <mat-divider></mat-divider>
+          <div>
+          <button mat-button [routerLink]="['/admin/customers']"  routerLinkActive="selected no-border txt-bold" fxLayoutAlign="start" class="py-2 pr-5">
+              Customers</button>
+              <mat-divider></mat-divider>
+          </div>
+          <div>
+              <button mat-button  [routerLink]="['/admin/chefs']" routerLinkActive="selected no-border txt-bold" fxLayoutAlign="start" class="py-2 pr-5">
+                  Chefs</button>
+              <mat-divider></mat-divider>
+          </div>
+          <button mat-button  [routerLink]="['/admin/promotions']" routerLinkActive="selected no-border txt-bold" fxLayoutAlign="start" class="py-2 pr-5">
+            Promotions</button>
+            <mat-divider></mat-divider>
+        </div>
+      
+    </mat-sidenav>
+    <mat-sidenav-content>
+      <mat-toolbar>
+        <button mat-icon-button (click)="sidenav.toggle()">
+          <mat-icon>menu</mat-icon>
+        </button>
+            <!-- Admin Portal -->
+        <span class="toolbar-spacer"></span>
+        <button mat-button (click)="logout()" routerLinkActive="selected txt-bold" fxLayoutAlign="start" class="py-2 pr-5 logout-btn">
+            Logout
+        </button>
+      </mat-toolbar>
+    
+      <router-outlet></router-outlet>
+     
+    </mat-sidenav-content>
+  </mat-sidenav-container>

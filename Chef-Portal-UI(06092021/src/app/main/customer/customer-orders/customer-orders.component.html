@@ -1,0 +1,47 @@
+<app-loader *ngIf="showLoader"></app-loader>
+<div class="container-fluid height-100">
+    <!-- <button mat-raised-button type="submit" color="primary" (click)="openOrderProductDialog()">Order Product </button> -->
+    <div class="p-3">
+        <h2>Your Orders</h2>
+    </div>
+    <hr>
+    <div class="container-fluid" *ngIf="!showLoader">
+        <div class="row">
+            <div class="content">
+                <div class="medias" fxLayout="row wrap" fxLayoutAlign="start">
+
+                    <div class="media" *ngFor="let order of ordersList" fxFlex="100" fxFlex.gt-xs="25"
+                            fxFlex.gt-sm="25">
+                        <!-- IMAGES  -->
+
+                        <div class="media-content" fxLayout="column" fxFlex="1 1 auto">
+                            <div class="pl-3 order-content-header">
+                               <h2> Order ID: {{ order.id }}</h2>
+                            </div>
+
+                            <div class="footer text-color pt-3 order-content-container">
+                                <div class="order-content">
+                                    <span><b>Chef: </b>{{ order._chef?.first_name}} {{ order._chef?.second_name}}</span>
+                                    <span><b>Current status: </b>{{ order.status}}</span>
+                                    <span><b>Total: </b>{{ (order.order_total /100)  | currency:'GBP'}}</span>
+                                    <span><b>Ordered at: </b>{{ order.order_date | date:'MMM d, y, h:mm a'}}</span>
+                                    <span><b><span *ngIf="order.collection">Collection</span><span *ngIf="!order.collection">Delivery</span></b></span>
+                                    <span><b>Slot: </b>{{ ((order?.start_slot)%12) }}pm - {{ ((order?.end_slot)%12) }}pm</span>
+                                </div>
+                            </div>
+                
+                            <div class="footer pt-4 order-btn-section" >
+                                <button mat-stroked-button type="button" color="primary" (click)="viewOrder(order.id)">View Order</button>
+                            </div>
+                        </div>
+                        <!-- /IMAGES -->
+
+                    </div>
+                    
+                </div>
+                   
+            </div>
+        </div>
+    </div>
+</div>
+<app-footer1></app-footer1>

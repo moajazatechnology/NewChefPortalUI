@@ -1,0 +1,55 @@
+// @import "src/@fuse/scss/fuse";
+
+.event-form-dialog {
+
+    // @include media-breakpoint('xs') {
+    //     width: 100%;
+    // }
+
+    // @include media-breakpoint('gt-xs') {
+    //     width: 480px;
+    // }
+
+    .mat-dialog-container {
+        padding: 0;
+    }
+
+    .dialog-content-wrapper {
+        // max-height: 85vh;
+        display: flex;
+        flex-direction: column;
+    }
+
+
+    .primary-color-input,
+    .secondary-color-input {
+        padding: 6px 8px;
+    }
+
+}
+.w-100{
+    width: 100%;
+    border: 1px solid gainsboro;
+    margin-top: 5%;
+    border-radius: 2%;
+}
+.w-50 {
+    width: 50%;
+}
+td {
+    padding: 2%;
+}
+tr {
+    padding: 2%;
+    border: 1px solid gainsboro;
+}
+.hr {
+    border: 1px solid gainsboro;
+    width: 100%;
+}
+tr.border-bottom {
+    border-bottom: 1px solid #ff000d;
+  }
+  .icon,mat-icon {
+      cursor: pointer;
+  }
