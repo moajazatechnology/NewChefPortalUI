@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { AuthService } from 'src/app/_services';
 
 @Component({
   selector: 'app-admin',
@@ -10,7 +11,8 @@ export class AdminComponent implements OnInit {
 
   constructor(
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private authService: AuthService
   ) { }
 
   ngOnInit(): void {
@@ -19,8 +21,7 @@ export class AdminComponent implements OnInit {
 
   logout() {
 
-    localStorage.removeItem('userType');
-    this.router.navigate(['/']);
+    this.authService.logout();
   }
 
 }
