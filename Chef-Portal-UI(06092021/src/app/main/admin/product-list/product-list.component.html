@@ -9,7 +9,7 @@
           </button>
           <mat-menu #menu="matMenu">
             <button mat-menu-item [routerLink]="['/admin/chefs/profile', userInfo.id]" routerLink="/chefs/profile">Profile</button>
-            <button mat-menu-item routerLink="/admin/home" [queryParams]="{ chef_id: userInfo.id}">Home</button>
+            <button mat-menu-item routerLink="/admin/chefs/home" [queryParams]="{ chef_id: userInfo.id}">Home</button>
             <button mat-menu-item [routerLink]="['/admin/chefs/productBychefId', userInfo.id]" routerLink="/chefs/productBychefId">Product</button>
             <button mat-menu-item [routerLink]="['/admin/chefs/menuByChefid', userInfo.id]" routerLink="/chefs/menuByChefid">Menu</button>
             <button mat-menu-item routerLink="/admin/chefs/OrderOfChef" [queryParams]="{ chef_id: userInfo.id }">Order</button>

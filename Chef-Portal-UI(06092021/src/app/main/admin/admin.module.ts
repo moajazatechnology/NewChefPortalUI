@@ -10,16 +10,16 @@ import { ChefsComponent } from './chefs/chefs.component';
 import { CustomersComponent } from './customers/customers.component';
 import { OrderComponent } from './order/order.component';
 import { AdminComponent } from './admin.component';
-import { ChefsProfileComponent } from './chefs-profile/chefs-profile.component';
+import { ChefsProfileComponent } from './chefs/chefs-profile/chefs-profile.component';
 import { ProductListComponent } from './product-list/product-list.component';
 import { MenuComponent } from './menu/menu.component';
 import { EditProfileChefComponent } from './edit-profile-chef/edit-profile-chef/edit-profile-chef.component';
-import { ChefsListForProductComponent } from './chefs-list-for-product/chefs-list-for-product.component';
-import { ChefListForMenuComponent } from './chef-list-for-menu/chef-list-for-menu.component';
-import { OrderOfChefComponent } from './order-of-chef/order-of-chef.component';
+import { ChefsListForProductComponent } from './product-list/chefs-list-for-product/chefs-list-for-product.component';
+import { ChefListForMenuComponent } from './menu/chef-list-for-menu/chef-list-for-menu.component';
+import { OrderOfChefComponent } from './order/order-of-chef/order-of-chef.component';
 import { SchedulesComponent } from './schedules/schedules.component';
 import { CalendarService } from 'src/app/_services/calender.service';
-import { ChefPaymentComponent } from './chef-payment/chef-payment.component';
+import { ChefPaymentComponent } from './chefs/chef-payment/chef-payment.component';
 import { CalendarModule as AngularCalendarModule, DateAdapter } from 'angular-calendar';
 import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 import { CalendarEventFormDialogComponent } from './schedules/event-form/event-form.component';
@@ -28,6 +28,7 @@ import { CreatePromotionComponent } from './promomtions/create-promotion/create-
 import { SinglePromoComponent } from './promomtions/single-promo/single-promo.component';
 import { EditPromocodeComponent } from './promomtions/edit-promocode/edit-promocode.component';
 import { AdminHomeComponent } from './admin-home/admin-home.component';
+import { ViewChefProfileComponent } from './chefs/view-chef-profile/view-chef-profile.component';
 
 const routes = [
   {
@@ -35,7 +36,7 @@ const routes = [
     component: AdminComponent,
       children : [
         {
-          path     : 'home',
+          path     : 'adminhome',
           component: AdminHomeComponent,
         },
         {
@@ -53,6 +54,10 @@ const routes = [
         {
           path : 'product',
           component : ChefsListForProductComponent
+        },
+        {
+          path : 'view-profile/:id',
+          component : ViewChefProfileComponent
         },
         {
           path : 'promotions',
@@ -76,6 +81,10 @@ const routes = [
           resolve  : {
             events: CalendarService,
           }
+        },
+        {
+          path     : 'chefs/home',
+          component: HomeComponent,
         },
         {
           path: 'chefs/ChefPayment',
@@ -123,7 +132,8 @@ const routes = [
     CreatePromotionComponent,
     SinglePromoComponent,
     EditPromocodeComponent,
-    AdminHomeComponent
+    AdminHomeComponent,
+    ViewChefProfileComponent
   ],
   imports: [
     CommonModule,

@@ -4,40 +4,47 @@
        
        <hr class="hr">
        <div class=" col-12 pt-3 mb-3">
-        Order # 
+            <b> Order #{{id}} </b>
        </div>
        <mat-divider></mat-divider>
        <div class=" col-12">
-           <p>customer details</p>
-           <p>Name:</p>
-           <p>Email:</p>
-           <p>Phone number:</p>
-           <p>Address:</p>
+           <p><b>customer details</b></p>
+           <p><b>Name:</b> {{ orderData?.customer_details?.first_name }} {{ orderData?.customer_details?.second_name }}</p>
+           <p><b>Email: </b>{{ orderData?.customer_details?.email }}</p>
+           <p><b>Phone number: </b>{{ orderData?.customer_details?.phone_number }}</p>
+           <p *ngIf="orderData.customer_details?.address"><b>Address: </b>{{ orderData?.customer_details?.address }}</p>
 
            <mat-divider></mat-divider>
 
-           <p>Payment details:</p>
-           <p>Order total:</p>
-           <p>Delivery cost:</p>
-           <p>Promosional discount:</p>
-           <p>Final total:</p>
-           <p>Admin cummision:</p>
-           <p>Chef earnings:</p>
+           <p><b>Payment details</b></p>
+           <p><b>Order total:</b>{{ orderData?.payment_details?.order_total }}</p>
+           <p><b>Delivery cost:</b>{{ orderData?.payment_details?.delivery_fee }}</p>
+           <p><b>Promotional discount:</b>{{ orderData?.payment_details?.promo_discount }}</p>
+           <p><b>Final total:</b>{{ orderData?.payment_details?.final_total }}</p>
+           <p><b>Admin commission:</b>{{ orderData?.payment_details?.admin_commision }}</p>
+           <p><b>Chef earnings:</b>{{ orderData?.payment_details?.chef_earnings }}</p>
 
            <mat-divider></mat-divider>
 
-           <p>Order details:</p>
-           <p>Store phone number:</p>
-           <p>Order status:</p>
-           <p>Order date:</p>
-           <p>Order slot:</p>
-           <p>Delivery/Collection:</p>
-           <p>Chef earnings:</p>
-           <p>Notes:</p>
+           <p><b>Order details</b></p>
+           <p><b>Store phone number:</b>{{ orderData?.order_details?.phone_number }}</p>
+           <p><b>Order status:</b>{{ orderData?.order_details?.status }}</p>
+           <p><b>Order date:</b>{{ (orderData?.order_details?.order_date) | date:'EEE, MMM d, y, h:mm:ss' }}</p>
+           <p><b>Order slot:</b>{{ ((orderData?.order_details?.start_slot)%12) }}pm - {{ ((orderData?.order_details?.end_slot)%12) }}pm</p>
+           <p><b>Delivery/Collection:</b><span *ngIf="orderData.order_details?.collection">Collection</span><span *ngIf="!orderData.order_details?.collection">Delivery</span></p>
+           <p><b>Notes:</b>{{ orderData?.order_details?.notes }}</p>
 
            <mat-divider></mat-divider>
 
-           <button class="btn btn-attempt btn-sm mt-3" type="button" (click)="viewOrder()">View order</button>
+           <div class="row">
+                <div class="col-md-2 col-12">
+                    <button class="btn btn-attempt btn-sm mt-3" type="button" (click)="viewOrder()">View order</button>
+                </div>
+                <!-- <div class="col-md-1 col-12">
+                    <button class="btn btn-attempt btn-sm mt-3" type="button" (click)="goBack()">Back</button> 
+                </div> -->
+           </div>
+
         </div>
     </div>
 </div>

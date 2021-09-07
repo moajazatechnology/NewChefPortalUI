@@ -10,7 +10,7 @@
               </button>
               <mat-menu #menu="matMenu">
                 <button mat-menu-item [routerLink]="['/admin/chefs/profile', userInfo.id]" routerLink="/chefs/profile">Profile</button>
-                <button mat-menu-item routerLink="/admin/home" [queryParams]="{ chef_id: userInfo.id}">Home</button>
+                <button mat-menu-item routerLink="/admin/chefs/home" [queryParams]="{ chef_id: userInfo.id}">Home</button>
                 <button mat-menu-item [routerLink]="['/admin/chefs/productBychefId', userInfo.id]" routerLink="/chefs/productBychefId">Product</button>
                 <button mat-menu-item [routerLink]="['/admin/chefs/menuByChefid', userInfo.id]" routerLink="/chefs/menuByChefid">Menu</button>
                 <button mat-menu-item routerLink="/admin/chefs/OrderOfChef" [queryParams]="{ chef_id: userInfo.id }">Order</button>
@@ -54,6 +54,13 @@
                 <td><mat-icon (click)="editChefBiography('banner')">edit</mat-icon></td>
             </tr>
             <tr fxLayoutAlign="start start"><th><h2><b>Store configuration:</b></h2></th></tr>
+
+            <tr>
+                <td><b>Minimum order:</b>
+                    <div>{{(userInfo._chef_store?.minimum_order) / 100 | currency:'GBP'}}</div>
+                </td>
+                <td><mat-icon (click)="editChefMinimunOrder('minimumorder')">edit</mat-icon></td>
+            </tr>
 
             <tr>
                 <td><b>Offered cusines:</b>

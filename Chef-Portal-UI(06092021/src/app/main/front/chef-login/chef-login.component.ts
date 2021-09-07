@@ -69,7 +69,7 @@ export class ChefLoginComponent implements OnInit {
                   let userType = localStorage.getItem('userType');
                   let checkUserType = userType === 'true' ? true : false;
                   if(checkUserType){
-                    this._router.navigate(['/admin/home']);
+                    this._router.navigate(['/admin/adminhome']);
                     
                   }else {
                     this._router.navigate(['/chef/home']);

@@ -7,12 +7,14 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
   styleUrls: ['./view-order.component.scss']
 })
 export class ViewOrderComponent implements OnInit {
-  order:any = {};
+  
+  orderData:any = {};
 
   constructor( 
     public dialogRef: MatDialogRef<ViewOrderComponent>,
     @Inject(MAT_DIALOG_DATA) public data  : any) {
-      this.order = this.data;
+      this.orderData = this.data;
+      console.log(this.orderData);
   }
 
   ngOnInit(): void {

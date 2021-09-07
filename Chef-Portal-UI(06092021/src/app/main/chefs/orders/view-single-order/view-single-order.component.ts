@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { DataService } from 'src/app/_services/dataservice';
 import { ViewOrderComponent } from '../view-order/view-order.component';
 
@@ -12,11 +12,12 @@ import { ViewOrderComponent } from '../view-order/view-order.component';
 export class ViewSingleOrderComponent implements OnInit {
 
   id: number = 0;
-  ordereData: any = {};
+  orderData: any = {};
 
   constructor(
     private _dataService: DataService,
     private route: ActivatedRoute,
+    private router: Router,
     private dialog: MatDialog
   ) { 
     let data =  this.route.snapshot.params;
@@ -30,17 +31,21 @@ export class ViewSingleOrderComponent implements OnInit {
 
   getSingleorder(id) {
 
-    this._dataService.getSingleOrder({url: 'order/get_single/' +id ,isLoader:true})
+    this._dataService.post({url: 'order/get_single', data: {order_id:id},isLoader:true})
      .subscribe(res => {
-        this.ordereData = res;
+        this.orderData = res;
        console.log(res);
      });
    }
 
-  viewOrder() {
+   goBack() {
+     this.router.navigate(['orders']);
+   }
 
+  viewOrder() {
+    this.orderData['id'] = this.id;
     let dialogRef = this.dialog.open(ViewOrderComponent, {
-      data:this.ordereData,
+      data:this.orderData,
       width: '600px',
       height:'800px',
       disableClose:true

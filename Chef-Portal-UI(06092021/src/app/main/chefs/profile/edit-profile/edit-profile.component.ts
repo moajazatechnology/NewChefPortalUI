@@ -288,8 +288,8 @@ export class EditProfileComponent implements OnInit {
 
   EditMinimumOrderFormGroup() {
     this.editMinimumOrderForm = this._fb.group({
-      chef_id: this._fb.control(0),
-      minimum_order: this._fb.control(this.data.profile_data?._chef_store?.minimum_order,[Validators.required,Validators.pattern("^[0-9]*$")])
+      // chef_id: this._fb.control(0),
+      minimum_order: this._fb.control((this.data.profile_data?._chef_store?.minimum_order) / 100,[Validators.required,Validators.pattern("^[0-9]*$")])
     });
   }
 
@@ -395,6 +395,7 @@ export class EditProfileComponent implements OnInit {
   mimimumOrderSubmit(event) {
 
     let userType = localStorage.getItem('userType');
+    console.log(userType);
     let checkUserType = userType === 'true' ? true : false;
     if (checkUserType) {
         this.url = "?chef_id="+this.data.profile_data.id;

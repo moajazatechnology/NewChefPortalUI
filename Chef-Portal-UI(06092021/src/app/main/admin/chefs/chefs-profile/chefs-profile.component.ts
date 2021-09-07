@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute } from '@angular/router';
 import { DataService } from 'src/app/_services/dataservice';
-import { EditProfileComponent } from '../../chefs/profile/edit-profile/edit-profile.component';
+import { EditProfileComponent } from '../../../chefs/profile/edit-profile/edit-profile.component';
 
 @Component({
   selector: 'app-chefs-profile',
@@ -106,6 +106,10 @@ export class ChefsProfileComponent implements OnInit {
   }
 
   editDeliverySlots(type) {
+    this.openDialog(type);
+  }
+
+  editChefMinimunOrder(type) {
     this.openDialog(type);
   }
   

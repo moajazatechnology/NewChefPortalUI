@@ -6,7 +6,7 @@ import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { first } from 'rxjs/operators';
 import { DataService } from 'src/app/_services/dataservice';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 
 @Component({
@@ -43,6 +43,7 @@ export class OrderOfChefComponent implements OnInit {
   constructor(
       private _dataService: DataService,
       public datepipe: DatePipe,
+      private router:Router,
       private _matSnackBar: MatSnackBar,
       private currencyPipe : CurrencyPipe,
       private _activatedRoute:ActivatedRoute) {
@@ -145,6 +146,11 @@ export class OrderOfChefComponent implements OnInit {
                     this.statusList = response;
                   },
       error => this.errorMsg = error);
+  }
+
+  viewSingleorder(id) {
+
+    this.router.navigate(['chef/order/single/',id])
   }
 
   getList() {

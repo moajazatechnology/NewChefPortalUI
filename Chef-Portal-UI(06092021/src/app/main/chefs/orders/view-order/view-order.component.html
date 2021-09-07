@@ -23,39 +23,59 @@
     
                             <div class="media-content" fxLayout="column" fxFlex="1 1 auto">
                                 <div fxLayout="row" fxLayoutAlign="start" class="footer pl-3 pt-3">
-                                   <h2> Order ID: {{ order.id }}</h2>
+                                   <h2> Order ID: {{ orderData.id }}</h2>
                                 </div>
     
                                 <div fxLayout="row" fxLayoutAlign="start end" class=" footer text-color pt-3">
                                     <div fxLayout="column" fxLayoutAlign="start stretch">
-                                        <span><b>Chef: </b>{{ order._chef?.first_name}} {{ order._chef?.second_name}}</span>
-                                        <span><b>Current status: </b>{{ order.status}}</span>
-                                        <span><b>Total: </b>{{ (order.order_total /100) | currency:'GBP'}}</span>
-                                        <span><b>Ordered at: </b>{{ order.order_date | date:'MMM d, y, h:mm a'}}</span>
-                                        <span><b><span *ngIf="order.collection">Collection</span><span *ngIf="!order.collection">Delivery</span></b></span>
-                                        <span><b>Slot: </b>{{ ((order?.start_slot)%12) }}pm - {{ ((order?.end_slot)%12) }}pm</span>
+                                        <p><b>customer details</b></p>
+                                        <p><b>Name:</b> {{ orderData.customer_details.first_name }} {{ orderData.customer_details.second_name }}</p>
+                                        <p><b>Email: </b>{{ orderData.customer_details.email }}</p>
+                                        <p><b>Phone number: </b>{{ orderData.customer_details.phone_number }}</p>
+                                        <p *ngIf="orderData.customer_details?.address"><b>Address: </b>{{ orderData.customer_details.address }}</p>
+
                                     </div>
                                    
                                 </div>
                                 <div fxLayout="row" fxLayoutAlign="start" class="footer pl-3 pt-3">
-                                    <h2> Order Details</h2>
+                                    <div fxLayout="column" fxLayoutAlign="start stretch">
+                                        <h2> Order Details</h2>
+                                        <p><b>Store phone number:</b>{{ orderData.order_details?.phone_number }}</p>
+                                        <p><b>Order status:</b>{{ orderData.order_details.status }}</p>
+                                        <p><b>Order date:</b>{{ (orderData.order_details.order_date) | date:'EEE, MMM d, y, h:mm:ss' }}</p>
+                                        <p><b>Order slot:</b>{{ ((orderData?.order_details.start_slot)%12) }}pm - {{ ((orderData?.order_details.end_slot)%12) }}pm</p>
+                                        <p><b>Delivery/Collection:</b><span *ngIf="orderData.order_details?.collection">Collection</span><span *ngIf="!orderData.order_details?.collection">Delivery</span></p>
+                                        <p><b>Chef earnings:</b></p>
+                                        <p><b>Notes:</b>{{ orderData.order_details.notes }}</p>
+                                    </div>
+
                                 </div>
                                 <div class="content border text-color">
-                                    <div *ngFor="let data of order.order_details">
+                                    <div *ngFor="let data of orderData.ordered_items">
                                         <div fxLayout="column" fxLayoutAlign="start stretch">
-                                            <span><b>Producty: </b><span class="text-align-right">{{ data.name}} </span></span>
+                                            <span><b>Product Name: </b><span class="text-align-right">{{ data.name}} </span></span>
                                             <span><b>Quantity: </b>{{ data.quantity}}</span>
                                             <span><b>Cost: </b>{{ (data.price/100)  | currency:'GBP'}}</span>
+                                            <div *ngFor="let variant of data.variants">
+                                                    <span><b>Variant name: </b>{{variant.name}}</span>
+                                                    <div *ngFor="let option of variant.options" class="pl-3">
+                                                        <span>{{option.name}}</span>
+                                                    </div>
+                                            </div>
                                         </div>
                                         <hr>
                                     </div>
                                 </div>
                                 <div fxLayout="row" fxLayoutAlign="start" class="pl-3 pt-3">
                                     <div fxLayout="column" fxLayoutAlign="start stretch">
-                                        <span> <b>Order total: </b>{{ (order.sub_total /100)  | currency:'GBP'}}</span>
-                                        <span><b> Delivery Cost: </b>{{ (order.delivery_fee /100)  | currency:'GBP' }}</span>
-                                        <span><b> Promo code: </b>{{ order.promo_code }}</span>
-                                        <span><b> Final total: </b>{{ (order.order_total/100)  | currency:'GBP' }}</span>
+                                        <p><b>Payment details</b></p>
+                                        <p><b>Order total:</b>{{ orderData.payment_details.order_total }}</p>
+                                        <p><b>Delivery cost:</b>{{ orderData.payment_details.delivery_fee }}</p>
+                                        <p><b>Promotional discount:</b>{{ orderData.payment_details.promo_discount }}</p>
+                                        <p><b>Final total:</b>{{ orderData.payment_details.final_total }}</p>
+                                        <p><b>Admin commission:</b>{{ orderData.payment_details.admin_commision }}</p>
+                                        <p><b>Chef earnings:</b>{{ orderData.payment_details.chef_earnings }}</p>
+                             
                                     </div>
                                  </div>
                 

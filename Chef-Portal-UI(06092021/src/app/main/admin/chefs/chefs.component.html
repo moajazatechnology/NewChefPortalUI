@@ -11,7 +11,7 @@
                         {{element[column.columnDef]}}
                     </span>
                     <span *ngIf="column.columnDef==='name'">
-                      <a [routerLink]="['/admin/chefs/profile', element.id]" routerLink="/profile">{{element[column.columnDef]}}</a>
+                      <a [routerLink]="['/admin/view-profile', element.id]" routerLink="/profile">{{element[column.columnDef]}}</a>
                     </span>
 
                     <span *ngIf="column.columnDef==='enabled'">
@@ -25,7 +25,7 @@
                       </button>
                       <mat-menu #menu="matMenu">
                         <button mat-menu-item [routerLink]="['/admin/chefs/profile', element.id]" routerLink="profile">Profile</button>
-                        <button mat-menu-item routerLink="/admin/home" [queryParams]="{ chef_id: element.id}">Home</button>
+                        <button mat-menu-item routerLink="/admin/chefs/home" [queryParams]="{ chef_id: element.id}">Home</button>
                         <button mat-menu-item [routerLink]="['/admin/chefs/productBychefId', element.id]" routerLink="productBychefId">Product</button>
                         <button mat-menu-item [routerLink]="['/admin/chefs/menuByChefid', element.id]" routerLink="menuByChefid">Menu</button>
                         <button mat-menu-item routerLink="/admin/chefs/OrderOfChef" [queryParams]="{ chef_id: element.id}">Order</button>

@@ -4,6 +4,7 @@ import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
+import { Router } from '@angular/router';
 import { first } from 'rxjs/operators';
 import { DataService } from 'src/app/_services/dataservice';
 
@@ -39,6 +40,7 @@ export class OrderComponent implements OnInit {
   constructor(
       private _dataService: DataService,
       public datepipe: DatePipe,
+      private router: Router,
       private _matSnackBar: MatSnackBar,
       private currencyPipe : CurrencyPipe) {
         this.columns = [
@@ -112,6 +114,11 @@ export class OrderComponent implements OnInit {
   ngAfterViewInit() {
   	this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
+  }
+
+  viewSingleorder(id) {
+
+    this.router.navigate(['chef/order/single/',id])
   }
 
   getAllStatus() {
