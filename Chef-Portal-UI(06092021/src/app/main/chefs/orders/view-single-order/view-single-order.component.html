@@ -27,7 +27,7 @@
            <mat-divider></mat-divider>
 
            <p><b>Order details</b></p>
-           <p><b>Store phone number:</b>{{ orderData?.order_details?.phone_number }}</p>
+           <p><b>Store phone number:</b>{{ orderData?.order_details?.store_number }}</p>
            <p><b>Order status:</b>{{ orderData?.order_details?.status }}</p>
            <p><b>Order date:</b>{{ (orderData?.order_details?.order_date) | date:'EEE, MMM d, y, h:mm:ss' }}</p>
            <p><b>Order slot:</b>{{ ((orderData?.order_details?.start_slot)%12) }}pm - {{ ((orderData?.order_details?.end_slot)%12) }}pm</p>
