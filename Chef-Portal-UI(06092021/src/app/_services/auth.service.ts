@@ -59,7 +59,12 @@ export class AuthService {
             .pipe(map(loginResponse => {
                 console.log(loginResponse);
                 this.loader.stop();
-                localStorage.setItem('customertoken', JSON.stringify(loginResponse.authToken));
+                localStorage.setItem('token', JSON.stringify(loginResponse.authToken));
+
+                this.currentUserValue['auth_admin'] = true;
+                this.currentUserValue['isExpired'] = false;
+                this.currentUserValue['token'] = loginResponse.authToken;
+                console.log(loginResponse);
                 this.currentUserSubject.next(loginResponse);
                 return loginResponse;
             }),catchError(err => { return throwError("Error thrown from Server");}));
@@ -78,9 +83,9 @@ export class AuthService {
         //             // store loginResponse details and jwt token in local storage to keep loginResponse logged in between page refreshes
                     localStorage.removeItem('token');
                     localStorage.removeItem('userType');
-                    localStorage.removeItem('customertoken');
                     sessionStorage.removeItem('chef_Id');
                     localStorage.removeItem('chefsInfo');
+                    localStorage.removeItem('customerInfo');
                     localStorage.removeItem('chefsBasketedProduct');
                     this.currentUserSubject.next(null);
                     console.log(this.currentUserSubject);
