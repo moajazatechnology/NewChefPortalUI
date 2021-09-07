@@ -15,6 +15,7 @@ import { CheckoutPassComponent } from './view-single-chef/checkout-pass/checkout
 import { CheckoutFailComponent } from './view-single-chef/checkout-fail/checkout-fail.component';
 import { AddQuantityComponent } from './view-single-chef/add-quantity/add-quantity.component';
 import { AddNewAddressComponent } from './view-single-chef/checkout/add-new-address/add-new-address.component';
+import { AuthGuard } from 'src/app/_guards';
 
 const routes = [
   {
@@ -27,15 +28,18 @@ const routes = [
   },
   {
     path     : 'checkout',
-    component:CheckoutComponent
+    component:CheckoutComponent,
+    canActivate: [AuthGuard]
   },
   {
     path     : 'checkout/success',
-    component:CheckoutPassComponent
+    component:CheckoutPassComponent,
+    canActivate: [AuthGuard]
   },
   {
     path     : 'checkout/fail',
-    component:CheckoutFailComponent
+    component:CheckoutFailComponent,
+    canActivate: [AuthGuard]
   }
 ];
 

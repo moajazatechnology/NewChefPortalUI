@@ -7,6 +7,7 @@ import { Login } from '../_models';
 import { ServerURL } from '../_helpers';
 import { LoaderService } from './loaderservice';
 import { DataService } from './dataservice';
+import { Router } from '@angular/router';
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
@@ -14,6 +15,7 @@ export class AuthService {
     private currentUserSubject: BehaviorSubject<Login>;
     constructor(private http: HttpClient,
         private dataService: DataService,
+        private router:Router,
         private loader: LoaderService) {
         this.currentUserSubject = new BehaviorSubject<Login>(JSON.parse(localStorage.getItem('token')));
     }
@@ -25,6 +27,7 @@ export class AuthService {
             'token':this.currentUserSubject.value ? this.currentUserSubject.value.auth_token : null || '', 
             // 'isExpired':Isexpired,
             'auth_admin':this.currentUserSubject.value ? this.currentUserSubject.value.auth_admin : true,
+            'isExpired': false
         };
         return guardInfo;
     }
@@ -57,7 +60,7 @@ export class AuthService {
                 console.log(loginResponse);
                 this.loader.stop();
                 localStorage.setItem('customertoken', JSON.stringify(loginResponse.authToken));
-                // this.currentUserSubject.next(loginResponse);
+                this.currentUserSubject.next(loginResponse);
                 return loginResponse;
             }),catchError(err => { return throwError("Error thrown from Server");}));
     }
@@ -75,16 +78,20 @@ export class AuthService {
         //             // store loginResponse details and jwt token in local storage to keep loginResponse logged in between page refreshes
                     localStorage.removeItem('token');
                     localStorage.removeItem('userType');
-                    sessionStorage.removeItem('chef_Id')
+                    localStorage.removeItem('customertoken');
+                    sessionStorage.removeItem('chef_Id');
+                    localStorage.removeItem('chefsInfo');
+                    localStorage.removeItem('chefsBasketedProduct');
+                    this.currentUserSubject.next(null);
+                    console.log(this.currentUserSubject);
+                    console.log(this.currentUserValue);
+                    this.router.navigate(['/']);
         //             localStorage.removeItem('themesettings');
         //             localStorage.removeItem('userInfo');
-                    this.currentUserSubject.next(null);
+                    
         //         }
         //         return logoutResponse;
         //     }),catchError(err => { return throwError("Error in logout");}));
 
-
-
-        this.currentUserSubject.next(null);
-    }
+   }
 }

@@ -24,6 +24,7 @@ import { CalendarEventFormDialogComponent } from './schedules/event-form/event-f
 import { AddProductVarientsComponent } from './products/create-product/add-product-varients/add-product-varients.component';
 import { ViewSingleOrderComponent } from './orders/view-single-order/view-single-order.component';
 import { ViewOrderComponent } from './orders/view-order/view-order.component';
+import { AuthGuard } from 'src/app/_guards';
 
 const routes = [
   {
@@ -33,37 +34,45 @@ const routes = [
         {
           path     : 'home',
           component: HomeComponent,
+          canActivate: [AuthGuard]
         },
         {
           path     : 'menus',
           component: MenusComponent,
+          canActivate: [AuthGuard],
           resolve  : {
             chat: MenuService
           }
         },
         {
           path     : 'chefs',
-          component: ChefsComponent
+          component: ChefsComponent,
+          canActivate: [AuthGuard]
         },
         {
           path     : 'orders',
-          component: OrdersComponent
+          component: OrdersComponent,
+          canActivate: [AuthGuard]
         },
         {
           path     : 'order/single/:id',
-          component: ViewSingleOrderComponent
+          component: ViewSingleOrderComponent,
+          canActivate: [AuthGuard]
         },
         {
           path     : 'products',
-          component: ProductsComponent
+          component: ProductsComponent,
+          canActivate: [AuthGuard]
         },
         {
           path     : 'profile',
-          component: ProfileComponent
+          component: ProfileComponent,
+          canActivate: [AuthGuard]
         },
         {
           path     : 'schedules',
           component: SchedulesComponent,
+          canActivate: [AuthGuard],
           resolve  : {
             events: CalendarService,
           }
@@ -71,6 +80,7 @@ const routes = [
         {
           path     : 'payment',
           component: PaymentComponent,
+          canActivate: [AuthGuard]
         }
       ]
   }
