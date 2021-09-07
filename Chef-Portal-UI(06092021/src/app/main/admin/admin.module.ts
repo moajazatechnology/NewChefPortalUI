@@ -30,6 +30,7 @@ import { EditPromocodeComponent } from './promomtions/edit-promocode/edit-promoc
 import { AdminHomeComponent } from './admin-home/admin-home.component';
 import { ViewChefProfileComponent } from './chefs/view-chef-profile/view-chef-profile.component';
 import { AuthGuard } from 'src/app/_guards';
+import { EditChefProfileComponent } from './chefs/view-chef-profile/edit-chef-profile/edit-chef-profile.component';
 
 const routes = [
   {
@@ -151,7 +152,8 @@ const routes = [
     SinglePromoComponent,
     EditPromocodeComponent,
     AdminHomeComponent,
-    ViewChefProfileComponent
+    ViewChefProfileComponent,
+    EditChefProfileComponent
   ],
   imports: [
     CommonModule,
