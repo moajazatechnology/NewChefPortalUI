@@ -118,7 +118,7 @@ export class OrderComponent implements OnInit {
 
   viewSingleorder(id) {
 
-    this.router.navigate(['chef/order/single/',id])
+    this.router.navigate(['/admin/view-order/',id]);
   }
 
   getAllStatus() {

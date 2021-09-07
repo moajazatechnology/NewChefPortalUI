@@ -1,18 +1,19 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
+import { ViewOrderComponent } from 'src/app/main/chefs/orders/view-order/view-order.component';
 import { DataService } from 'src/app/_services/dataservice';
-import { ViewOrderComponent } from '../view-order/view-order.component';
 
 @Component({
-  selector: 'app-view-single-order',
-  templateUrl: './view-single-order.component.html',
-  styleUrls: ['./view-single-order.component.scss']
+  selector: 'app-view-single-order-chefs',
+  templateUrl: './view-single-order-chefs.component.html',
+  styleUrls: ['./view-single-order-chefs.component.scss']
 })
-export class ViewSingleOrderComponent implements OnInit {
-
+export class ViewSingleOrderChefsComponent implements OnInit {
   id: number = 0;
   orderData: any = {};
+
+  chef_id: string;
 
   constructor(
     private _dataService: DataService,
@@ -26,6 +27,8 @@ export class ViewSingleOrderComponent implements OnInit {
   }
 
   ngOnInit(): void {
+
+    this.chef_id = sessionStorage.getItem("chef_Id");
     
   }
 
