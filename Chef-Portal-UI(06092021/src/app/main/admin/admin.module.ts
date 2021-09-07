@@ -29,6 +29,7 @@ import { SinglePromoComponent } from './promomtions/single-promo/single-promo.co
 import { EditPromocodeComponent } from './promomtions/edit-promocode/edit-promocode.component';
 import { AdminHomeComponent } from './admin-home/admin-home.component';
 import { ViewChefProfileComponent } from './chefs/view-chef-profile/view-chef-profile.component';
+import { ViewSingleCustomerComponent } from './customers/view-single-customer/view-single-customer.component';
 
 const routes = [
   {
@@ -46,6 +47,10 @@ const routes = [
         {
           path     : 'customers',
           component: CustomersComponent
+        },
+        {
+          path     : 'view-customer/:id',
+          component: ViewSingleCustomerComponent
         },
         {
           path     : 'orders',
@@ -133,7 +138,8 @@ const routes = [
     SinglePromoComponent,
     EditPromocodeComponent,
     AdminHomeComponent,
-    ViewChefProfileComponent
+    ViewChefProfileComponent,
+    ViewSingleCustomerComponent
   ],
   imports: [
     CommonModule,

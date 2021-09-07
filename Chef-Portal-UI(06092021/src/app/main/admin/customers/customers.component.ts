@@ -4,6 +4,7 @@ import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
+import { Router } from '@angular/router';
 import { DataService } from 'src/app/_services/dataservice';
 
 @Component({
@@ -34,6 +35,7 @@ export class CustomersComponent implements OnInit {
   constructor(
       private _dataService: DataService,
       private _matSnackBar: MatSnackBar,
+      private router: Router,
       public datepipe: DatePipe) {
         this.columns = [
           {
@@ -115,6 +117,12 @@ export class CustomersComponent implements OnInit {
     this.page = event.pageIndex + 1;
     this.pageSize = event.pageSize;
     this.getList();
+  }
+
+  viewCustomer(id) {
+
+    this.router.navigate(['view-customer/',id])
+
   }
 
   changeToggle(element) {

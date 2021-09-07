@@ -7,7 +7,10 @@
             <th mat-header-cell *matHeaderCellDef>{{column.header}}</th>
             
                 <td mat-cell *matCellDef="let element">
-                    <span *ngIf="column.columnDef!=='enabled'">
+                    <span *ngIf="column.columnDef!=='enabled' && column.columnDef!=='id' && column.columnDef!=='name'">
+                        {{element[column.columnDef]}}
+                    </span>
+                    <span class="cursor" *ngIf="column.columnDef!=='id' || column.columnDef!=='name'" (click)="viewCustomer(element.id)">
                         {{element[column.columnDef]}}
                     </span>
                     <span *ngIf="column.columnDef==='enabled'">
