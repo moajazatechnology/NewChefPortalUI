@@ -1,0 +1,70 @@
+
+<div fxLayout="column">
+    <div class="header-section" fxLayout="row" fxLayoutAlign="space-between">
+        <div fxLayout="row" fxLayoutGap="15px">
+            <span class="bold">{{message}}</span>
+        </div> 
+        <mat-icon class="icon bold" (click)="dialogRef.close('N');">close</mat-icon>
+     </div>
+     <div id="login" fxLayout="column">
+
+        <div id="login-form-wrapper" fxLayout="column" fxLayoutAlign="center start">
+    
+            <div id="login-form">
+                
+                <div *ngIf="data.type==='commission'">
+                    <form fxLayot="column" [formGroup]="editCommissionForm">
+
+                        <mat-form-field  appearance="outline">
+                            <mat-label>Commission</mat-label>
+                            <input matInput formControlName="commission" placeholder="Enter a percentage of commission" (blur)="transformAmounttoPercentage($event)">
+                            <mat-error *ngIf="editCommissionForm.get('commission').hasError('required')">
+                                Commission is required
+                            </mat-error>
+                            <mat-error *ngIf="!editCommissionForm.get('commission').hasError('required') && 
+                            editCommissionForm.get('commission').hasError('pattern')">
+                                Only numbers are allowed between 0 to 100
+                            </mat-error>
+                        
+                        </mat-form-field>
+        
+                        <button mat-raised-button color="primary" class="submit-button" aria-label="LOG IN"
+                        (click)="commissionSubmit($event)" [disabled]="isSubmit">
+                        <i class="fa fa-spinner fa-spin" *ngIf="loader"></i>
+                        SUBMIT
+                        </button>
+
+                    </form>
+                </div>
+
+                <div *ngIf="data.type==='maximumradius'">
+                    <form fxLayot="column" [formGroup]="editMaximumradiusForm">
+
+                        <mat-form-field  appearance="outline">
+                            <mat-label>Maximum radius</mat-label>
+                            <input matInput formControlName="radius" placeholder="Enter a radius in miles...">
+                            <mat-error *ngIf="editMaximumradiusForm.get('radius').hasError('required')">
+                                Commission radius is required
+                            </mat-error>
+                            <mat-error *ngIf="!editMaximumradiusForm.get('radius').hasError('required') && 
+                            editMaximumradiusForm.get('radius').hasError('pattern')">
+                                Only numbers allowed
+                            </mat-error>
+                        
+                        </mat-form-field>
+        
+                        <button mat-raised-button color="primary" class="submit-button" aria-label="LOG IN"
+                        (click)="radiusSubmit($event)" [disabled]="isSubmit">
+                        <i class="fa fa-spinner fa-spin" *ngIf="loader"></i>
+                        SUBMIT
+                        </button>
+
+                    </form>
+                </div>
+
+            </div>
+            
+        </div>
+    </div>
+</div>
+

@@ -1,5 +1,6 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
+import { AuthService } from 'src/app/_services';
 import { DataService } from 'src/app/_services/dataservice';
 
 @Component({
@@ -17,8 +18,9 @@ export class ViewChefNavbarComponent implements OnInit {
 
   constructor(
     private dataService: DataService,
+    private authService: AuthService,
     private router: Router) {
-    this.customerToken = localStorage.getItem('customertoken');
+    this.customerToken = localStorage.getItem('token');
     this.customerInfo = JSON.parse(localStorage.getItem('customerInfo'));
   }
 
@@ -60,10 +62,7 @@ export class ViewChefNavbarComponent implements OnInit {
   }
 
   logout() {
-    localStorage.removeItem('customertoken');
-    localStorage.removeItem('chefsInfo');
-    localStorage.removeItem('customerInfo');
-    localStorage.removeItem('chefsBasketedProduct');
-    this.router.navigate(['/']);
+   
+    this.authService.logout();
   }
 }

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { AuthService } from 'src/app/_services';
 
 @Component({
   selector: 'app-chefs',
@@ -9,7 +10,8 @@ import { Router } from '@angular/router';
 export class ChefsComponent implements OnInit {
 
   constructor(
-    private router:Router
+    private router:Router,
+    private authService: AuthService
   ) { }
 
   ngOnInit(): void {
@@ -17,8 +19,7 @@ export class ChefsComponent implements OnInit {
 
   logout() {
 
-    localStorage.removeItem('userType');
-    this.router.navigate(['/']);
+    this.authService.logout();
   }
 
 }

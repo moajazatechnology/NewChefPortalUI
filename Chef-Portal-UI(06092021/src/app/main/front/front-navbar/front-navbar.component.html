@@ -100,7 +100,7 @@
             </div>
             <div *ngIf="customerToken">
      
-              <button mat-stroked-button  class="btn-border text-white" [matMenuTriggerFor]="menuCustomer">{{customerInfo.first_name}} {{customerInfo.second_name}}<i class="fa fa-caret-down pl-8"></i>
+              <button mat-stroked-button  class="btn-border text-white" [matMenuTriggerFor]="menuCustomer">{{customerInfo?.first_name}} {{customerInfo?.second_name}}<i class="fa fa-caret-down pl-8"></i>
               </button>
               <mat-menu #menuCustomer="matMenu">
                 <button mat-menu-item routerLink="/customer/profile">Profile</button>

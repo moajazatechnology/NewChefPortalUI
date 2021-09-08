@@ -12,7 +12,7 @@ export class FooterComponent implements OnInit {
   constructor(
     private router: Router
   ) { 
-    this.customerToken = localStorage.getItem('customertoken');
+    this.customerToken = localStorage.getItem('token');
   }
 
   ngOnInit(): void {

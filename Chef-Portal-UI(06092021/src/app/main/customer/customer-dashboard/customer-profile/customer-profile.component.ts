@@ -14,7 +14,7 @@ import { AddEditAddressComponent } from './add-edit-address/add-edit-address.com
 })
 export class CustomerProfileComponent implements OnInit {
 
-  toggle_options = { id: 1, title: "Email communications", disabled: false, checked:true};
+  toggle_options = { id: 1, title: "Email communications", disabled: true, checked:true};
 
   allAddressList: any = [];
   customerDetails: any = {};

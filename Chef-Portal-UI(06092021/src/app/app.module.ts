@@ -14,6 +14,7 @@ import { LoaderComponent } from './main/shared/components/loader/loader.componen
 import { LoaderService } from './_services/loaderservice';
 import { SharedModule } from './main/shared/shared.module';
 import { FormsModule } from '@angular/forms';
+import { AuthGuard } from './_guards';
 // import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 
 @NgModule({
@@ -41,6 +42,7 @@ import { FormsModule } from '@angular/forms';
     LoaderComponent,
   ],
   providers: [DataService,
+    AuthGuard,
     {
       provide : HTTP_INTERCEPTORS,
       useClass: LoaderAuthInterceptor,

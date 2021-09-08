@@ -125,7 +125,7 @@ export class DataService {
     this.startLoader(info);
 
     
-    let t = localStorage.getItem('customertoken').replace('"','');
+    let t = localStorage.getItem('token').replace('"','');
      let token = t.replace('"','')
     //UPLOAD FILE DATA OPTION HEADERS
     const HttpUploadOptions = {
@@ -198,7 +198,7 @@ export class DataService {
   getAllList(info: { url: string; data: any; isLoader?: boolean; }): Observable<Response> {
     this.startLoader(info);
 
-    let t = localStorage.getItem('customertoken').replace('"','');
+    let t = localStorage.getItem('token').replace('"','');
      let token = t.replace('"','')
     //UPLOAD FILE DATA OPTION HEADERS
     const HttpUploadOptions = {
@@ -219,7 +219,7 @@ export class DataService {
   getCustomerDetails(info: { url: string; isLoader?: boolean; }): Observable<Response> {
     this.startLoader(info);
 
-    let t = localStorage.getItem('customertoken').replace('"','');
+    let t = localStorage.getItem('token').replace('"','');
      let token = t.replace('"','')
     //UPLOAD FILE DATA OPTION HEADERS
     const HttpUploadOptions = {
@@ -283,7 +283,7 @@ export class DataService {
   deleteRecord(info: { url: string; isLoader?: boolean; }): Observable<Response> {
     this.startLoader(info);
 
-    let t = localStorage.getItem('customertoken').replace('"','');
+    let t = localStorage.getItem('token').replace('"','');
      let token = t.replace('"','')
     //UPLOAD FILE DATA OPTION HEADERS
     const HttpUploadOptions = {

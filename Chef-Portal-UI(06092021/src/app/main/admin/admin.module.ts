@@ -29,6 +29,8 @@ import { SinglePromoComponent } from './promomtions/single-promo/single-promo.co
 import { EditPromocodeComponent } from './promomtions/edit-promocode/edit-promocode.component';
 import { AdminHomeComponent } from './admin-home/admin-home.component';
 import { ViewChefProfileComponent } from './chefs/view-chef-profile/view-chef-profile.component';
+import { AuthGuard } from 'src/app/_guards';
+import { EditChefProfileComponent } from './chefs/view-chef-profile/edit-chef-profile/edit-chef-profile.component';
 import { ViewSingleCustomerComponent } from './customers/view-single-customer/view-single-customer.component';
 import { ViewSingleOrderAdminComponent } from './order/view-single-order-admin/view-single-order-admin.component';
 import { ViewSingleOrderChefsComponent } from './order/view-single-order-chefs/view-single-order-chefs.component';
@@ -41,14 +43,17 @@ const routes = [
         {
           path     : 'adminhome',
           component: AdminHomeComponent,
+          canActivate: [AuthGuard]
         },
         {
           path     : 'chefs',
-          component: ChefsComponent
+          component: ChefsComponent,
+          canActivate: [AuthGuard]
         },
         {
           path     : 'customers',
-          component: CustomersComponent
+          component: CustomersComponent,
+          canActivate: [AuthGuard]
         },
         {
           path     : 'view-customer/:id',
@@ -56,7 +61,8 @@ const routes = [
         },
         {
           path     : 'orders',
-          component: OrderComponent
+          component: OrderComponent,
+          canActivate: [AuthGuard]
         },
         {
           path     : 'view-order/:id',
@@ -68,31 +74,38 @@ const routes = [
         },
         {
           path : 'product',
-          component : ChefsListForProductComponent
+          component : ChefsListForProductComponent,
+          canActivate: [AuthGuard]
         },
         {
           path : 'view-profile/:id',
-          component : ViewChefProfileComponent
+          component : ViewChefProfileComponent,
+          canActivate: [AuthGuard]
         },
         {
           path : 'promotions',
-          component : PromomtionsComponent
+          component : PromomtionsComponent,
+          canActivate: [AuthGuard]
         },
         {
           path : 'single-promo/:id',
-          component : SinglePromoComponent
+          component : SinglePromoComponent,
+          canActivate: [AuthGuard]
         },
         {
           path: 'menu',
-          component : ChefListForMenuComponent
+          component : ChefListForMenuComponent,
+          canActivate: [AuthGuard]
         },
         {
           path : 'chefs/OrderOfChef',
-          component : OrderOfChefComponent
+          component : OrderOfChefComponent,
+          canActivate: [AuthGuard]
         },
         {
           path : 'chefs/schedules/:id',
           component: SchedulesComponent,
+          canActivate: [AuthGuard],
           resolve  : {
             events: CalendarService,
           }
@@ -100,26 +113,32 @@ const routes = [
         {
           path     : 'chefs/home',
           component: HomeComponent,
+          canActivate: [AuthGuard]
         },
         {
           path: 'chefs/ChefPayment',
-          component : ChefPaymentComponent
+          component : ChefPaymentComponent,
+          canActivate: [AuthGuard]
         },
         {
           path : 'chefs/productBychefId/:id',
-          component : ProductListComponent
+          component : ProductListComponent,
+          canActivate: [AuthGuard]
         },
         {
           path: 'chefs/menuByChefid/:id',
           component : MenuComponent,
+          canActivate: [AuthGuard]
         },
         {
           path     : 'chefs/profile/:id',
-          component: ChefsProfileComponent
+          component: ChefsProfileComponent,
+          canActivate: [AuthGuard]
         },
         {
           path     : 'edit-profile-chef/:id',
-          component: EditProfileChefComponent
+          component: EditProfileChefComponent,
+          canActivate: [AuthGuard]
         }
       ]
   }
@@ -149,9 +168,7 @@ const routes = [
     EditPromocodeComponent,
     AdminHomeComponent,
     ViewChefProfileComponent,
-    ViewSingleCustomerComponent,
-    ViewSingleOrderAdminComponent,
-    ViewSingleOrderChefsComponent
+    EditChefProfileComponent
   ],
   imports: [
     CommonModule,

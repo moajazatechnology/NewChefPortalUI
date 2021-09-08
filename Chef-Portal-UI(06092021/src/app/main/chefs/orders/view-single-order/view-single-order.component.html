@@ -1,4 +1,5 @@
-<div class="container-fluid">
+<app-loader *ngIf="showLoader"></app-loader>
+<div class="container-fluid" *ngIf="!showLoader">
     <div class="row pt-3 pl-md-4">
        
        

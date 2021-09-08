@@ -3,8 +3,11 @@
     <mat-divider></mat-divider>
     <p><b>Chef name:</b></p>
     <p><b>Chef since:</b></p>
-    <p><b>Commission:</b></p>
-    <p><b>Maximum radius:</b></p>
+    <p><b><mat-label>Commission:</mat-label></b> <span class="pl-3"><mat-icon (click)="editChefCommission('commission')">edit</mat-icon></span> </p>
+    <p><b><mat-label>Maximum radius:</mat-label></b><span class="pl-3"><mat-icon (click)="editChefMaximumRadius('maximumradius')">edit</mat-icon></span> </p>
     <mat-divider></mat-divider>
-    <button class="btn btn-attempt btn-sm mt-3" type="button" [routerLink]="'/admin/chefs'">BACK</button>
+    <div class="pl-3"> 
+        <button class="btn btn-attempt btn-sm mt-3" type="button" [routerLink]="'/admin/chefs'">BACK</button>
+    </div>
+   
 </div>

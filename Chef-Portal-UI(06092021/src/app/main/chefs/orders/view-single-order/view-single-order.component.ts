@@ -13,6 +13,7 @@ export class ViewSingleOrderComponent implements OnInit {
 
   id: number = 0;
   orderData: any = {};
+  showLoader: boolean = true;
 
   constructor(
     private _dataService: DataService,
@@ -34,7 +35,10 @@ export class ViewSingleOrderComponent implements OnInit {
     this._dataService.post({url: 'order/get_single', data: {order_id:id},isLoader:true})
      .subscribe(res => {
         this.orderData = res;
+        this.showLoader = false;
        console.log(res);
+     },error => {
+       
      });
    }
 

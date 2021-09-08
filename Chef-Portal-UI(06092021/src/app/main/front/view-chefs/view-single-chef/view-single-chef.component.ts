@@ -54,7 +54,7 @@ export class ViewSingleChefComponent implements OnInit {
     private router: Router,
     private _matSnackBar: MatSnackBar,
     private route: ActivatedRoute) {      
-      this.customerToken = localStorage.getItem('customertoken');
+      this.customerToken = localStorage.getItem('token');
       this.getScreenSize();
     }
 
@@ -271,7 +271,7 @@ export class ViewSingleChefComponent implements OnInit {
         
         this.router.navigate(['/checkout']);
       }else{
-        this._matSnackBar.open('Your miminum order price must be ' +this.singleChefInfo.minimum_order, 'CLOSE', {
+        this._matSnackBar.open('Your miminum order price must be ' + (this.singleChefInfo.minimum_order /100), 'CLOSE', {
           verticalPosition: 'bottom',
           horizontalPosition:'center',
           duration        : 4000

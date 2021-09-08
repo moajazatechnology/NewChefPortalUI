@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { AuthService } from 'src/app/_services';
 
 @Component({
   selector: 'app-customer-dashboard',
@@ -11,7 +12,8 @@ export class CustomerDashboardComponent implements OnInit {
   public isNavbarCollapsed:boolean = true;
   customerInfo: any = {};
   constructor(
-    private router: Router
+    private router: Router,
+    private authService: AuthService
   ) {
     this.customerInfo = JSON.parse(localStorage.getItem('customerInfo'));
     console.log(this.customerInfo);
@@ -21,10 +23,7 @@ export class CustomerDashboardComponent implements OnInit {
   }
 
   logout() {
-    localStorage.removeItem('customertoken');
-    localStorage.removeItem('chefsInfo');
-    localStorage.removeItem('customerInfo');
-    localStorage.removeItem('chefsBasketedProduct');
-    this.router.navigate(['/']);
+   
+    this.authService.logout();
   }
 }
