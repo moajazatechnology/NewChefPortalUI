@@ -150,7 +150,7 @@ export class OrderOfChefComponent implements OnInit {
 
   viewSingleorder(id) {
 
-    this.router.navigate(['chef/order/single/',id])
+    this.router.navigate(['/admin/chefs/view-order/',id]);
   }
 
   getList() {

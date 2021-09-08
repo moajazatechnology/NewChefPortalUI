@@ -1,19 +1,17 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
+import { ViewOrderComponent } from 'src/app/main/chefs/orders/view-order/view-order.component';
 import { DataService } from 'src/app/_services/dataservice';
-import { ViewOrderComponent } from '../view-order/view-order.component';
 
 @Component({
-  selector: 'app-view-single-order',
-  templateUrl: './view-single-order.component.html',
-  styleUrls: ['./view-single-order.component.scss']
+  selector: 'app-view-single-order-admin',
+  templateUrl: './view-single-order-admin.component.html',
+  styleUrls: ['./view-single-order-admin.component.scss']
 })
-export class ViewSingleOrderComponent implements OnInit {
-
+export class ViewSingleOrderAdminComponent implements OnInit {
   id: number = 0;
   orderData: any = {};
-  showLoader: boolean = true;
 
   constructor(
     private _dataService: DataService,
@@ -35,10 +33,7 @@ export class ViewSingleOrderComponent implements OnInit {
     this._dataService.post({url: 'order/get_single', data: {order_id:id},isLoader:true})
      .subscribe(res => {
         this.orderData = res;
-        this.showLoader = false;
        console.log(res);
-     },error => {
-       
      });
    }
 

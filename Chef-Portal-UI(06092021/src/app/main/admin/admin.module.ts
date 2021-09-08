@@ -31,6 +31,9 @@ import { AdminHomeComponent } from './admin-home/admin-home.component';
 import { ViewChefProfileComponent } from './chefs/view-chef-profile/view-chef-profile.component';
 import { AuthGuard } from 'src/app/_guards';
 import { EditChefProfileComponent } from './chefs/view-chef-profile/edit-chef-profile/edit-chef-profile.component';
+import { ViewSingleCustomerComponent } from './customers/view-single-customer/view-single-customer.component';
+import { ViewSingleOrderAdminComponent } from './order/view-single-order-admin/view-single-order-admin.component';
+import { ViewSingleOrderChefsComponent } from './order/view-single-order-chefs/view-single-order-chefs.component';
 
 const routes = [
   {
@@ -53,9 +56,21 @@ const routes = [
           canActivate: [AuthGuard]
         },
         {
+          path     : 'view-customer/:id',
+          component: ViewSingleCustomerComponent
+        },
+        {
           path     : 'orders',
           component: OrderComponent,
           canActivate: [AuthGuard]
+        },
+        {
+          path     : 'view-order/:id',
+          component: ViewSingleOrderAdminComponent
+        },
+        {
+          path     : 'chefs/view-order/:id',
+          component: ViewSingleOrderChefsComponent
         },
         {
           path : 'product',
