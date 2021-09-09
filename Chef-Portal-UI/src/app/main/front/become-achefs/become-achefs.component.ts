@@ -21,6 +21,7 @@ export class BecomeAChefsComponent implements OnInit {
   existsPhoneno: ElementRef;
 
   public isSubmit: boolean = false;
+  public loading: boolean = false;
 
   becomechefsForm= new FormGroup({
     first_name: new FormControl('', Validators.required),
@@ -126,9 +127,10 @@ export class BecomeAChefsComponent implements OnInit {
     if (this.becomechefsForm.valid)
     {
       this.isSubmit = true;
+      this.loading = true;
       let formValue = this.becomechefsForm.value
 
-      this._dataService.post({url:'auth/create_chef',data:formValue,isLoader:true})
+      this._dataService.createChef({url:'auth/create_chef',data:formValue,isLoader:true})
         .pipe(first())
         .subscribe(
             data => {
@@ -140,6 +142,7 @@ export class BecomeAChefsComponent implements OnInit {
                 });
                 this._router.navigate(['/auth/login']);
                  this.isSubmit = false;
+                 this.loading = false;
             },
             error => {
                 // Show the error message
@@ -149,6 +152,8 @@ export class BecomeAChefsComponent implements OnInit {
                     duration        : 2000
                 });
                 this.becomechefsForm.reset();
+                this.isSubmit = false;
+                this.loading = false;
       });
     }else{
       CommonUtils.validateAllFormFields(this.becomechefsForm);

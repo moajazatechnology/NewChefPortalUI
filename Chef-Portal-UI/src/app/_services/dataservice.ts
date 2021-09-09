@@ -99,6 +99,20 @@ export class DataService {
     );
   }
 
+  createChef(info: { url: string; data: any; isLoader?: boolean; }): Observable<Response> {
+    this.startLoader(info);
+
+    return this.http.post(ServerURL.SERVER_URL_ENDPOINT + info.url, info.data).pipe(
+      map((res) => {
+        return this.extractData(res, info);
+      }),
+      catchError((err: Response) => {
+        console.error(err);
+        return this.handleErrorPromise(err, info);
+      })
+    );
+  }
+
   getSingleOrder(info: { url: string; isLoader?: boolean; }): Observable<Response> {
     this.startLoader(info);
 
