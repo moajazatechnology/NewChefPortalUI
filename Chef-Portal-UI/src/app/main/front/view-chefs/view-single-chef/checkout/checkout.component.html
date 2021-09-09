@@ -133,7 +133,7 @@
                                                 <hr>
 
                                                 <div class="col-12 pl-0 mb-2" *ngFor="let address of allAddressList.not_eligible">
-                                                    <mat-radio-group aria-label="Select an option" color="primary" (change)="onChangeAddress($event.value)">
+                                                    <mat-radio-group aria-label="Select an option" [disabled]="true" color="primary" (change)="onChangeAddress($event.value)">
                                                         <mat-radio-button [value]="address.id"><span class="text-wrap">{{address.address_1}}, {{address.address_2}}, {{address.address_3}}, {{address.city}}, {{address.country}},{{address.postcode}} <mat-icon (click)="editAddress(address)">edit</mat-icon> <mat-icon color="warn" (click)="deleteSelectedAddress(address.id)">delete</mat-icon></span></mat-radio-button>
                                                     </mat-radio-group>
                                                 </div>
