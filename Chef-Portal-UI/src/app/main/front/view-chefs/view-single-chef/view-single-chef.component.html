@@ -1,0 +1,243 @@
+<app-view-chef-navbar></app-view-chef-navbar>
+<div fxLayout="column">
+    <!-- CONTENT -->
+    <div class="content" fxLayout="column">
+       <!-- CENTER -->
+       <div  class="center p-24">
+
+           <!-- CONTENT -->
+            <div class="content profile p-24" fxLayout="column" [ngClass]="showHideBasketBtn ? 'w-75' : 'w-100'">
+
+                <div class="p-24 mb-20" fxLayout.gt-sm="row" fxLayoutAlign.gt-sm="end start" *ngIf="showHideMobileBasket">
+
+                    <div class="container-fluid p-0">
+                        <div class="responsive-box">
+                
+                            <div class="ml-4" fxLayout="column" >
+                                <!-- <div fxLayout="column"> -->
+                                    <div fxLayout="row" fxLayoutAlign="end end">
+                                        <button class="btn btn-attempt border-white btn-sm" type="button" (click)="showHideBasket()"> <i class="fa fa-angle-left mr-2"></i> HIDE BASKET</button>
+                                    </div>
+                                    <div *ngIf="basketProductList.length > 0" fxLayout="column" >
+                                        <h3 class="bold">Your order with adasd {{ singleChefInfo?.name}}</h3>
+                                        <h3 class="bold">Order for {{selectedDate | date:'EEE, MMM d'}}</h3>
+                                        <div class="basket-box">
+                                            <div class="mb-3 hr-line" *ngFor="let product of basketProductList;let productArrindex=index">
+                                                <div fxLayout="row" class="mb-3" fxFlex="1 0 auto" fxLayoutGap="20px">
+                                                    <div fxLayout="column" fxLayoutAlign="space-around start"  fxFlex="22">
+                                                        <div fxLayout="row" class="mb-3">  
+                                                            <mat-icon (click)="increaseDecreaseCount('decrease',productArrindex)">remove_circle_outline</mat-icon>
+                                                                <div>{{product.count}}</div>
+                                                            <mat-icon (click)="increaseDecreaseCount('increase',productArrindex)" matTooltip="You cannot increase quantity" [matTooltipDisabled]="!isTooltipshow">add_circle_outline</mat-icon>
+                                                        </div>
+                                                        <div fxLayout="row" class="mb-3">
+                                                           <span class="bold"> {{ (product.totalPrice/100) | currency:'GBP'}} </span>
+                                                        </div>
+                                                        <div fxLayout="row" class="mb-3">
+                                                            <mat-icon color="warn" (click)="deleteSelectedproduct(productArrindex)">delete</mat-icon>
+                                                        </div>
+                                                        
+                                                    </div>
+                                                    <div fxLayout="column" fxLayoutAlign="space-around start"  fxFlex="78">
+                                                        <span class="mb-3"><b>{{ product.name }}</b></span>
+                                                        <div class="mb-3" *ngFor="let variant of product.checkedProductVariantOptions">
+                                                            <span class="mb-3"><b>{{ variant.variant_name }}</b></span>
+                                                            <div  *ngFor="let option of variant.checkedOptions">
+                                                                <span>{{option.product_variant_name}}</span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+        
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div fxLayout="row" fxLayoutAlign="start center">
+                                            <span class="bold"><h2>Subtotal = {{ (totalPrice/100) | currency:'GBP'}} </h2></span>
+                                        </div>
+                                        <div fxLayout="row" *ngIf="isSlotSelected && (active===1)" fxLayoutAlign="start center">
+                                            <div fxLayout="column" fxLayoutAlign="space-around start">
+                                                <span class="bold"><h2>Delivery = {{ deliveryCharges | currency:'GBP'}} </h2></span>
+                                                <span class="bold" *ngIf="!showPromoCode"><h2>Total = {{ ((totalPrice/100) + deliveryCharges) | currency:'GBP'}} </h2></span>
+                                            </div>
+                                            
+                                        </div>
+                                        <div fxLayout="row" *ngIf="isSlotSelected && showPromoCode" fxLayoutAlign="start center">
+                                            <div fxLayout="column" fxLayoutAlign="space-around start">
+                                                <span class="bold" *ngIf="promocode && !promocode.is_flat_discount"><h2>Discount = {{ discount | currency:'GBP'}}  <mat-icon color="warn" (click)="removeDiscount()">delete</mat-icon></h2></span>
+                                                <span class="bold" *ngIf="promocode && promocode.is_flat_discount"><h2>Discount = {{ discount | currency:'GBP'}}  <mat-icon color="warn" (click)="removeDiscount()">delete</mat-icon></h2></span>
+                                                <span class="bold"><h2>Total = {{ (productTotalPriceWithDeliveryCharges) | currency:'GBP'}} </h2></span>
+                                            </div>
+                                            
+                                        </div>
+                                        <div fxLayout="row" fxLayoutAlign="end center">
+                                            <button mat-raised-button type="submit" color="primary" (click)="checkoutProduct()">
+                                                CHECKOUT
+                                            </button>
+                                        </div>
+                                        
+                                    </div>
+                                    <div fxLayout="row" fxLayoutAlign="center center" *ngIf="basketProductList.length === 0">
+                                        <h2>No product added in your Basket.</h2>
+                                    </div>
+                                   
+                                <!-- </div> -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- PROFILE HEADER -->
+                <div class="header p-24 mb-20" fxLayout.gt-sm="row"  [ngStyle]="{'background-image': 'url('+singleChefInfo.banner_image?.media_url?.url+')' }"
+                    fxLayoutAlign.gt-sm="end start">
+                    <button class="btn btn-attempt btn-sm btn-m-4" type="button" (click)="showHideBasket()"  *ngIf="!showHideBasketBtn && !showHideMobileBasket"> <i class="fa fa-angle-left mr-2"></i> SHOW BASKET</button>
+                </div>
+
+                <div class="row pt-3 padding-2">
+                    <div class="col-md-3 col-12 mb-3 text-center">
+                        <img class="img-profile" [src]="singleChefInfo.profile_image?.media_url?.url" [alt]="singleChefInfo.first_name">                     
+                    </div>
+                    <!--/.col-->
+                    <div class="col-md-8 col-12 mb-3">
+                        <h2>{{singleChefInfo.first_name}} {{singleChefInfo.second_name}}</h2>
+                        <p>{{singleChefInfo.biography}}</p>                           
+                    </div>
+                </div>
+                
+            </div>
+            <div class="content" fxLayout="column" fxFlex="25">
+
+                <div class="main-box">
+                
+                    <div *ngIf="showHideBasketBtn" fxLayout="column" fxLayoutAlign="start">
+                        <!-- <div> -->
+                            <div  fxLayout="row"  fxLayoutAlign="end start">
+                                <button class="btn btn-attempt border-white btn-sm" type="button" (click)="showHideBasket()"> <i class="fa fa-angle-left mr-2"></i> HIDE BASKET</button>
+
+                            </div>
+                            <div *ngIf="basketProductList.length > 0" fxLayout="column" >
+                                <h3 class="bold">Your order with {{ singleChefInfo.name}}</h3>
+                                <h3 class="bold">Order for {{selectedDate | date:'EEE, MMM d'}}</h3>
+                                <div class="box">
+                                    <div class="mb-3 hr-line" *ngFor="let product of basketProductList;let productArrindex=index">
+                                        <div fxLayout="row" class="mb-3" fxFlex="1 0 auto" fxLayoutGap="20px">
+                                            <div fxLayout="column" fxLayoutAlign="space-around start"  fxFlex="22">
+                                                <div fxLayout="row" class="mb-3">  
+                                                    <mat-icon (click)="increaseDecreaseCount('decrease',productArrindex)">remove_circle_outline</mat-icon>
+                                                        <div>{{product.count}}</div>
+                                                    <mat-icon (click)="increaseDecreaseCount('increase',productArrindex)" matTooltip="You cannot increase quantity" [matTooltipDisabled]="!isTooltipshow">add_circle_outline</mat-icon>
+                                                </div>
+                                                <div fxLayout="row" class="mb-3">
+                                                   <span class="bold"> {{ (product.totalPrice/100) | currency:'GBP'}} </span>
+                                                </div>
+                                                <div fxLayout="row" class="mb-3">
+                                                    <mat-icon color="warn" (click)="deleteSelectedproduct(productArrindex)">delete</mat-icon>
+                                                </div>
+                                                
+                                            </div>
+                                            <div fxLayout="column" fxLayoutAlign="space-between start"  fxFlex="78">
+                                                <span class="mb-3"><b>{{ product.name }}</b></span>
+                                                <div class="mb-3" *ngFor="let variant of product.checkedProductVariantOptions">
+                                                    <span class="mb-3"><b>{{ variant.variant_name }}</b></span>
+                                                    <div  *ngFor="let option of variant.checkedOptions">
+                                                        <span>{{option.product_variant_name}}</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <div fxLayout="row" fxLayoutAlign="start center">
+                                    <span class="bold"><h2>Total Price = {{ (totalPrice /100) | currency:'GBP'}} </h2></span>
+                                        
+                                </div>
+                                <div fxLayout="row" fxLayoutAlign="end center">
+                                    <button mat-raised-button type="submit" color="primary" (click)="checkoutProduct()">
+                                        CHECKOUT
+                                    </button>
+                                </div>
+                                
+                            </div>
+                            <div fxLayout="row" fxLayoutAlign="center center" *ngIf="basketProductList.length === 0">
+                                <h2>No product added in your Basket.</h2>
+                            </div>
+                           
+                        <!-- </div> -->
+                    </div>
+                </div>
+
+            </div>
+      
+       </div>
+       <!-- / CENTER -->
+
+       <div fxLayout="row wrap" class="p-16 w-75" fxLayoutAlign="space-between center">
+           <div class="pl-3" *ngIf="singleChefInfo?.chef_availability?.length > 0">
+            <h2>Food available for {{selectedDate | date:'EEEE, MMMM d'}}th</h2>
+           </div>
+            <div *ngIf="singleChefInfo?.chef_availability?.length === 0">
+                <h2>No Food available</h2>
+            </div>
+            <button mat-raised-button *ngIf="singleChefInfo?.chef_availability?.length > 0" type="submit" color="primary" [matMenuTriggerFor]="menuDate">
+                <span>
+                    <i class="fa fa-calendar" aria-hidden="true"></i>
+                    <span class="pl-10">{{selectedDate | date:'EEE, MMM d'}}</span>
+                    <!-- <i class="fa fa-caret-down pl-10"></i> -->
+                </span>
+      
+            </button>
+            <mat-menu #menuDate="matMenu">
+                <div *ngFor="let date of chefsAvailableDate">
+                <button mat-menu-item (click)="onSelectDate(date)">{{date | date:'EEE, MMM d'}}</button>
+                </div>
+            </mat-menu>
+            
+        </div>
+        <mat-divider></mat-divider>
+
+            <!-- / CONTENT -->
+
+            <div class="content p-16">
+                <div class="medias pl-3" fxLayout="column" fxLayoutAlign="space-around start"  *ngFor="let menu of showFilteredProductList">
+                    <h2>{{menu.name}}</h2>
+                    <span class="title">{{menu.description}}</span>
+                    <div class="medias" fxLayout="row wrap" fxLayoutAlign="start">
+                        
+                        <div class="media" *ngFor="let product of menu.products" fxFlex="100" fxFlex.gt-xs="25"
+                                fxFlex.gt-sm="25">
+                            <!-- PRODUCTS -->
+    
+                            <div class="media-content" fxLayout="column" fxFlex="1 1 auto">
+    
+                                <div  class="content" fxLayout="column" fxFlex="1 1 auto">
+                                    <img [src]="product.media_url?.url" [alt]="product.name">
+                                    <div class="p-4" fxLayout="column" fxLayoutAlign="space-around start">
+                                        <div class="h1">{{ product.name }}</div>
+                                        <span class="fw-100"><b>{{ (product.price /100) | currency:'GBP' }}</b></span>
+                                        <span class="fw-100 text">{{ product.description}}...</span>
+                                    </div>
+                                    
+                                </div>
+    
+                                <div class="footer" fxLayout="row" fxLayoutAlign="center center">
+                                    <button mat-button (click)="addToBasket(product,menu.menu_id)">
+                                        Add
+                                    </button>
+                                </div>
+    
+                            </div>
+                            <!-- /PRODUCTS -->
+                        </div>
+                    </div>
+                    <!-- IF NO PRODUCTS IS FOUND -->
+                    <!-- <div class="no-record" *ngIf="singleChefInfo.menus.length<=0">No Menus found.</div> -->
+                </div>
+               </div>
+             <!-- / CONTENT -->
+    
+
+   </div>
+   <!-- / CONTENT -->
+
+</div>
+<app-footer1></app-footer1>

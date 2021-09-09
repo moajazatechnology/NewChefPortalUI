@@ -1,0 +1,15 @@
+<app-loader *ngIf="showLoader"></app-loader>
+<div class="container-fluid" *ngIf="!showLoader">
+    <div class="row">
+        <p><b>Customer #{{customerData.id}}</b></p>
+        <mat-divider></mat-divider>
+        <p><b>Customer Name:</b>{{customerData.first_name}}{{customerData.second_name}}</p>
+        <p><b>Member since:</b>{{customerData.created_at | date:'EEE, MMM d, y, h:mm:ss'}}</p>
+        <p><b>Email:</b>{{customerData.email}}</p>
+        <p><b>Phone number:</b>{{customerData.phone_number}}</p>
+        <p><b>Enabled email:</b><mat-slide-toggle [checked]="customerData.email_communications" [disabled]="true" color="primary"></mat-slide-toggle></p>
+        <mat-divider></mat-divider>
+        
+    </div>
+    <button class="btn btn-attempt btn-sm mt-3" type="button" [routerLink]="'/admin/customers'">BACK</button>
+</div>
