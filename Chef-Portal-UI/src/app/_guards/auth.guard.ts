@@ -16,21 +16,21 @@ export class AuthGuard implements CanActivate {
         const currentUser = this.authenticationService.currentUserValue;
         console.log(route);
         console.log(currentUser);
-        // if (currentUser.isExpired===false && currentUser.token) {
+        if (currentUser.isExpired===false && currentUser.token) {
             
-            //Open Welcome Popup For first time login user
+           // Open Welcome Popup For first time login user
             // if(currentUser.last_login=='' || currentUser.last_login==null){
             //     this.openWelcomePopup();                       
             // }
             
             // authorised so return true
             return true;
-        // }else {
-        // not logged in so redirect to login page with the return url
-        // this.router.navigate(['/'], { queryParams: { returnUrl: state.url }});
-        // this.authenticationService.logout();
-        // return false;
-        // }
+        }else {
+       // not logged in so redirect to login page with the return url
+        this.router.navigate(['/'], { queryParams: { returnUrl: state.url }});
+        this.authenticationService.logout();
+        return false;
+        }
 
 
     }

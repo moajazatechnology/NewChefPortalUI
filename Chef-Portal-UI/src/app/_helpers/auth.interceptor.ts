@@ -42,15 +42,17 @@ export class LoaderAuthInterceptor implements HttpInterceptor {
 		//return next.handle(changedRequest);
 	    return next.handle(changedRequest).pipe(tap((event: HttpEvent<any>) => { 
 	      if (event instanceof HttpResponse) {
-	      	// if(event.body.errorcode==391)
-	      	// {
+	      	if(event.body.errorcode==391)
+	      	{
 	      		// this._authService.logout().subscribe(response =>{
 		        //   if(response.logout===true)
 		        //   {
 		        //     this.router.navigate(['/authentication/login']);        
 		        //   }
 		        // });
-	      	// }
+				this._authService.logout();
+				this.router.navigate(['/']);
+	      	}
 	      }
 	    },
 	      (err: any) => {

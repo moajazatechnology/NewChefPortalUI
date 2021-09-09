@@ -1,4 +1,4 @@
-import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
+import { APP_INITIALIZER, CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -15,6 +15,8 @@ import { LoaderService } from './_services/loaderservice';
 import { SharedModule } from './main/shared/shared.module';
 import { FormsModule } from '@angular/forms';
 import { AuthGuard } from './_guards';
+import { AuthService } from './_services';
+import { appInitializer } from './_guards/appInitializer';
 // import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 
 @NgModule({
@@ -43,6 +45,7 @@ import { AuthGuard } from './_guards';
   ],
   providers: [DataService,
     AuthGuard,
+    // { provide: APP_INITIALIZER, useFactory: appInitializer, multi: true, deps: [AuthService] },
     {
       provide : HTTP_INTERCEPTORS,
       useClass: LoaderAuthInterceptor,
