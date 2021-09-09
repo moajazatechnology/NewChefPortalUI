@@ -27,6 +27,7 @@ export class CustomerSignupComponent implements OnInit {
   existsPhoneno: ElementRef;
 
   public isSubmit: boolean = false;
+  loading: boolean = false;
 
   customersForm= new FormGroup({
     first_name: new FormControl('', Validators.required),
@@ -132,6 +133,7 @@ export class CustomerSignupComponent implements OnInit {
     if (this.customersForm.valid)
     {
       this.isSubmit = true;
+      this.loading = true;
       let formValue = this.customersForm.value
       formValue.enable_emails = this.toggle_options.checked;
       this._dataService.customerpost({url:'auth/create_customer',data:formValue,isLoader:true})
@@ -146,10 +148,13 @@ export class CustomerSignupComponent implements OnInit {
                 });
                 this._router.navigate(['/customer-login']);
                  this.isSubmit = false;
+                 this.loading = false;
                  this.customersForm.reset();
             },
             error => {
                 // Show the error message
+                this.isSubmit = false;
+                this.loading = false;
                 this._matSnackBar.open(error.error.message, '', {
                     verticalPosition: 'bottom',
                     horizontalPosition:'center',

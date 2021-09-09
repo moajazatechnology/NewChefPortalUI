@@ -135,10 +135,6 @@ export class SchedulesComponent implements OnInit {
   }
 
 
-
-
-
-
   // -----------------------------------------------------------------------------------------------------
   // @ Public methods
   // -----------------------------------------------------------------------------------------------------
@@ -263,7 +259,8 @@ export class SchedulesComponent implements OnInit {
            horizontalPosition:'center',
            duration        : 2000
          });
-         this.refresh.next(true);
+        //  this.refresh.next(true);
+        this.setEvents();
      
    });
 
@@ -306,7 +303,8 @@ export class SchedulesComponent implements OnInit {
             
               if ( response !=='N')
               {
-                this.refresh.next(true);
+                // this.refresh.next(true);
+                this.setEvents();
               }
           });
   }
@@ -324,7 +322,8 @@ export class SchedulesComponent implements OnInit {
       });
       this.dialogRef.afterClosed()
           .subscribe((response: FormGroup) => {
-              this.refresh.next(true);
+            //   this.refresh.next(true);
+            this.setEvents();
           });
   }
 
