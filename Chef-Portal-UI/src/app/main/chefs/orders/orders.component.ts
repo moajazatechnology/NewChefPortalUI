@@ -19,7 +19,8 @@ export class OrdersComponent implements OnInit {
   public tableContents: any = [];
   public displayedColumns: any = [];  
   public columns = [];
-  public statusList: any = [];
+  public statusListDelivery: any = [];
+  public statusListCollection: any = [];
   public config_info: any;
   public dataSource: MatTableDataSource<any>;
 
@@ -120,9 +121,35 @@ export class OrdersComponent implements OnInit {
     this._dataService.getAll({url:'order/status/options', isLoader:true})
       .subscribe(response =>
                   {
-                    this.statusList = response;
+                    this.statusListDelivery = this.getFilteredStatusByDelivery(response);
+                    this.statusListCollection = this.getFilteredStatusByCollection(response);
+                    console.log('collection',this.statusListCollection);
+                    console.log('delivery',this.statusListDelivery);
+                    
                   },
       error => this.errorMsg = error);
+  }
+
+  getFilteredStatusByCollection(data) {
+
+    let arr: any = [];
+    data.forEach(element => {
+      if(element.status!=='DISPATCHED') {
+        arr.push(element);
+      }
+    });
+    return arr
+  }
+
+  getFilteredStatusByDelivery(data) {
+
+    let arr: any = [];
+    data.forEach(element => {
+      if(element.status==='PENDING' || element.status==='CANCELLED') {
+        arr.push(element);
+      }
+    });
+    return arr;
   }
 
   getList() {
@@ -153,6 +180,7 @@ export class OrdersComponent implements OnInit {
         // obj['paymentMethod'] = element;
         obj['address'] = element._chef?._chef_store?.name;
         obj['account'] = this.currencyPipe.transform(element.order_total/100, 'GBP');
+        obj['collection'] = element.collection;
         // obj['rating'] = element;
         
         tempArr.push(obj);

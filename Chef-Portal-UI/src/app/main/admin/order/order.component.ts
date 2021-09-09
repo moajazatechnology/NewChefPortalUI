@@ -19,7 +19,8 @@ export class OrderComponent implements OnInit {
   public tableContents: any = [];
   public displayedColumns: any = [];  
   public columns = [];
-  public statusList: any = [];
+  public statusListDelivery: any = [];
+  statusListCollection: any = [];
   public config_info: any;
   public dataSource: MatTableDataSource<any>;
 
@@ -125,13 +126,22 @@ export class OrderComponent implements OnInit {
     this._dataService.getAll({url:'order/status/options', isLoader:true})
       .subscribe(response =>
                   {
-                    this.statusList = this.getFilteredStatus(response);
+                    this.statusListDelivery = response;
+                    this.statusListCollection = this.getFilteredStatusByCollection(response);
+                    
                   },
       error => this.errorMsg = error);
   }
 
-  getFilteredStatus(data) {
+  getFilteredStatusByCollection(data) {
 
+    let arr: any = [];
+    data.forEach(element => {
+      if(element.status!=='DISPATCHED') {
+        arr.push(element);
+      }
+    });
+    return arr;
   }
 
   getList() {
@@ -162,6 +172,7 @@ export class OrderComponent implements OnInit {
         // obj['paymentMethod'] = element;
         obj['address'] = element._chef?._chef_store?.name;
         obj['account'] = this.currencyPipe.transform(element.order_total/100, 'GBP');
+        obj['collection'] = element.collection;
         // obj['rating'] = element;
         
         tempArr.push(obj);

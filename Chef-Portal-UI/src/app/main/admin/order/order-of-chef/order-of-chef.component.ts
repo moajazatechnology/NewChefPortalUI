@@ -20,7 +20,8 @@ export class OrderOfChefComponent implements OnInit {
   public tableContents: any = [];
   public displayedColumns: any = [];  
   public columns = [];
-  public statusList: any = [];
+  public statusListDelivery: any = [];
+  statusListCollection: any = [];
   public config_info: any;
   public dataSource: MatTableDataSource<any>;
 
@@ -144,9 +145,33 @@ export class OrderOfChefComponent implements OnInit {
     this._dataService.getAll({url:'order/status/options', isLoader:true})
       .subscribe(response =>
                   {
-                    this.statusList = response;
+                    this.statusListDelivery = this.getFilteredStatusByDelivery(response);
+                    this.statusListCollection = this.getFilteredStatusByCollection(response);
+                    
                   },
       error => this.errorMsg = error);
+  }
+
+  getFilteredStatusByCollection(data) {
+
+    let arr: any = [];
+    data.forEach(element => {
+      if(element.status!=='DISPATCHED') {
+        arr.push(element);
+      }
+    });
+    return arr;
+  }
+
+  getFilteredStatusByDelivery(data) {
+
+    let arr: any = [];
+    data.forEach(element => {
+      if(element.status==='PENDING' || element.status==='CANCELLED') {
+        arr.push(element);
+      }
+    });
+     return arr;
   }
 
   viewSingleorder(id) {
