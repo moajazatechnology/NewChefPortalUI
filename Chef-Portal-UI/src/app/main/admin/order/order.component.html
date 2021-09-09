@@ -14,19 +14,27 @@
                         {{element[column.columnDef]}}
                     </span>
                     <span *ngIf="column.columnDef==='status'">
-                        <mat-form-field appearance="outline">
-                            <mat-select [disabled]="element.statusName === 'COMPLETE' || element.statusName === 'CANCELLED' " [(ngModel)]="element.status" (selectionChange)="statusChange($event,element.id)">
-                                <mat-option *ngFor="let status of statusList" [value]="status.id" >
-                                    {{status.status}}
-                                </mat-option>
-                            </mat-select>
-                            <!-- Above IS Original Code -->
-                            <!-- <mat-select  [(ngModel)]="element.status" (selectionChange)="statusChange($event,element.id)">
-                                <mat-option *ngFor="let status of statusList" [value]="status.id" >
-                                    {{status.status}}
-                                </mat-option>
-                            </mat-select> -->
-                          </mat-form-field>
+                        <div *ngIf="!element.collection">
+                            <mat-form-field  appearance="outline">
+                                <mat-select [disabled]="element.statusName === 'COMPLETE' || element.statusName === 'CANCELLED' " [(ngModel)]="element.status" (selectionChange)="statusChange($event,element.id)">
+                                    <mat-option *ngFor="let status of statusListDelivery" [value]="status.id" >
+                                        {{status.status}}
+                                    </mat-option>
+                                </mat-select>
+                              
+                              </mat-form-field>
+                        </div>
+                        <div *ngIf="element.collection">
+                            <mat-form-field * appearance="outline">
+                                <mat-select [disabled]="element.statusName === 'COMPLETE' || element.statusName === 'CANCELLED' " [(ngModel)]="element.status" (selectionChange)="statusChange($event,element.id)">
+                                    <mat-option *ngFor="let status of statusListCollection" [value]="status.id" >
+                                        {{status.status}}
+                                    </mat-option>
+                                </mat-select>
+
+                              </mat-form-field>
+                        </div>
+
                     </span>
                 </td>
 
