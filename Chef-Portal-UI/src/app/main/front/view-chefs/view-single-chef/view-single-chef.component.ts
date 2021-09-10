@@ -205,7 +205,7 @@ export class ViewSingleChefComponent implements OnInit {
             localStorage.setItem('chefsInfo',JSON.stringify(chefInfo));
             localStorage.setItem('chefsBasketedProduct',JSON.stringify(this.basketProductList));
            
-            window.location.reload()
+            window.location.reload();
           }
         });
       }
