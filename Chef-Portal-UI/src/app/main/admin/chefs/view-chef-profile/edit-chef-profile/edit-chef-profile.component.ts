@@ -59,7 +59,7 @@ export class EditChefProfileComponent implements OnInit {
 
     this.editMaximumradiusForm = this._fb.group({
       chef_id: this._fb.control(this.data?.profile_data?.id || 0),
-      radius: this._fb.control(this.data?.profile_data?._chef_store?.accepted_radius || '',[Validators.required,Validators.pattern("^[0-9]*$")])
+      radius: this._fb.control((this.data?.profile_data?._chef_store?.accepted_radius /100) || '',[Validators.required,Validators.pattern("^[0-9]*$")])
 
     });
   }

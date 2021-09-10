@@ -4,7 +4,7 @@
     <p><b>Chef name: </b>{{chefInfo.first_name}} {{chefInfo.second_name}}</p>
     <p><b>Chef since: </b> {{ chefInfo.created_at | date:'EEE, MMM d, y, h:mm:ss'}}</p>
     <p><b><mat-label>Commission:</mat-label></b> {{chefInfo?._chef_store?.commision}} <span class="pl-3"><mat-icon (click)="editChefCommission('commission')">edit</mat-icon></span> </p>
-    <p><b><mat-label>Maximum radius:</mat-label></b> {{chefInfo?._chef_store?.accepted_radius}}<span class="pl-3"><mat-icon (click)="editChefMaximumRadius('maximumradius')">edit</mat-icon></span> </p>
+    <p><b><mat-label>Maximum radius:</mat-label></b> {{chefInfo?._chef_store?.accepted_radius /100}}<span class="pl-3"><mat-icon (click)="editChefMaximumRadius('maximumradius')">edit</mat-icon></span> </p>
     <mat-divider></mat-divider>
     <div class="pl-3"> 
         <button class="btn btn-attempt btn-sm mt-3" type="button" [routerLink]="'/admin/chefs'">BACK</button>
