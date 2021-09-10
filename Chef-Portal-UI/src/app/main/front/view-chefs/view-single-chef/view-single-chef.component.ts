@@ -164,7 +164,8 @@ export class ViewSingleChefComponent implements OnInit {
   addToBasket(product,menu_id) {
 
     console.log(product);
-
+    
+    
     let productData = {};
     productData = product;
 
@@ -197,6 +198,14 @@ export class ViewSingleChefComponent implements OnInit {
               console.log(this.basketProductList);
             // }
             this.getTotalPrice(this.basketProductList);
+            let chefInfo = this.singleChefInfo;
+            chefInfo['selectedDate'] = this.selectedDate;
+            chefInfo['allproductTotalPrice'] = this.totalPrice;
+      
+            localStorage.setItem('chefsInfo',JSON.stringify(chefInfo));
+            localStorage.setItem('chefsBasketedProduct',JSON.stringify(this.basketProductList));
+           
+            window.location.reload()
           }
         });
       }
