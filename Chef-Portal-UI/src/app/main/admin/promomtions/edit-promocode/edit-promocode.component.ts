@@ -66,7 +66,7 @@ export class EditPromocodeComponent implements OnInit {
       name = this.data.name ? this.data.name : '';
       chef_list = this.data.chef_list ? this.data.chef_list : [];
       promo_type = this.data.discount_type ? this.data.discount_type.id : '';
-      minimum_order = this.data.minimum_order ? this.data.minimum_order : 0;
+      minimum_order = this.data.minimum_order ? this.data.minimum_order /100 : 0;
       enabled = this.data.enabled ? this.data.enabled : false;
     }
 
