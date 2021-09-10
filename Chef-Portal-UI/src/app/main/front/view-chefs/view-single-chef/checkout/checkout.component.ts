@@ -307,11 +307,15 @@ export class CheckoutComponent implements OnInit {
 
    calculateDiscount() {
 
-    let totalPriceTemp = this.totalPrice;
+    let totalPriceTemp = (this.totalPrice /100);
+    console.log(totalPriceTemp);
     if(this.check_promo_type_response.id === 1 && this.check_promo_type_response.name === 'DELIVERY'){
             
       if(this.promocode && this.promocode.is_flat_discount){
-        this.discount = this.deliveryCharges - this.promocode.flat_discount;
+        if(this.deliveryCharges > (this.promocode.flat_discount / 100)) {
+          this.discount = this.deliveryCharges - (this.promocode.flat_discount / 100);
+        }
+        
       }else {
         this.discount = (this.promocode.percentage_discount / 100) * this.deliveryCharges;
         console.log( 'discount',this.discount);
@@ -321,7 +325,7 @@ export class CheckoutComponent implements OnInit {
     }else if(this.check_promo_type_response.id === 2 && this.check_promo_type_response.name === 'ORDER'){
 
       if(this.promocode && this.promocode.is_flat_discount){
-        this.discount = totalPriceTemp - this.promocode.flat_discount;
+        this.discount = (this.promocode.flat_discount / 100);
       }else {
         this.discount = (this.promocode.percentage_discount / 100) * totalPriceTemp;
         console.log(totalPriceTemp);
@@ -330,7 +334,7 @@ export class CheckoutComponent implements OnInit {
     }
     let total = totalPriceTemp + this.deliveryCharges;
     console.log('total',total)
-    this.productTotalPriceWithDeliveryCharges = ((totalPriceTemp / 100)  + this.deliveryCharges) - this.discount;
+    this.productTotalPriceWithDeliveryCharges = ((totalPriceTemp)  + this.deliveryCharges) - this.discount;
     console.log(this.productTotalPriceWithDeliveryCharges);
    }
 

@@ -145,7 +145,7 @@ export class OrdersComponent implements OnInit {
 
     let arr: any = [];
     data.forEach(element => {
-      if(element.status==='PENDING' || element.status==='CANCELLED') {
+      if(element.status==='PENDING' || element.status==='CANCELLED' || element.status==='COMPLETE') {
         arr.push(element);
       }
     });
