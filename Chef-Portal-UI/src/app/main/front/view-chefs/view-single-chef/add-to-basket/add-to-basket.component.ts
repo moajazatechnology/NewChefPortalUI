@@ -23,6 +23,8 @@ export class AddToBasketComponent implements OnInit {
     this.productTotalPrice = this.product.price;
     this.checkedProductVariantOptions = [];
 
+    console.log(this.checkedProductVariantOptions);
+    console.log(this.product);
     this.addCheckedOptions();
   }
 
@@ -174,9 +176,11 @@ export class AddToBasketComponent implements OnInit {
 
   }
 
-  addToBasket(product) {
+  addToBasket() {
+    let product = this.product;
     product['totalPrice'] = this.productTotalPrice;
     product['checkedProductVariantOptions'] = this.checkedProductVariantOptions;
+    console.log('product',product)
     this.dialogRef.close(product);
   }
 

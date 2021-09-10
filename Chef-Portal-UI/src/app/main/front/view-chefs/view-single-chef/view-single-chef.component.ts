@@ -168,6 +168,7 @@ export class ViewSingleChefComponent implements OnInit {
     let productData = {};
     productData = product;
 
+    console.log(productData);
 
     productData['menu_id'] = menu_id;
     let dialogRef = this.dialog.open(AddToBasketComponent, {
@@ -191,7 +192,9 @@ export class ViewSingleChefComponent implements OnInit {
           if(result!=='N') {
             // let duplibateChef = this.basketProductList.find(c=>c.product_id === result.product_id);
             // if(duplibateChef===undefined){
+              console.log(result,'result')
               this.basketProductList.push(result);
+              console.log(this.basketProductList);
             // }
             this.getTotalPrice(this.basketProductList);
           }

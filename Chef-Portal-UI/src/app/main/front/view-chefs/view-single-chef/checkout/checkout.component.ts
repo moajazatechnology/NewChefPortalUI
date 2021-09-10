@@ -15,7 +15,6 @@ import { AddNewAddressComponent } from './add-new-address/add-new-address.compon
   styleUrls: ['./checkout.component.scss']
 })
 export class CheckoutComponent implements OnInit {
-
  
   active = 1;
   public showHideBasketBtn:boolean= true;

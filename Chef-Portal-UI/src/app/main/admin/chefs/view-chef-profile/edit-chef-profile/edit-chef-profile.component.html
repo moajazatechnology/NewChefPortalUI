@@ -17,7 +17,7 @@
 
                         <mat-form-field  appearance="outline">
                             <mat-label>Commission</mat-label>
-                            <input matInput formControlName="commission" placeholder="Enter a percentage of commission" (blur)="transformAmounttoPercentage($event)">
+                            <input matInput min="0" max="100" formControlName="commission" placeholder="Enter a percentage of commission" (blur)="transformAmounttoPercentage($event)">
                             <mat-error *ngIf="editCommissionForm.get('commission').hasError('required')">
                                 Commission is required
                             </mat-error>
