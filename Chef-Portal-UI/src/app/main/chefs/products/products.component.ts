@@ -20,6 +20,7 @@ export class ProductsComponent implements OnInit {
   mode: ProgressSpinnerMode = 'indeterminate';
   value = 50;
   public showLoader:boolean = true;
+  public show_main_content: string = "hidden";  
 
   constructor(
     private dialog: MatDialog,
@@ -36,6 +37,7 @@ export class ProductsComponent implements OnInit {
     .subscribe(response =>{
       this.productList = response;
       this.showLoader = false;
+      this.show_main_content = "visible";
     });
   }
 

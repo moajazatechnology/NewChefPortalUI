@@ -23,3 +23,38 @@ mat-toolbar {
 .toolbar-spacer {
     flex: 1 1 auto;
 }
+
+.dashboard-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.dashboard-auth-menu {
+    display: flex;
+    align-items: center;
+}
+
+@media screen and (max-width: 768px) {
+    .dashboard-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+        margin-bottom: 1em;
+    }    
+}
+
+.dashboard-auth-name {
+    margin-right: 0.2em;
+    margin-left: 0.2em;
+}
+
+.dashboard-user-panel-image {
+    border-radius: 20px;
+    max-width: 4em;
+    max-height: 1.5em;
+    margin-right: 0.7em;
+    margin-left: 0.7em;
+    cursor: pointer;
+}

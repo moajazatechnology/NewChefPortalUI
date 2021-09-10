@@ -1,102 +1,159 @@
 <app-loader *ngIf="showLoader"></app-loader>
-<div fxLayout="column" class="p-4" *ngIf="!showLoader">
-    <div fxLayout="column" fxLayoutAlign="start start" fxFlex="50">
-        <h1>Welcome to your Chef dashboard</h1>
-        <div class="hr"></div>
-    </div>
-
-    <div fxLayout="column" class="mb-3" fxLayoutAlign="space-around start" fxFlex="50">
-        <h3><b>Sales made today: {{profile_data.sales_stats?.total_daily_sales}}</b></h3>
-        <h3><b>All time sales: {{profile_data.sales_stats?.total_sales}}</b></h3>
-    </div>
-
-    <div fxLayout="column" class="mb-3" fxLayoutAlign="space-around start" fxFlex="50">
-        <h3>Overview of Orders</h3>
-        <h3><b>Cancelled: {{profile_data.order_stats?.cancelled_orders}}</b></h3>
-        <h3><b>Pending: {{profile_data.order_stats?.pending_orders}}</b></h3>
-        <h3><b>Dispatched: {{profile_data.order_stats?.dispatched_orders}}</b></h3>
-        <h3><b>Completed: {{profile_data.order_stats?.complete_orders}}</b></h3>
-    </div>
-    <p>To get your store up and running,there are few essentials steps that you need to take,as listed below.
-        Once Finished, please get in contact with the team to make your store live!
-    </p>
-    <div fxLayout="column" fxFlex="50" class="p-4">
-        <div *ngIf="!profile_data.profile_complete">
-            <table class="w-50">
-                <tr>
-                    <td>
-                        <div><b>Set Profile Picture</b></div>
-                    </td>
-                    <td>
-                        <mat-icon *ngIf="profile_data.profile_image_set" class="check">check</mat-icon>
-                        <mat-icon *ngIf="!profile_data.profile_image_set" class="ncheck">close</mat-icon>
-                    </td>
-                </tr>
-                <div class="hr"></div>
-                <tr>
-                    <td>
-                        <div><b>Set Banner</b></div>
-                    </td>
-                    <td>
-                        <mat-icon *ngIf="profile_data.banner_image_set" class="check">check</mat-icon>
-                        <mat-icon *ngIf="!profile_data.banner_image_set" class="ncheck">close</mat-icon>
-                    </td>
-                </tr>
-                <div class="hr"></div>
-                <tr>
-                    <td>
-                        <div><b>Configured Store Address</b></div>
-                    </td>
-                    <td>
-                        <mat-icon *ngIf="profile_data.chef_store_address_set" class="check">check</mat-icon>
-                        <mat-icon *ngIf="!profile_data.chef_store_address_set" class="ncheck">close</mat-icon>
-                    </td>
-                </tr>
-                <div class="hr"></div>
-                <tr>
-                    <td>
-                        <div><b>First Product created</b></div>
-                    </td>
-                    <td>
-                        <mat-icon *ngIf="profile_data.product_created" class="check">check</mat-icon>
-                        <mat-icon *ngIf="!profile_data.product_created" class="ncheck">close</mat-icon>
-                    </td>
-                </tr>
-                <div class="hr"></div>
-                <tr>
-                    <td>
-                        <div><b>First menu created</b></div>
-                    </td>
-                    <td>
-                        <mat-icon *ngIf="profile_data.menu_created" class="check">check</mat-icon>
-                        <mat-icon *ngIf="!profile_data.menu_created" class="ncheck">close</mat-icon>
-                    </td>
-                </tr>
-                <div class="hr"></div>
-                <tr>
-                    <td>
-                        <div><b>Payments configured</b></div>
-                    </td>
-                    <td>
-                        <mat-icon *ngIf="profile_data.payment_status" class="check">check</mat-icon>
-                        <mat-icon *ngIf="!profile_data.payment_status" class="ncheck">close</mat-icon>
-                    </td>
-                </tr>
-                <div class="hr"></div>
-                <tr>
-                    <td>
-                        <div><b>Live on platform</b></div>
-                    </td>
-                    <td>
-                        <mat-icon *ngIf="profile_data.enabled" class="check">check</mat-icon>
-                        <mat-icon *ngIf="!profile_data.enabled" class="ncheck">close</mat-icon>
-                    </td>
-                </tr>
-                <div class="hr"></div>
-            </table>
+<div class="container-fluid" [style.visibility]="show_main_content">
+    <div class="row text-center">
+        <div class="home-row col-md-3">
+            <div class="card orders-card">
+                <div class="card-body">
+                    <div class="orders-title">Cancelled</div>
+                    <div class="orders-value">{{profile_data.order_stats?.cancelled_orders}}</div>
+                </div>
+            </div>
         </div>
-        <div *ngIf="profile_data.profile_complete">
-            <h1>Your Profile is complete</h1>
+        <div class="home-row col-md-3">
+            <div class="card orders-card">
+                <div class="card-body">
+                    <div class="orders-title">Pending</div>
+                    <div class="orders-value">{{profile_data.order_stats?.pending_orders}}</div>
+                </div>
+            </div>
+        </div>
+        <div class="home-row col-md-3">
+            <div class="card orders-card">
+                <div class="card-body">
+                    <div class="orders-title">Dispatched</div>
+                    <div class="orders-value">{{profile_data.order_stats?.dispatched_orders}}</div>
+                </div>
+            </div>
+        </div>
+        <div class="home-row col-md-3">
+            <div class="card orders-card">
+                <div class="card-body">
+                    <div class="orders-title">Completed</div>
+                    <div class="orders-value">{{profile_data.order_stats?.complete_orders}}</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row home-row text-left">
+        <div class="col-xs-12">
+            <div class="card sales-card">
+                <div class="row full-row">
+                    <div class="col-md-8">
+                        <div class="sales-graph-container">
+                            <div class="sales-graph-heading">Today's sales</div>
+                            <div class="sales-graph-date">{{salesDataDate}}</div>
+                            <div>
+                                <canvas id="myCanvasId">{{ chart }}</canvas>
+                            </div>                        
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="sales-stats-container">
+                            <div class="sales-stats-item">
+                                <div class="sales-stats-caption">Total sales today</div>
+                                <div class="sales-stats-value">{{profile_data.sales_stats?.total_daily_sales}}</div>
+                            </div>
+                            <div class="sales-stats-item">
+                                <div class="sales-stats-caption">Total sales this week</div>
+                                <div class="sales-stats-value">£-</div>
+                            </div>
+                            <div class="sales-stats-item">
+                                <div class="sales-stats-caption">Total this month</div>
+                                <div class="sales-stats-value">£-</div>
+                            </div>
+                            <div class="sales-stats-item">
+                                <div class="sales-stats-caption">All time sales</div>
+                                <div class="sales-stats-value">{{profile_data.sales_stats?.total_sales}}</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row text-left">
+        <div class="col-md-6 home-row">
+            <div class="card tasks-card">
+                <div class="row full-row">
+                    <div class="tasks-header">
+                        <div class="tasks-header-content">
+                            <div class="tasks-title">Tasks</div>
+                            <div class="tasks-caption">Complete these to get started!</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-12">
+                        <div class="tasks-option">
+                            <b>Set Profile Picture</b>
+                            <div *ngIf="profile_data.profile_image_set" class="done-flag">DONE</div>
+                            <div *ngIf="!profile_data.profile_image_set" class="required-flag">REQUIRED</div>
+                            <!-- <mat-icon *ngIf="profile_data.profile_image_set" class="check">check</mat-icon>
+                            <mat-icon *ngIf="!profile_data.profile_image_set" class="check">close</mat-icon> -->
+                        </div>
+                        <div class="tasks-option">
+                            <b>Set Banner</b>
+                            <div *ngIf="profile_data.banner_image_set" class="done-flag">DONE</div>
+                            <div *ngIf="!profile_data.banner_image_set" class="required-flag">REQUIRED</div>
+                            <!-- <mat-icon *ngIf="profile_data.banner_image_set" class="check">check</mat-icon>
+                            <mat-icon *ngIf="!profile_data.banner_image_set" class="check">close</mat-icon> -->
+                        </div>
+                        <div class="tasks-option">
+                            <b>Set Store Address</b>
+                            <div *ngIf="profile_data.chef_store_address_set" class="done-flag">DONE</div>
+                            <div *ngIf="!profile_data.chef_store_address_set" class="required-flag">REQUIRED</div>
+                            <!-- <mat-icon *ngIf="profile_data.chef_store_address_set" class="check">check</mat-icon>
+                            <mat-icon *ngIf="!profile_data.chef_store_address_set" class="ncheck">close</mat-icon> -->
+                        </div>
+                        <div class="tasks-option">
+                            <b>Create first product</b>
+                            <div *ngIf="profile_data.product_created" class="done-flag">DONE</div>
+                            <div *ngIf="!profile_data.product_created" class="required-flag">REQUIRED</div>
+                            <!-- <mat-icon *ngIf="profile_data.product_created" class="check">check</mat-icon>
+                            <mat-icon *ngIf="!profile_data.product_created" class="ncheck">close</mat-icon> -->
+                        </div>
+                        <div class="tasks-option">
+                            <b>Create first menu</b>
+                            <div *ngIf="profile_data.menu_created" class="done-flag">DONE</div>
+                            <div *ngIf="!profile_data.menu_created" class="required-flag">REQUIRED</div>
+                            <!-- <mat-icon *ngIf="profile_data.menu_created" class="check">check</mat-icon>
+                            <mat-icon *ngIf="!profile_data.menu_created" class="ncheck">close</mat-icon> -->
+                        </div>
+                        <div class="tasks-option">
+                            <b>Setup payments</b>
+                            <div *ngIf="profile_data.payment_status" class="done-flag">DONE</div>
+                            <div *ngIf="!profile_data.payment_status" class="required-flag">REQUIRED</div>
+                            <!-- <mat-icon *ngIf="profile_data.payment_status" class="check">check</mat-icon>
+                            <mat-icon *ngIf="!profile_data.payment_status" class="ncheck">close</mat-icon> -->
+                        </div>
+                        <div class="tasks-option">
+                            <b>Live on platform</b>
+                            <div *ngIf="profile_data.enabled" class="done-flag">DONE</div>
+                            <div *ngIf="!profile_data.enabled" class="required-flag">REQUIRED</div>
+                            <!-- <mat-icon *ngIf="profile_data.enabled" class="check">check</mat-icon>
+                            <mat-icon *ngIf="!profile_data.enabled" class="ncheck">close</mat-icon> -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 home-row">
+            <div class="card tasks-card">
+                <div class="row full-row">
+                    <div class="tasks-header">
+                        <div class="tasks-header-content">
+                            <div class="tasks-title">My Stats</div>
+                            <div class="tasks-caption">Coming soon...</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-12">
+                        <div class="tasks-option">
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </div>

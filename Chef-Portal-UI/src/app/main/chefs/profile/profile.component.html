@@ -1,5 +1,317 @@
 <app-loader *ngIf="showLoader"></app-loader>
-<div fxLayout="column" *ngIf="!showLoader">
+
+<div class="container-fluid" [style.visibility]="show_main_content">
+    <div class="row">
+        <div class="col-md-8">
+            <div class="card basic-card">
+                <div class="row full-row">
+                    <div class="basic-header">
+                        <div class="basic-header-content">
+                            <div class="basic-title">
+                                Biography
+                            </div>
+                            <div class="card-edit-button">
+                                <mat-icon (click)="editChefBiography('biography')">edit</mat-icon>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-12">
+                        <span class="card-content bio-card-content">
+                            {{userInfo._chef_profile?.biography}}
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card basic-card">
+                <div class="row full-row">
+                    <div class="basic-header">
+                        <div class="basic-header-content">
+                            <div class="basic-title">
+                                Cuisines
+                            </div>
+                            <div class="card-edit-button">
+                                <mat-icon (click)="editChefCuisine('cuisine')">edit</mat-icon>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-12">
+                        <div class="tasks-option">
+                            <span class="cuisine-card-content">
+                                <div class="card-content" *ngFor="let cuisine of cuisineNames;let i=index">
+                                    {{i+1}}. {{cuisine?._cuisine?.name}}
+                                </div>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-4">
+            <div class="card basic-card">
+                <div class="row full-row">
+                    <div class="basic-header">
+                        <div class="basic-header-content">
+                            <div class="basic-title">
+                                Profile picture
+                            </div>
+                            <div class="card-edit-button">
+                                <mat-icon (click)="editChefProfile('profile')">edit</mat-icon>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-12">
+                        <div class="card-content text-center">
+                            <img class="profile-image"
+                                [src]="userInfo._chef_profile?._chef_profile_image?.media_url?.url"
+                                *ngIf="userInfo._chef_profile?._chef_profile_image?.media_url?.url !== '' && userInfo._chef_profile?._chef_profile_image?.media_url?.url" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-8">
+            <div class="card basic-card">
+                <div class="row full-row">
+                    <div class="basic-header">
+                        <div class="basic-header-content">
+                            <div class="basic-title">
+                                Banner picture
+                            </div>
+                            <div class="card-edit-button">
+                                <mat-icon (click)="editChefBiography('banner')">edit</mat-icon>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-12">
+                        <div class="card-content text-center">
+                            <img class="banner-image" [src]="userInfo._chef_profile?._chef_banner_image?.media_url?.url"
+                                style="width: 40%;"
+                                *ngIf="userInfo._chef_profile?._chef_banner_image?.media_url?.url !== '' && userInfo._chef_profile?._chef_banner_image?.media_url?.url" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="card basic-card">
+                <div class="row full-row">
+                    <div class="basic-header">
+                        <div class="basic-header-content">
+                            <div class="basic-title">
+                                Store address
+                            </div>
+                            <div class="card-edit-button">
+                                <mat-icon (click)="editChefStoreAddress('address')">edit</mat-icon>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-12">
+                        <div class="card-content">
+                            <b>Address 1:</b> {{userInfo._chef_store?._chef_store_address.address_1}}<br>
+                            <b>Address 2:</b>{{userInfo._chef_store?._chef_store_address.address_2}}<br>
+                            <b>Address 3:</b> {{userInfo._chef_store?._chef_store_address.address_3}}<br>
+                            <b>City:</b> {{userInfo._chef_store?._chef_store_address.city}}<br>
+                            <b>Country:</b> {{userInfo._chef_store?._chef_store_address.country}}<br>
+                            <b>Postcode:</b> {{userInfo._chef_store?._chef_store_address.postcode}}<br>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <div class="card basic-card">
+                <div class="row full-row">
+                    <div class="basic-header">
+                        <div class="basic-header-content">
+                            <div class="basic-title">
+                                Collection slots
+                            </div>
+                            <div class="card-edit-button">
+                                <mat-icon (click)="editCollectionSlots('collection')">edit</mat-icon>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-12">
+                        <span class="cuisine-card-content">
+                            <div class="card-content" *ngFor="let cs of collectionSlots;let i=index">
+                                {{cs?.start_hour}}:00 - {{cs?.end_hour}}:00
+                            </div>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="card basic-card">
+                <div class="row full-row">
+                    <div class="basic-header">
+                        <div class="basic-header-content">
+                            <div class="basic-title">
+                                Delivery slots
+                            </div>
+                            <div class="card-edit-button">
+                                <mat-icon (click)="editDeliverySlots('delivery')">edit</mat-icon>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-12">
+                        <span class="cuisine-card-content">
+                            <div class="card-content" *ngFor="let ds of deliverySlots;let i=index">
+                                {{ds?.start_hour}}:00 - {{ds?.end_hour}}:00
+                            </div>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-4">
+            <div class="card basic-small-card">
+                <div class="row full-row">
+                    <div class="basic-header">
+                        <div class="basic-header-content">
+                            <div class="basic-title">Phone number</div>
+                            <div class="card-edit-button">
+                                <mat-icon (click)="editChefPhoneNo('phoneNo')">edit</mat-icon>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-12">
+                        <div class="card-content">
+                            <div class="card-content-single-item">
+                                {{userInfo.phone_number}}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card basic-small-card">
+                <div class="row full-row">
+                    <div class="basic-header">
+                        <div class="basic-header-content">
+                            <div class="basic-title">Email</div>
+                            <div class="card-edit-button">
+                                <mat-icon (click)="editChefEmail('email')">edit</mat-icon>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-12">
+                        <div class="card-content">
+                            <div class="card-content-single-item">
+                                {{userInfo.email}}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card basic-small-card">
+                <div class="row full-row">
+                    <div class="basic-header">
+                        <div class="basic-header-content">
+                            <div class="basic-title">Password</div>
+                            <div class="card-edit-button">
+                                <mat-icon (click)="editChefPassword('password')">edit</mat-icon>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-12">
+                        <div class="card-content">
+                            <div class="card-content-single-item">
+                                ***********
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <div class="card basic-small-card">
+                <div class="row full-row">
+                    <div class="basic-header">
+                        <div class="basic-header-content">
+                            <div class="basic-title">Store Services</div>
+                            <div class="card-edit-button">
+                                <mat-icon (click)="editCollectionDelivery('collectionDelivery')">edit</mat-icon>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-12">
+                        <div class="card-content-single-item">
+                            <b> Collection </b>
+                            <mat-icon *ngIf="userInfo._chef_store?.collection" class="check">check</mat-icon>
+                            <mat-icon *ngIf="!userInfo._chef_store?.collection" class="ncheck">close</mat-icon><br>
+                            <b> Delivery </b>
+                            <mat-icon *ngIf="userInfo._chef_store?.delivery" class="check">check</mat-icon>
+                            <mat-icon *ngIf="!userInfo._chef_store?.delivery" class="ncheck">close</mat-icon>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="card basic-small-card">
+                <div class="row full-row">
+                    <div class="basic-header">
+                        <div class="basic-header-content">
+                            <div class="basic-title">Minimum order</div>
+                            <div class="card-edit-button">
+                                <mat-icon (click)="editChefMinimunOrder('minimumorder')">edit</mat-icon>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-12">
+                        <div class="card-content">
+                            <div class="card-content-single-item">
+                                {{(userInfo._chef_store?.minimum_order) / 100 | currency:'GBP'}}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- <div fxLayout="column" *ngIf="!showLoader">
     <div fxLayout="column" fxLayoutAlign="start center">
         <h1 class="p-4"><b>Welcome, {{userInfo.first_name}} {{userInfo.second_name}}.</b></h1>
     </div>
@@ -96,6 +408,4 @@
         </table>
         
     </div>
-</div>
-
-
+</div> -->

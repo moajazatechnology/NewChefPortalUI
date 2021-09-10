@@ -150,7 +150,6 @@ export class EditProfileComponent implements OnInit {
   }
 
   onAddSelectRow(index) {
-    console.log('dhbjhsb')
     if(index<4){
       this.slots.push(this.createItemFormGroup(null));
       console.log(this.slots);

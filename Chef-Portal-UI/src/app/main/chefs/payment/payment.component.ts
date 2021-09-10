@@ -11,6 +11,8 @@ export class PaymentComponent implements OnInit {
 
   public payment_status: any = {};
   public loader: boolean = false;
+  public showLoader: boolean = true;
+  public show_main_content: string = "hidden";  
 
   public payments_signup_disabled: boolean = false;
 
@@ -28,6 +30,9 @@ export class PaymentComponent implements OnInit {
 
     this._dataService.getAll({ url: 'chef/stripe/account', isLoader: true })
       .subscribe(res => {
+        this.loader = false;
+        this.showLoader = false;
+        this.show_main_content = "visible";
         this.payment_status = res;
       })
   }
@@ -41,7 +46,7 @@ export class PaymentComponent implements OnInit {
         // this.getNewWindow(res.url);
         this.openLinkOnSameWindow(res.url);
         this.loader = false;
-        this.payments_signup_disabled = false;
+        // this.payments_signup_disabled = false;
       },
         error => {
           // Show the error message

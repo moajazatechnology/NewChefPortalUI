@@ -24,3 +24,92 @@ td {
     border-radius: 50%;
     color:white;
 }
+
+
+.full-row { 
+    height: 100%;
+}
+
+.basic-card {
+    min-height: 15em;
+    max-height: 15em;
+    margin-bottom: 1em;
+    width: 100%;
+}
+
+.basic-small-card {
+    min-height: 10em;
+    max-height: 10em;
+    margin-bottom: 1em;
+    width: 100%;
+}
+
+.basic-header-content {
+    margin-top: 1em;
+    margin-left: 1em;
+    display: flex;
+    justify-content: center;
+}
+@media screen and (max-width: 768px) {
+    .basic-header-content {
+        justify-content:start;
+    }    
+}
+.basic-header {
+    border-bottom: 0.01rem solid rgb(240,240,240);
+}
+
+.basic-title {
+    font-size: 1.7em;
+    margin-bottom: 0.6em;
+    opacity: 0.7;
+}
+
+.basic-caption {
+    font-size: 1.2em;
+    opacity: 0.7;
+    margin-bottom: 0.6em;
+}
+
+.card-edit-button {
+    position: absolute;
+    right: 15px;
+}
+
+.bio-card-content {
+    display: -webkit-box;
+    -webkit-line-clamp: 6;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.cuisine-card-content {
+    display: -webkit-box;
+    -webkit-line-clamp: 4;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.card-content {
+    margin: 1em;
+}
+
+.profile-image {
+    border-radius: 50%;
+    width: 125px;
+    height: 125px;
+    object-fit: cover;
+}
+
+.banner-image {
+    width: 250px;
+    height: 125px;
+    object-fit: cover;
+}
+
+.card-content-single-item {
+    margin-top: 1.3em;
+    font-size: 1.3em;
+    width: 100%;
+    text-align: center;
+}

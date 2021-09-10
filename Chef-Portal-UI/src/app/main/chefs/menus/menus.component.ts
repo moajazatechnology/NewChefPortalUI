@@ -17,6 +17,7 @@ export class MenusComponent implements OnInit {
   refresh: Subject<any> = new Subject();
   menuList:any = [];
   public showLoader: boolean = true
+  public show_main_content: string = "hidden";  
 
   constructor(
     private dialog: MatDialog,
@@ -52,6 +53,7 @@ export class MenusComponent implements OnInit {
     this.dataService.getAll({url:'menu',isLoader:true})
     .subscribe(response =>{
       this.menuList = response;
+      this.show_main_content = "visible";
       this.showLoader = false;
     });
   }
