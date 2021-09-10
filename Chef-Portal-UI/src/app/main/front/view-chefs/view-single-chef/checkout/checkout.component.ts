@@ -130,6 +130,8 @@ export class CheckoutComponent implements OnInit {
     this.dataService.getAllList({url: 'checkout/addresses' ,data:{chef_id:this.singleChefInfo?.id}, isLoader:true})
      .subscribe(res => {
        this.allAddressList = res;
+       let addressId = this.allAddressList?.eligible?.length > 0 ? this.allAddressList?.eligible[0].id : 0;
+       this.deliveryFormGroup.get('customer_address_id').setValue(addressId);
        console.log(res);
      });
   }
@@ -282,10 +284,24 @@ export class CheckoutComponent implements OnInit {
           this.calculateDiscount();
           
         });
+      }else {
+         // Show the error message
+         this._matSnackBar.open('This promo code is not valid', '', {
+          verticalPosition: 'bottom',
+          horizontalPosition:'center',
+          duration        : 2000
+        });
+        this.promocodeLoader = false;
       }
     },
     error =>{
       this.promocodeLoader = false;
+       // Show the error message
+       this._matSnackBar.open(error.error.message, '', {
+        verticalPosition: 'bottom',
+        horizontalPosition:'center',
+        duration        : 2000
+    });
     });
    }
 

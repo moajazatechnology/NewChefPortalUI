@@ -113,7 +113,8 @@ export class EditChefProfileComponent implements OnInit {
                 duration        : 2000
               });
               this.dialogRef.close();
-              this,this.isSubmit = false;
+              this.isSubmit = false;
+              this.loader = false;
           },
           error => {
               // Show the error message

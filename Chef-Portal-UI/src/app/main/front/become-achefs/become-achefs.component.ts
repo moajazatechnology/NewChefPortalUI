@@ -140,13 +140,13 @@ export class BecomeAChefsComponent implements OnInit {
                     horizontalPosition:'center',
                     duration        : 2000
                 });
-                this._router.navigate(['/auth/login']);
+                this._router.navigate(['/chef-login']);
                  this.isSubmit = false;
                  this.loading = false;
             },
             error => {
                 // Show the error message
-                this._matSnackBar.open('Error signing up', '', {
+                this._matSnackBar.open(error.error.message, '', {
                     verticalPosition: 'bottom',
                     horizontalPosition:'center',
                     duration        : 2000

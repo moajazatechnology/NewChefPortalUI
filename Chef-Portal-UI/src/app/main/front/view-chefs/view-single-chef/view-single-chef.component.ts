@@ -165,7 +165,8 @@ export class ViewSingleChefComponent implements OnInit {
 
     console.log(product);
 
-    let productData = product;
+    let productData = {};
+    productData = product;
 
 
     productData['menu_id'] = menu_id;
