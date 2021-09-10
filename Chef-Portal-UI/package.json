@@ -11,6 +11,9 @@
   },
   "private": true,
   "dependencies": {
+    "@types/chart.js": "^2.9.34",
+    "angular-plotly.js": "^4.0.4",
+    "chart.js": "^3.5.1",
     "@angular/animations": "~11.2.13",
     "@angular/cdk": "^11.2.12",
     "@angular/common": "~11.2.13",

@@ -13,6 +13,10 @@ export class ProfileComponent implements OnInit {
   public userInfo: any = {};
   public cuisineNames: any = [];
   public showLoader:boolean = true;
+  public show_main_content: string = "hidden";  
+
+  public collectionSlots: any = [];
+  public deliverySlots: any = [];
 
   constructor(
     private dialog: MatDialog,
@@ -29,7 +33,10 @@ export class ProfileComponent implements OnInit {
     this._dataService.getChefInfo({url:'chef', isLoader:true})
     .subscribe(response => {
       this.userInfo = response;
+      this.collectionSlots = this.userInfo?._chef_store._chef_store_collection_slots;
+      this.deliverySlots = this.userInfo?._chef_store._chef_store_delivery_slots;
       this.showLoader = false;
+      this.show_main_content = "visible";
     });
   }
 

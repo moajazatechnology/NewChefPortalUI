@@ -1,46 +1,66 @@
-
-  <mat-sidenav-container fullscreen>
-    <mat-sidenav mode="side" #sidenav opened position="start">
+<mat-sidenav-container fullscreen>
+  <mat-sidenav mode="side" #sidenav opened position="start">
     <img src="./assets/lmc_logo_white.png" routerLink="home" class="image" style="width: 100%; margin-bottom: 1em;">
     <div fxLayout="column">
-        
-        <button mat-button  routerLink="home" routerLinkActive="selected no-border txt-bold" fxLayoutAlign="start" class="py-2 pr-5">
+
+      <button mat-button (click)="updateRoute('home')" routerLink="home" routerLinkActive="selected no-border txt-bold"
+        fxLayoutAlign="start" class="py-2 pr-5">
         Home</button>
-        <mat-divider></mat-divider>
-        <button mat-button  routerLink="profile" routerLinkActive="selected no-border txt-bold" fxLayoutAlign="start" class="py-2 pr-5">
+      <mat-divider></mat-divider>
+      <button mat-button (click)="updateRoute('profile')" routerLink="profile"
+        routerLinkActive="selected no-border txt-bold" fxLayoutAlign="start" class="py-2 pr-5">
         Profile</button>
-        <mat-divider></mat-divider>
-        <button mat-button routerLink="orders" routerLinkActive="selected no-border txt-bold" fxLayoutAlign="start" class="py-2 pr-5">
+      <mat-divider></mat-divider>
+      <button mat-button (click)="updateRoute('orders')" routerLink="orders"
+        routerLinkActive="selected no-border txt-bold" fxLayoutAlign="start" class="py-2 pr-5">
         Orders</button>
-    <mat-divider></mat-divider>
-    <button mat-button  routerLink="products" routerLinkActive="selected no-border txt-bold" fxLayoutAlign="start" class="py-2 pr-5">
+      <mat-divider></mat-divider>
+      <button mat-button (click)="updateRoute('products')" routerLink="products"
+        routerLinkActive="selected no-border txt-bold" fxLayoutAlign="start" class="py-2 pr-5">
         Products</button>
-    <mat-divider></mat-divider>
-    <button mat-button  routerLink="menus" routerLinkActive="selected no-border txt-bold" fxLayoutAlign="start" class="py-2 pr-5">
+      <mat-divider></mat-divider>
+      <button mat-button (click)="updateRoute('menus')" routerLink="menus"
+        routerLinkActive="selected no-border txt-bold" fxLayoutAlign="start" class="py-2 pr-5">
         Menus</button>
-    <mat-divider></mat-divider>
-    <button mat-button  routerLink="schedules" routerLinkActive="selected no-border txt-bold" fxLayoutAlign="start" class="py-2 pr-5">
+      <mat-divider></mat-divider>
+      <button mat-button (click)="updateRoute('schedules')" routerLink="schedules"
+        routerLinkActive="selected no-border txt-bold" fxLayoutAlign="start" class="py-2 pr-5">
         Schedules</button>
-    <mat-divider></mat-divider>
-    <button mat-button  routerLink="payment" routerLinkActive="selected no-border txt-bold" fxLayoutAlign="start" class="py-2 pr-5">
+      <mat-divider></mat-divider>
+      <button mat-button (click)="updateRoute('payments')" routerLink="payment"
+        routerLinkActive="selected no-border txt-bold" fxLayoutAlign="start" class="py-2 pr-5">
         Payments</button>
-    <mat-divider></mat-divider>
+      <mat-divider></mat-divider>
     </div>
-      
-    </mat-sidenav>
-    <mat-sidenav-content>
-      <mat-toolbar>
+
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <mat-toolbar class="dashboard-header">
+      <div class="dashboard-page-heading">
         <button mat-icon-button (click)="sidenav.toggle()">
           <mat-icon>menu</mat-icon>
         </button>
-            <!-- Chef Portals -->
-        <span class="toolbar-spacer"></span>
-        <button mat-button (click)="logout()" routerLinkActive="selected no-border txt-bold" fxLayoutAlign="start" class="py-2 pr-5 logout-btn">
-            Log out
-        </button>
-      </mat-toolbar>
-    
-      <router-outlet></router-outlet>
-     
-    </mat-sidenav-content>
-  </mat-sidenav-container>
+        {{current_route}}
+      </div>
+      <div class="dashboard-auth-menu">
+        <div class="dashboard-auth-name">{{chefName}}</div>
+        <img src="{{chefProfilePicture}}" routerLink="profile" (click)="updateRoute('profile')"
+          class="dashboard-user-panel-image">
+        <mat-select disableOptionCentering panelClass="dashboard-user-panel-group-class">
+          <mat-option (click)="updateRoute('profile')" routerLink="profile" class="dashboard-user-panel-option-class">
+            My Profile
+          </mat-option>
+          <mat-option (click)="logout()" class="dashboard-user-panel-option-class">
+            Logout
+          </mat-option>
+          <mat-option class="dashboard-user-panel-option-class">
+            Close
+          </mat-option>
+        </mat-select>
+      </div>
+    </mat-toolbar>
+
+    <router-outlet></router-outlet>
+
+  </mat-sidenav-content>
+</mat-sidenav-container>

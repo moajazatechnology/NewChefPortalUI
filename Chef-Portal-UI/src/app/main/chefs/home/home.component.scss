@@ -1,3 +1,7 @@
+body {
+    font-family: Roboto;
+}
+
 .p-4 {
     padding: 4%;
 }
@@ -22,4 +26,150 @@
 }
 .w-50 {
     width: 50%;
+}
+
+
+.orders-card {
+    width: 100%;
+    height: 10em;
+    cursor: pointer;
+}
+
+.orders-card:hover {
+    border-color: rgb(110,65,200);
+    color: rgb(110,65,200);
+}
+
+.orders-title {
+    font-size: 1.5em;
+    opacity: 0.7;
+    margin-top: 0.5em;
+}
+
+.orders-value {
+    font-size: 3em;
+    margin-top: 0.75em;
+}
+
+.home-row {
+    margin-bottom: 1em;
+}
+
+.full-row { 
+    height: 100%;
+}
+
+.sales-card {
+    width: 100%;
+    height: 100%;
+    min-height: 30em;
+}
+
+.sales-graph-heading {
+    font-size: 1.7em;
+    margin-bottom: 0.6em;
+}
+
+.sales-graph-date {
+    font-size: 1.2em;
+    opacity: 0.7;
+    margin-bottom: 0.6em;
+}
+
+.sales-stats-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+    width: 100%;
+}
+
+.sales-stats-item {
+    border-bottom: 0.01rem solid rgb(240,240,240);
+    border-left: 0.01rem solid rgb(240,240,240);
+    width: 100%;
+    height: 25%;
+    text-align: center;
+}
+
+.sales-stats-caption {
+    font-size: 1.2em;
+    opacity: 0.7;
+    margin-top: 0.85em;
+}
+
+.sales-stats-value {
+    font-size: 1.7em;
+    margin-top: 0.7em;
+}
+
+@media screen and (max-width: 768px) {
+    .sales-stats-item {
+        border-left: none;
+    }
+}
+
+.sales-graph-container {
+    margin-top: 1em;
+    margin-left: 1em;
+}
+
+.tasks-card {
+    width: 100%;
+}
+
+.tasks-header-content {
+    margin-top: 1em;
+    margin-left: 1em;
+}
+.tasks-header {
+    border-bottom: 0.01rem solid rgb(240,240,240);
+}
+
+.tasks-title {
+    font-size: 1.7em;
+    margin-bottom: 0.6em;
+}
+
+.tasks-caption {
+    font-size: 1.2em;
+    opacity: 0.7;
+    margin-bottom: 0.6em;
+}
+
+.tasks-option {
+    height: 2em;
+    margin-right: 1em;
+    margin-left: 1em;
+    margin-top: 1em;
+    margin-bottom: 1em;
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+}
+
+.remove-overflow {
+    overflow-x: hidden;
+}
+
+.required-flag {
+    width: 8em;
+    border-radius: 10px;
+    background-color: #FE0000;
+    color: white;
+    text-align: center;
+    letter-spacing: 3px;
+    font-weight: 400;
+    font-size: 0.8em;
+}
+
+.done-flag {
+    width: 6em;
+    border-radius: 10px;
+    background-color: #00B212;
+    color: white;
+    text-align: center;
+    letter-spacing: 3px;
+    font-weight: 400;
+    font-size: 0.8em;
 }

@@ -290,7 +290,7 @@
                                     </mat-select>
                                 </mat-form-field>
                                 <div fxFlex="10">
-                                    <i class="material-icons icon-size" (click)="onAddSelectRow(index)" matTooltip="Add New">
+                                    <i class="material-icons icon-size" *ngIf="slots.length < 4" (click)="onAddSelectRow(slots.length)" matTooltip="Add New">
                                         add_circle_outline
                                     </i>
                                     <i class="material-icons icon-size" 
@@ -300,9 +300,9 @@
                                     </i>
                                 </div>
                             </ng-container>
-                            <ng-template #endLimit>
-                                <div class="red" *ngIf="index===4">We can slot upto 5</div>
-                            </ng-template>
+                            <!-- <ng-template #endLimit>
+                                <div class="red" *ngIf="index===4">You can have up to 4 slots</div>
+                            </ng-template> -->
                         </div>
                         
                         <button mat-raised-button color="primary" class="submit-button" aria-label="LOG IN"

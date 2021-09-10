@@ -1,55 +1,37 @@
 <app-loader *ngIf="showLoader"></app-loader>
-<div fxLayout="column" *ngIf="!showLoader">
-    <div fxLayout="row" fxLayoutAlign="start start" class="p-5">
-        <button mat-raised-button type="submit" color="primary" (click)="openCreateMenuDialog()">Create Menu </button>
-    </div>
-    <!-- CONTENT -->
-    <div class="content">
-
-        <!-- CENTER -->
-        <div class="center p-24 pb-56" >
-
-            <!-- CONTENT -->
-            <div class="content">
-                <div class="medias" fxLayout="row wrap" fxLayoutAlign="start">
-
-                    <div class="media" *ngFor="let menu of menuList" fxFlex="100" fxFlex.gt-xs="25"
-                            fxFlex.gt-sm="25">
-                        <!-- IMAGES  -->
-
-                        <div class="media-content" fxLayout="column" fxFlex="1 1 auto">
-
-                            <div class="footer" fxLayout="row" fxLayoutAlign="end start">
-                                <mat-icon (click)="openEditDialog(menu)">edit</mat-icon>
-                                <mat-icon (click)="deleteSelectedMenu(menu.id)" color="warn">delete</mat-icon>
-
-                            </div>
-    
-                            <div  class="content" fxLayout="column" fxFlex="1 1 auto">
-                                <div><p><b>Name:</b> {{menu.name}}</p></div>
-                                <div><p><b>Description:</b> {{menu.description}}</p></div>
-                                <div><b>Products:</b>
-                                    <div *ngFor="let product of menu._products">
-                                        {{product.name}}
-                                    </div> 
-                                </div>
-                            </div>
+<div class="container-fluid" [style.visibility]="show_main_content">
+    <div class="row extend-row">
+        <div class="col-lg-4" *ngFor="let menu of menuList">
+            <div class="card basic-card">
+                <div class="basic-header">
+                    <div class="basic-header-content">
+                        <div class="basic-title">
+                            {{menu.name}}
                         </div>
-                        <!-- /IMAGES -->
-
+                        <div class="card-edit-button">
+                            <mat-icon (click)="openEditDialog(menu)">edit</mat-icon>
+                            <mat-icon (click)="deleteSelectedMenu(menu.id)" color="warn">delete</mat-icon>
+                        </div>
                     </div>
-                    
                 </div>
-               
-           </div>
-            <!-- / CONTENT -->
-
+                <div class="card-content card-content-products">
+                    <div *ngFor="let product of menu._products">
+                        {{product.name}}
+                    </div>
+                </div>
+                <div class="basic-header"></div>
+                <div class="card-content">
+                    <div class="card-product-description">
+                        <p>{{menu.description}}</p>
+                    </div>
+                </div>
+            </div>
         </div>
-        <!-- / CENTER -->
-
+        <div fxLayout="row" fxLayoutAlign="center center" class="p-10" *ngIf="menuList.length===0">No Menu found.</div>
     </div>
-    <!-- / CONTENT -->
-    <!-- IF NO PRODUCT IS FOUND -->
-    <div fxLayout="row" fxLayoutAlign="center center" class="p-10"
-    *ngIf="menuList.length===0">No Menu found.</div>
-</div> 
+    <div class="floating-add-btn">
+        <button class="new-product-btn" mat-raised-button color="primary" (click)="openCreateMenuDialog()">
+            <mat-icon class="new-product-icon">add</mat-icon>
+        </button>
+    </div>
+</div>
